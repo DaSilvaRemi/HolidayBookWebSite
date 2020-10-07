@@ -11,12 +11,13 @@ Pour cela CVVEN selon ces obligations de collaborations nous à envoyé la descr
 #Hébergement
 La composition des hébergement est la suivante : 
 -40 logements : entrée, douche et wc, 2 chambres à 2 lits avec coin toilette et balcon.
--15 chambres doubles : entrée, douche et wc, 1 lit double•8 chambres de 3 lits séparés par une cloison mobile avec coin toilette, wc, douche.
+-15 chambres doubles : entrée, douche et wc, 1 lit double
+-8 chambres de 3 lits séparés par une cloison mobile avec coin toilette, wc, douche.
 -12 chambres de 4 lits séparés par une cloison mobile avec douche, wc et balcon.
 -1 logement adapté pour les personnes à mobilité réduite.
 
 ------------------------
 # Auteurs : Da Sila Rémi, Dodille Martin, Dielna Mathieu, Hospice Melvin
-# Superviseur : Bouin Clément, Mauduit Valéry
+# Superviseur : Boin Clément, Mauduit Valéry
 # Etablissement : Lycée René Descartes
 # Classe des Auteurs : BTS 2 SL Groupe 2
