@@ -17,7 +17,7 @@ La composition des hébergement est la suivante :
 -1 logement adapté pour les personnes à mobilité réduite.
 
 ------------------------
-# Auteurs : Da Sila Rémi, Dodille Martin, Dielna Mathieu, Hospice Melvin
+# Auteurs : Da Sila Rémi, Dodille Martin, Dielna Mathieu
 # Superviseur : Boin Clément, Mauduit Valéry
 # Etablissement : Lycée René Descartes
 # Classe des Auteurs : BTS 2 SL Groupe 2
