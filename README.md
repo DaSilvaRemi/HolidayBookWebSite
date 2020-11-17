@@ -1,23 +1,57 @@
-# Nom Projet : SiteVacanceReservationBTSSIO
-Le CVVEN(Comité pour les Villages de Vacances de l'Education Nationale) étant une association nous à contacté(nous prestataire informatique) pour un contrat de fourniture de service informatique, précisément pour un contrat de création de site web
-Ce contrat à pour objet de développer pour CVVEN:
--une application web permettant la réservation des séjours de vacances pour les agents (enutilisant le Framework PHP CodeIgniter et la librairie Bootstrap);
--une   application   Java   «client   lourd»   pour   l'organisation   des   réunions   (gestion   desparticipants);
--une application mobile destinée aux participants aux réunions permettant aux organisateursde proposer des quizz ou des sondages en direct.
-------------------------
-Nous nous occuperons en premier lieu de l'application web.
-Pour cela CVVEN selon ces obligations de collaborations nous à envoyé la description du lieu de réservation.
--Seuls les adhérents et leurs familles peuvent réserver(nous considérons que tous utilisateurs du site sont des adhérents).
-#Hébergement
-La composition des hébergement est la suivante : 
--40 logements : entrée, douche et wc, 2 chambres à 2 lits avec coin toilette et balcon.
--15 chambres doubles : entrée, douche et wc, 1 lit double
--8 chambres de 3 lits séparés par une cloison mobile avec coin toilette, wc, douche.
--12 chambres de 4 lits séparés par une cloison mobile avec douche, wc et balcon.
--1 logement adapté pour les personnes à mobilité réduite.
+# CodeIgniter 4 Framework
 
-------------------------
-# Auteurs : Da Sila Rémi, Dodille Martin, Dielna Mathieu
-# Superviseur : Boin Clément, Mauduit Valéry
-# Etablissement : Lycée René Descartes
-# Classe des Auteurs : BTS 2 SL Groupe 2
+## What is CodeIgniter?
+
+CodeIgniter is a PHP full-stack web framework that is light, fast, flexible, and secure. 
+More information can be found at the [official site](http://codeigniter.com).
+
+This repository holds the distributable version of the framework,
+including the user guide. It has been built from the 
+[development repository](https://github.com/codeigniter4/CodeIgniter4).
+
+More information about the plans for version 4 can be found in [the announcement](http://forum.codeigniter.com/thread-62615.html) on the forums.
+
+The user guide corresponding to this version of the framework can be found
+[here](https://codeigniter4.github.io/userguide/). 
+
+
+## Important Change with index.php
+
+`index.php` is no longer in the root of the project! It has been moved inside the *public* folder,
+for better security and separation of components.
+
+This means that you should configure your web server to "point" to your project's *public* folder, and
+not to the project root. A better practice would be to configure a virtual host to point there. A poor practice would be to point your web server to the project root and expect to enter *public/...*, as the rest of your logic and the
+framework are exposed.
+
+**Please** read the user guide for a better explanation of how CI4 works!
+The user guide updating and deployment is a bit awkward at the moment, but we are working on it!
+
+## Repository Management
+
+We use Github issues, in our main repository, to track **BUGS** and to track approved **DEVELOPMENT** work packages.
+We use our [forum](http://forum.codeigniter.com) to provide SUPPORT and to discuss
+FEATURE REQUESTS.
+
+This repository is a "distribution" one, built by our release preparation script. 
+Problems with it can be raised on our forum, or as issues in the main repository.
+
+## Contributing
+
+We welcome contributions from the community.
+
+Please read the [*Contributing to CodeIgniter*](https://github.com/codeigniter4/CodeIgniter4/blob/develop/contributing.md) section in the development repository.
+
+## Server Requirements
+
+PHP version 7.2 or higher is required, with the following extensions installed: 
+
+- [intl](http://php.net/manual/en/intl.requirements.php)
+- [libcurl](http://php.net/manual/en/curl.requirements.php) if you plan to use the HTTP\CURLRequest library
+
+Additionally, make sure that the following extensions are enabled in your PHP:
+
+- json (enabled by default - don't turn it off)
+- [mbstring](http://php.net/manual/en/mbstring.installation.php)
+- [mysqlnd](http://php.net/manual/en/mysqlnd.install.php)
+- xml (enabled by default - don't turn it off)
