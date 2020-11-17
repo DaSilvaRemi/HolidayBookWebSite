@@ -21,6 +21,7 @@ class Sejour {
     private $typeLogement;
     private $pension;
     private $option;
+    private $exception;
     
     public function __construct($datedebut, $datefin, $nbPersonne, $typeLogement, $pension, $option) {
         if(!$this->Erreur()){
@@ -32,28 +33,56 @@ class Sejour {
             $this->$option = $option;
         }
         else{
-            $Exception = $this->Exception();
+            $Exception = $this->getErreur();
             unset($this);
             return $Exception;
         }
+    }
+
+    public function getDateDebut(){
+        return $this->dateDebut;
+    }
+
+    public function getDateFin(){
+        return $this->dateFin;
+    }
+
+    public function getNbPersonne(){
+        return $this->nbPersonne;
+    }
+
+    public function getTypeLogement(){
+        return $this->typeLogement;
+    }
+
+    public function getPension(){
+        return $this->pension;
+    }
+
+    public function getOption(){
+        return $this->option;
+    }
+
+    public function getErreur(){
+        return $this->exception;
     }
     
     
     public function Erreur() : bool{
         $erreur = false;
-        if(!$this->controlDuree($date1, $date2)){
-            $this->Exception(array("datedebut" => "La durée du séjour est incorrecte!")); 
+        if(!$this->controlDuree($this->getDateDebut(), $this->getDateFin())){
+            $this->addException(array("datedebut" => "La durée du séjour est incorrecte!")); 
             $erreur = true;
         }
-        if(!$this->capacite($date1, $date2)){
-            $this->Exception(array("nbpersonne" => "Le nombre de personnes n'est pas correcte par rapport à la capacité!"));   
+        if(!$this->capacite()){
+            $this->addException(array("nbpersonne" => "Le nombre de personnes n'est pas correcte par rapport à la capacité!"));   
             $erreur = true; 
         }
         return $erreur;
     }
     
-    public function Exception(array $tab) : array{
-        return $tableau[] = $tab;
+    public function addException(array $tab) {
+        $this->exception[] = $tab;
     }
     
     public function dateJour(string $date) {
