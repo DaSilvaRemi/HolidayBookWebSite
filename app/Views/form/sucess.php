@@ -4,7 +4,7 @@
 </head>
 <body>
 
-    <h3>Votre formulaire à été transmis !</h3>
+    <h3>Votre réservation à été transmise !</h3>
 
     <p><?php echo anchor('form', 'Essayer à nouveau!'); ?></p>
 
