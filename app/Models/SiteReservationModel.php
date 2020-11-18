@@ -11,8 +11,7 @@ use \App\Models\ControlSiteReservation;
  */
 class SiteReservationModel extends Model{
 
-    public function __construct(\CodeIgniter\Database\ConnectionInterface &$db = null, \CodeIgniter\Validation\ValidationInterface $validation = null,
-    ) {
+    public function __construct(\CodeIgniter\Database\ConnectionInterface &$db = null, \CodeIgniter\Validation\ValidationInterface $validation = null) {
         parent::__construct($db, $validation);
     }
 
