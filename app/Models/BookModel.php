@@ -23,4 +23,12 @@ class BookModel extends Model{
             return $requete;
         }
     }
+
+    public function getNbLitDouble(){
+        $requete = $this->db->query("SELECT nblitdouble FROM typelogement WHERE typelogement = '".$typelogement."'");
+    }
+
+    public function getNbLitSimple(){
+
+    }
 }
