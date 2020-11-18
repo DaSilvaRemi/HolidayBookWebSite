@@ -1,16 +1,17 @@
 <?php
 namespace App\Models;
 use CodeIgniter\Model;
+use \App\Models\Date;
 
 class ControlSiteReservationModel extends Model{
     public function __construct($datedebut, $datefin, $nbPersonne, $typeLogement, $pension, $option){
         if(!$this->Erreur()){
-            $this->dateDebut = $datedebut;
-            $this->$datefin = $datefin;
-            $this->$nbPersonne = $nbPersonne;
-            $this->$typeLogement = $typeLogement;
-            $this->$pension = $pension;
-            $this->$option = $option;
+            $this->dateDebut = new Date($dateDebut);
+            $this->datefin = new Date($datefin);
+            $this->nbPersonne = $nbPersonne;
+            $this->typeLogement = $typeLogement;
+            $this->pension = $pension;
+            $this->option = $option;
         }
         else{
             $Exception = $this->getErreur();
@@ -53,6 +54,11 @@ class ControlSiteReservationModel extends Model{
             return $this->exception;
         }
 
+        /*
+        fonction : Génère et ajoute des erreur à au tableau d'exception
+        parametre : Void
+        retour : erreur => bool 
+        */
         public function Erreur() : bool{
             $erreur = false;
             if(!$this->controlDuree($this->getDateDebut(), $this->getDateFin())){
@@ -74,20 +80,44 @@ class ControlSiteReservationModel extends Model{
         public function addException(array $tab) {
             $this->exception[] = $tab;
         }
-        
+
         /*
-        fonction : retourne le jour de la date */
-        public function dateToDay(string $date) {
-            if(strpos($date, "-")){
-                $day = explode("-", $date);
+    fonction : Controle si le nombre de personne est inférieur à la capacité des chambres
+    parametre : Aucun
+    retour : retourne si la capacité est correcte
+    */
+    public function controlCapacite(){
+        $siteReservationModel = \App\Models\SiteReservationModel();
+        if($model->getNbLitDouble() != 0 || $siteReservationModel->getNbLitSimple() != 0){
+            if($siteReservationModel->getNbPersonne() <= $siteReservationModel->getNbLitDouble()*2){
+                return true;
             }
-            elseif($date, "/"){
-                $day = explode("/", $date);
+            elseif($siteReservationModel->getNbPersonne() <= $siteReservationModel->getNbLitSimple()){
+                return true;
             }
             else{
-
+                return false;
             }
-            return 
         }
+        else{
+                return false;
+        }
+    }
+
+    /*
+    fonction : Controle la durée du séjour s'il est égale à 7 jours
+    parametre : Void
+    retour : un booléan selon si la durée du séjour est bonne
+    */
+    public function controlDuree() : bool{
+        if($this->getDateFin()->getDay() - $this->getDateDebut()->getDay()  == 7){
+            return true;
+        }
+        else{
+            return false;
+        }
+    }
+        
+
     }
 }

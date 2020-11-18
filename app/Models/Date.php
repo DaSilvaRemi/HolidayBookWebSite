@@ -18,15 +18,45 @@ class Date {
     }
 
     public function getYear(){
-
+        return $this->cutDate("YYYY");
     }
     
     public function getDay(){
-
+        return $this->cutDate("DD");
     }
 
     public function getMonth(){
+        return $this->cutDate("MM");
+    }
 
+    private function cutDate($cutFormatDate){
+        for ($i=0; $i < count($this->getTabDate); $i++) { 
+            for($j = 0; $j < count($this->getTabFormatDate()), $j++){
+                if($this->getTabFormatDate() == $cutFormatDate){
+                    return $date[$j]
+                }
+            }
+        }
+    }
+
+    public function getTabDate(){
+        if(strpos($this->getFormatDate(), "-")){
+            $tabDate = explode("-", $this->getDate());
+        }
+        elseif($this->getFormatDate(), "/"){
+            $tabDate = explode("/", $this->getDate());
+        }
+        return $tabDate;
+    }
+
+    public function getTabFormatDate(){
+        if(strpos($this->getFormatDate(), "-")){
+            $tabFormatDate = explode("-", $this->getFormatDate());
+        }
+        elseif($this->getFormatDate(), "/"){
+            $tabFormatDate = explode("/", $this->getFormatDate());
+        }
+        return $tabFormatDate;
     }
 
     public function setDate($date){
@@ -38,6 +68,7 @@ class Date {
     }
 
     public function changeDateFormat($formatDate = "YYYY-MM-DD"){
+        $formatDate = strtoupper($formatDate);
         if(strpos($formatDate, "-")){
             $tabFormatDateTemp = explode("-", $formatDate);
         }
@@ -45,14 +76,8 @@ class Date {
             $tabFormatDateTemp = explode("/", $formatDate);
         }
 
-        if(strpos($this->getFormatDate(), "-")){
-            $tabDate = explode("-", $this->getDate());
-            $tabFormatDate = explode("-", $this->getFormatDate());
-        }
-        elseif($this->getFormatDate(), "/"){
-            $tabDate = explode("/", $this->getDate());
-            $tabFormatDate = explode("/", $this->getFormatDate());
-        }
+        $tabDate = $this->getTabDate();
+        $tabFormatDate = $this->getTabFormatDate();
 
         $newDate = "";
         for($i = 0; $i < count($tabDate), $i++){
