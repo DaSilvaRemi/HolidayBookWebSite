@@ -4,11 +4,11 @@ namespace App\Models;
 use CodeIgniter\Model;
 
 /**
- * Description of BookModel
- *
+ * Description of SiteReservationModel
+ *Classe permettant de récuper les données de la base de données
  * @author dasilvaremi
  */
-class BookModel extends Model{
+class SiteReservationModel extends Model{
     private $dateDebut;
     private $dateFin;
     private $nbPersonne;
@@ -16,79 +16,12 @@ class BookModel extends Model{
     private $pension;
     private $option;
 
-    public function __construct($datedebut, $datefin, $nbPersonne, $typeLogement, $pension, $option, \CodeIgniter\Database\ConnectionInterface &$db = null, \CodeIgniter\Validation\ValidationInterface $validation = null,
+    public function __construct(, \CodeIgniter\Database\ConnectionInterface &$db = null, \CodeIgniter\Validation\ValidationInterface $validation = null,
     ) {
-        if(!$this->Erreur()){
-            parent::__construct($db, $validation);
-            $this->dateDebut = $datedebut;
-            $this->$datefin = $datefin;
-            $this->$nbPersonne = $nbPersonne;
-            $this->$typeLogement = $typeLogement;
-            $this->$pension = $pension;
-            $this->$option = $option;
-        }
-        else{
-            $Exception = $this->getErreur();
-            unset($this);
-            return $Exception;
-        }
+        parent::__construct($db, $validation);
     }
 
-    public function Erreur() : bool{
-        $erreur = false;
-        if(!$this->controlDuree($this->getDateDebut(), $this->getDateFin())){
-            $this->addException(array("datedebut" => "La durée du séjour est incorrecte!")); 
-            $erreur = true;
-        }
-        if(!$this->controlCapacite()){
-            $this->addException(array("nbpersonne" => "Le nombre de personnes n'est pas correcte par rapport à la capacité!"));   
-            $erreur = true; 
-        }
-        return $erreur;
-    }
-
-    public function addException(array $tab) {
-        $this->exception[] = $tab;
-    }
     
-    public function dateJour(string $date) {
-        return explode("/", $date);
-    }
-
-    //retour : date de début du séjour
-    public function getDateDebut(){
-        return $this->dateDebut;
-    }
-
-    //retour : date de fin du séjour
-    public function getDateFin(){
-        return $this->dateFin;
-    }
-
-    //retour : nombre de personne ayant réservé le séjour
-    public function getNbPersonne(){
-        return $this->nbPersonne;
-    }
-
-    //retour : le type de logement du séjour
-    public function getTypeLogement(){
-        return $this->typeLogement;
-    }
-
-    //retour : retourne le type de pension
-    public function getPension(){
-        return $this->pension;
-    }
-
-    //retour : retourne les options sélectionné
-    public function getOption(){
-        return $this->option;
-    }
-
-    //retour : retourne les erreurs
-    public function getErreur(){
-        return $this->exception;
-    }
     
     public function getQueryTypeLogement(){
         if(empty($this->typelogement)){
