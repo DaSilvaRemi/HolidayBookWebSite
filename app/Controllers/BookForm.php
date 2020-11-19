@@ -1,12 +1,19 @@
 <?php namespace App\Controllers;
 
 use CodeIgniter\Controller;
+use \App\Models\ControlSiteReservationModel;
+use \Config\Services;
 
 class BookForm extends Controller
 {
     public function index()
     {
-        helper(['form', 'url']);
+        helper('form');
+        
+        /*$this->validate([]);
+        echo view('form/book', [
+                'validation' => $this->validator
+            ]);*/
         
         if (!$this->validate(['datedebut' => 'required','datefin' => 'required','pension' => 'required','typelogement' => 'required' ],
         ['datedebut' => ['required' => 'Merci d\'indiquer une date de début de séjour.'],'datefin' => ['required' => 'Merci d\'indiquer une date de fin de séjour.'],
@@ -24,7 +31,7 @@ class BookForm extends Controller
     
     public static function showData(){
         $model = new \App\Models\SiteReservationModel();
-        return $model->getTypeLogement();
+        return $model->getQueryTypeLogement();
     }
     
     /* 
@@ -35,8 +42,8 @@ class BookForm extends Controller
         -la vue book lorqu'il y'a une erreur et affiche celle ci.
     */
     public function control(){
-        $leControlSiteReservation = new ControlSiteReservationModel($this->input->post('datedebut'), $this->input->post('datefin'), $this->input->post('nbpersonne'), 
-        $this->input->post('typelogement'), $this->input->post('pension'), $this->input->post('menage'));
+        $leControlSiteReservation = new ControlSiteReservationModel($this->$request->getPost('datedebut'), $this->$request->getPost('datefin'), $this->$request->getPost('nbpersonne'), 
+        $this->$request->getPost('typelogement'), $this->$request->getPost('pension'), $this->$request->getPost('menage'));
 
         if(!$leControlSiteReservation->Erreur()){
             $tabException = $leControlSiteReservation->getException();
@@ -49,8 +56,7 @@ class BookForm extends Controller
         }
         else {
             echo view('form/sucess'); 
-        }       
-       
+        }      
     }
 }
 
