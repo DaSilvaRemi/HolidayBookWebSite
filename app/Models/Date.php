@@ -1,12 +1,13 @@
-<? 
+<?php 
 
 class Date {
 
     private $date;
     private $formatDate;
     public function __construct($date){
-        $this->date = $date; 
+        $this->date = $date;
         $this->formatDate = "YYYY-MM-DD";
+        $this->changeDateFormat(); 
     }
 
     public function getDate(){
@@ -29,34 +30,12 @@ class Date {
         return $this->cutDate("MM");
     }
 
-    private function cutDate($cutFormatDate){
-        for ($i=0; $i < count($this->getTabDate); $i++) { 
-            for($j = 0; $j < count($this->getTabFormatDate()), $j++){
-                if($this->getTabFormatDate() == $cutFormatDate){
-                    return $date[$j]
-                }
-            }
-        }
-    }
-
     public function getTabDate(){
-        if(strpos($this->getFormatDate(), "-")){
-            $tabDate = explode("-", $this->getDate());
-        }
-        elseif($this->getFormatDate(), "/"){
-            $tabDate = explode("/", $this->getDate());
-        }
-        return $tabDate;
+        return Date::explodeDate($this->getDate());
     }
 
     public function getTabFormatDate(){
-        if(strpos($this->getFormatDate(), "-")){
-            $tabFormatDate = explode("-", $this->getFormatDate());
-        }
-        elseif($this->getFormatDate(), "/"){
-            $tabFormatDate = explode("/", $this->getFormatDate());
-        }
-        return $tabFormatDate;
+        return Date::explodeDate($this->getFormatDate());
     }
 
     public function setDate($date){
@@ -69,22 +48,17 @@ class Date {
 
     public function changeDateFormat($formatDate = "YYYY-MM-DD"){
         $formatDate = strtoupper($formatDate);
-        if(strpos($formatDate, "-")){
-            $tabFormatDateTemp = explode("-", $formatDate);
-        }
-        elseif($formatDate, "/"){
-            $tabFormatDateTemp = explode("/", $formatDate);
-        }
+        $tabFormatDateTemp = Date::explodeDate($formatDate);
 
         $tabDate = $this->getTabDate();
         $tabFormatDate = $this->getTabFormatDate();
 
         $newDate = "";
-        for($i = 0; $i < count($tabDate), $i++){
-            for($j = 0; $j < count($tabFormatDateTemp), $j++){
+        for($i = 0; $i < count($tabDate); $i++){
+            for($j = 0; $j < count($tabFormatDateTemp); $j++){
                 foreach($tabFormatDate as $FormatDate){
                     if($FormatDate == $tabFormatDateTemp[$j]){
-                        $newDate = $date[$j];
+                        $newDate = $tabDate[$j];
                     }
                 }
             }
@@ -92,4 +66,28 @@ class Date {
         $this->setFormatDate($formatDate);
         $this->date = $newDate; 
     }
+    
+    private function cutDate($cutFormatDate){
+        for ($i=0; $i < count($this->getTabDate()); $i++) { 
+            for($j = 0; $j < count($this->getTabFormatDate()); $j++){
+                if($this->getTabFormatDate()[$j] == $cutFormatDate){
+                    return $this->getTabDate()[$j];
+                }
+            }
+        }
+    }
+    
+    public static function explodeDate($date){
+        if(strpos($date, "-") !== false){
+            return explode("-", $formatDate);
+        }
+        elseif(strpos($date, "/") !== false){
+            return explode("/", $formatDate);
+        }
+        else{
+            return false;
+        }
+    }
 }
+
+?>
