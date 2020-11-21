@@ -1,9 +1,9 @@
 <?php
 namespace App\Models;
-use CodeIgniter\Model;
 use Date;
+use App\Models\SiteReservationModel;
 
-class ControlSiteReservationModel extends Model{
+class ControlSiteReservationModel{
 
     private $dateDebut;
     private $dateFin;
@@ -11,6 +11,7 @@ class ControlSiteReservationModel extends Model{
     private $typeLogement;
     private $pension;
     private $option;
+    private $exception;
 
     public function __construct($datedebut, $datefin, $nbPersonne, $typeLogement, $pension, $option){
         $this->dateDebut = new Date($datedebut);
@@ -18,7 +19,13 @@ class ControlSiteReservationModel extends Model{
         $this->nbPersonne = $nbPersonne;
         $this->typeLogement = $typeLogement;
         $this->pension = $pension;
-        $this->option = $option;
+        if(empty($option)){
+            $this->option = false;
+        }
+        else{
+            $this->option = true;
+        }
+
     }
     
     //retour : date de début du séjour

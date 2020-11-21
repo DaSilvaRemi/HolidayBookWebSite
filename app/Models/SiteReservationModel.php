@@ -61,7 +61,7 @@ class SiteReservationModel extends Model{
      * menage => boolean => Correspond à option   
     -retour : void     */
     public function insertReservation($typelogement, $id_user,$dateDebut, $dateFin, $nbPersonne, $pension, $menage) : void{
-        $this->db->query("INSER INTO reservation (datedebut, datefin, nbpersonne, pension, menage, id_user, num_logement, typelogement) "
+        $this->db->query("INSERT INTO reservation (datedebut, datefin, nbpersonne, pension, menage, valide, id_user, num_logement, typelogement) "
                 . "VALUES(:datedebut:, :datefin:, :nbpersonne:, :pension:, :menage: , :valide:, :id_user:, "
                 . "(SELECT num_logement FROM logement WHERE typelogement = :typelogement:), :typelogement:);",
                 ["datedebut" => $dateDebut, "datefin" => $dateFin, "nbpersonne" => $nbPersonne, "pension" => $pension, "menage" => $menage, "valide" => false,

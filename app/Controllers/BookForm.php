@@ -49,7 +49,7 @@ class BookForm extends Controller
             echo view('form/book',['validation' => $this->validator]);  
         }
         else {
-            $leControlSiteReservation->insertData(0); //Mettre à la place du zéro l'id de l'utilisateur(on peut le stocker dans une session)
+            $leControlSiteReservation->insertData(1); //Mettre à la place du un l'id de l'utilisateur(on peut le stocker dans une session)
             echo view('form/sucess'); 
         } 
     }
