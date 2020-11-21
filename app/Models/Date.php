@@ -18,24 +18,29 @@ class Date {
         return $this->formatDate;
     }
 
+    //Retourne l'année
     public function getYear(){
         return $this->cutDate("YYYY");
     }
     
+    //Retourne le Jour
     public function getDay(){
         return $this->cutDate("DD");
     }
 
+    //Retourne le mois
     public function getMonth(){
         return $this->cutDate("MM");
     }
 
+    //Retourne la date sous forme de tableau
     public function getTabDate(){
-        return Date::explodeDate($this->getDate());
+        return Date::explodeValue($this->getDate());
     }
 
+    //Retourne le format sous forme de tableau
     public function getTabFormatDate(){
-        return Date::explodeDate($this->getFormatDate());
+        return Date::explodeValue($this->getFormatDate());
     }
 
     public function setDate($date){
@@ -48,25 +53,27 @@ class Date {
 
     public function changeDateFormat($formatDate = "YYYY-MM-DD"){
         $formatDate = strtoupper($formatDate);
-        $tabFormatDateTemp = Date::explodeDate($formatDate);
+        $tabFormatDateTemp = Date::explodeValue($formatDate);
 
         $tabDate = $this->getTabDate();
         $tabFormatDate = $this->getTabFormatDate();
 
-        $newDate = "";
-        for($i = 0; $i < count($tabDate); $i++){
-            for($j = 0; $j < count($tabFormatDateTemp); $j++){
-                foreach($tabFormatDate as $FormatDate){
-                    if($FormatDate == $tabFormatDateTemp[$j]){
-                        $newDate = $tabDate[$j];
-                    }
-                }
+        $newDate = [];
+
+        for($j = 0; $j < count($tabFormatDateTemp); $j++){
+            if($tabFormatDateTemp[$j] == $tabFormatDate[$j]){
+                $newDate[] = $tabDate[$j];
             }
         }
+
         $this->setFormatDate($formatDate);
-        $this->date = $newDate; 
+        $this->setDate($newDate[0]."-".$newDate[1]."-".$newDate[2]);
     }
     
+    /*
+    -fonction : Permet de séparer la partie de la date que l'on souhaite(Jour,Mois ou Année)     
+    -parametre : -cutformatdate => string contenant la partie de la date qu'on veut soit "DD" soit "MM" soit "YYYY"     
+    -retour : string || bool => correspond au champs date sélectionné ou renvoie false s'il ne trouve pas     */
     private function cutDate($cutFormatDate){
         for ($i=0; $i < count($this->getTabDate()); $i++) { 
             for($j = 0; $j < count($this->getTabFormatDate()); $j++){
@@ -75,18 +82,35 @@ class Date {
                 }
             }
         }
+        return false;
     }
     
-    public static function explodeDate($date){
-        if(strpos($date, "-") !== false){
-            return explode("-", $formatDate);
-        }
-        elseif(strpos($date, "/") !== false){
-            return explode("/", $formatDate);
+    /*
+    -fonction : Permet de séparer une chaine de caractère séparé par un séparateur    
+    -parametre :   -value => string(avec des séparateur)
+                   -separateur => char ou string => setByDefault(null)     
+    -retour : Retourne un tableau ou false si le separateur n'as pas été trouvée     */
+    public static function explodeValue($value,$separateur = ""){
+        if(!empty($separateur)){
+            if(strpos($value, $separateur)){
+                return explode($separateur, $value);
+            }
+            else{
+                return false;
+            }
         }
         else{
-            return false;
-        }
+            if(strpos($value, "-")){
+                return explode("-", $value);
+            }
+            elseif(strpos($value, "/")){
+                return explode("/", $value);
+            }
+            else{
+                return false;
+            }
+        } 
+        
     }
 }
 
