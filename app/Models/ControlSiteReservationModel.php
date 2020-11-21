@@ -94,16 +94,20 @@ class ControlSiteReservationModel extends Model{
         if($siteReservationModel->getNbLitDouble($this->getTypeLogement())[0]['nblitdouble'] != 0 || 
             $siteReservationModel->getNbLitSimple($this->getTypeLogement())[0]['nblitsimple'] != 0){
             if($this->getNbPersonne() <= intval($siteReservationModel->getNbLitDouble($this->getTypeLogement())[0]['nblitdouble'])*2){
+                unset($siteReservationModel);
                 return true;
             }
             elseif($this->getNbPersonne() <= intval($siteReservationModel->getNbLitSimple($this->getTypeLogement())[0]['nblitsimple'])){
+                unset($siteReservationModel);
                 return true;
             }
             else{
+                unset($siteReservationModel);
                 return false;
             }
         }
         else{
+                unset($siteReservationModel);
                 return false;
         }
         }
@@ -121,5 +125,16 @@ class ControlSiteReservationModel extends Model{
         else{
             return false;
         }
-    }     
+    } 
+
+    /*
+    -fonction : Créer une réservation et détruit le modèle
+    -parametre : id_user => int => id de l'utilisateur connecté     
+    -retour : void     
+     */
+    public function insertData($id_user) : void{
+        $siteReservationModel = new SiteReservationModel();
+        $siteReservationModel->insertReservation($this->getTypeLogement(), $id_user, $this->getDateDebut(), $this->getDateFin(), $this->getNbPersonne(), $this->getPension(), $this->getOption());
+        unset($siteReservationModel);
+    }
 }
