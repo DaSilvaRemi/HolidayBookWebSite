@@ -1,12 +1,20 @@
 <?php
 namespace App\Models;
 use CodeIgniter\Model;
-use \App\Models\Date;
+use Date;
 
 class ControlSiteReservationModel extends Model{
+
+    private $dateDebut;
+    private $dateFin;
+    private $nbPersonne;
+    private $typeLogement;
+    private $pension;
+    private $option;
+
     public function __construct($datedebut, $datefin, $nbPersonne, $typeLogement, $pension, $option){
-        $this->dateDebut = new Date($dateDebut);
-        $this->datefin = new Date($datefin);
+        $this->dateDebut = new Date($datedebut);
+        $this->dateFin = new Date($datefin);
         $this->nbPersonne = $nbPersonne;
         $this->typeLogement = $typeLogement;
         $this->pension = $pension;
@@ -63,7 +71,7 @@ class ControlSiteReservationModel extends Model{
             $this->addException(array("nbpersonne" => "Le nombre de personnes n'est pas correcte par rapport à la capacité!"));   
             $erreur = true; 
         }
-        return $erreur;
+        //return $erreur;
     }
 
     /*
@@ -82,20 +90,25 @@ class ControlSiteReservationModel extends Model{
     */
 
     public function controlCapacite(){
-        $siteReservationModel = \App\Models\SiteReservationModel();
-        if($model->getNbLitDouble() != 0 || $siteReservationModel->getNbLitSimple() != 0){
-            if($siteReservationModel->getNbPersonne() <= $siteReservationModel->getNbLitDouble()*2){
-                return true;
+        $siteReservationModel = new SiteReservationModel();
+        if($siteReservationModel->getNbLitDouble($this->getTypeLogement())[0]['nblitdouble'] != 0 || 
+            $siteReservationModel->getNbLitSimple($this->getTypeLogement())[0]['nblitsimple'] != 0){
+            if($this->getNbPersonne() <= intval($siteReservationModel->getNbLitDouble($this->getTypeLogement()))*2){
+                echo("Je suis la 1");
+                //return true;
             }
-            elseif($siteReservationModel->getNbPersonne() <= $siteReservationModel->getNbLitSimple()){
-                return true;
+            elseif($this->getNbPersonne() <= intval($siteReservationModel->getNbLitSimple($this->getTypeLogement()))){
+                echo("Je suis la 2");
+                //return true;
             }
             else{
-                return false;
+                echo("Je suis la 3");
+                //return false;
             }
         }
         else{
-                return false;
+                echo("Je suis la 4");
+                //return false;
         }
         }
     
