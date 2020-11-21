@@ -31,7 +31,7 @@ class BookForm extends Controller
     
     public static function showData(){
         $model = new \App\Models\SiteReservationModel();
-        return $model->getQueryTypeLogement();
+        return $model->getTypeLogement();
     }
     
     /* 
@@ -42,8 +42,8 @@ class BookForm extends Controller
         -la vue book lorqu'il y'a une erreur et affiche celle ci.
     */
     public function control(){
-        $leControlSiteReservation = new ControlSiteReservationModel($this->$request->getPost('datedebut'), $this->$request->getPost('datefin'), $this->$request->getPost('nbpersonne'), 
-        $this->$request->getPost('typelogement'), $this->$request->getPost('pension'), $this->$request->getPost('menage'));
+        $leControlSiteReservation = new ControlSiteReservationModel($this->request->getPost('datedebut'), $this->request->getPost('datefin'), $this->request->getPost('nbpersonne'), 
+        $this->request->getPost('typelogement'), $this->request->getPost('pension'), $this->request->getPost('menage'));
 
         if(!$leControlSiteReservation->Erreur()){
             $tabException = $leControlSiteReservation->getException();
@@ -52,11 +52,11 @@ class BookForm extends Controller
                     $this->validator->setError($errorField, $errorValue);
                 }
             }
-            echo view('form/book',['validation' => $this->validator]);  
+            //echo view('form/book',['validation' => $this->validator]);  
         }
         else {
-            echo view('form/sucess'); 
-        }      
+            //echo view('form/sucess'); 
+        }    
     }
 }
 
