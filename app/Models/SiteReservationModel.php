@@ -42,4 +42,32 @@ class SiteReservationModel extends Model{
         return  $this->db->query("SELECT nblitsimple FROM typelogement WHERE typelogement = :typelogement: ORDER BY typelogement DESC;",["typelogement" => $typelogement[0]['typelogement']])->getResultArray();
     }
     
+    /*--------------------------------------Table réservation------------------------------------------------*/
+    /*
+    -fonction : Modifie le champs valide lorsque l'admin à accepté une réservation
+    -parametre : idSejour => int => PRIMARY KEY => Correspond à l'id de la réservation
+     * valide => boolean => setByDefault(true) => Champs de validation
+    -retour : void     */
+    public function alterIsValide($idSejour, $valide = true) : void{
+        $this->db->query("UPDATE reservation SET valide = :valide: WHERE id_sejour = :id_sejour:;",["valide" => $valide, "is_sejour" => $idSejour]);
+    }
+    
+    /*
+    -fonction : insère des données dans la table réservation     
+    -parametre : *typelogement => String
+     * id_user => int
+     * dateDebut => Date en format YYYY-MM-DD
+     * dateFin => Date en format YYYY-MM-DD 
+     * nbPersonne => int
+     * pension => String => Correspond au type de pension
+     * menage => boolean => Correspond à option   
+    -retour : void     */
+    public function insertReservation($typelogement, $id_user,$dateDebut, $dateFin, $nbPersonne, $pension, $menage) : void{
+        $this->db->query("INSER INTO reservation (datedebut, datefin, nbpersonne, pension, menage, id_user, num_logement, typelogement) "
+                . "VALUES(:datedebut:, :datefin:, :nbpersonne:, :pension:, :menage: , :valide:, :id_user:, "
+                . "(SELECT num_logement FROM logement WHERE typelogement = :typelogement:), :typelogement:);",
+                ["datedebut" => $dateDebut, "datefin" => $dateFin, "nbpersonne" => $nbPersonne, "pension" => $pension, "menage" => $menage, "valide" => false,
+                    "id_user" => $id_user, "typelogement" => $typelogement,]);
+    }
+    
 }
