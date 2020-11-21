@@ -9,11 +9,6 @@ class BookForm extends Controller
     {
         helper('form');
         
-        /*$this->validate([]);
-        echo view('form/book', [
-                'validation' => $this->validator
-            ]);*/
-        
         if (!$this->validate(['datedebut' => 'required','datefin' => 'required','pension' => 'required','typelogement' => 'required' ],
         ['datedebut' => ['required' => 'Merci d\'indiquer une date de début de séjour.'],'datefin' => ['required' => 'Merci d\'indiquer une date de fin de séjour.'],
         'pension'    => ['required' => 'Merci d\'indiquer votre pension.'], 'typelogement' => ['required' => 'Veuillez selectionnez un type de séjour']]))

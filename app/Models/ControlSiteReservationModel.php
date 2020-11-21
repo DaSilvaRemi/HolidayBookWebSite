@@ -134,7 +134,7 @@ class ControlSiteReservationModel extends Model{
      */
     public function insertData($id_user) : void{
         $siteReservationModel = new SiteReservationModel();
-        $siteReservationModel->insertReservation($this->getTypeLogement(), $id_user, $this->getDateDebut(), $this->getDateFin(), $this->getNbPersonne(), $this->getPension(), $this->getOption());
+        $siteReservationModel->insertReservation($this->getTypeLogement(), $id_user, $this->getDateDebut()->getDate(), $this->getDateFin()->getDate(), $this->getNbPersonne(), $this->getPension(), $this->getOption());
         unset($siteReservationModel);
     }
 }

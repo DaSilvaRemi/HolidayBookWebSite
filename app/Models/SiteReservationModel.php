@@ -23,23 +23,21 @@ class SiteReservationModel extends Model{
     retour : retourne un tableau contenant les résultat de la requête     */
     public function getTypeLogement($typelogement = ""){
         if(empty($typelogement)){
-            return  $this->db->query("SELECT typelogement FROM typelogement ORDER BY typelogement DESC;")->getResultArray();
+            return  $this->db->query("SELECT typelogement FROM typelogement;")->getResultArray();
         }
         else{
-            return $this->db->query("SELECT typelogement FROM typelogement WHERE typelogement = :typelogement: ORDER BY typelogement DESC;",["typelogement" => $typelogement])->getResultArray();
+            return $this->db->query("SELECT typelogement FROM typelogement WHERE typelogement = :typelogement: LIMIT 1;",["typelogement" => $typelogement])->getResultArray();
         }
     }
 
     /*Retourne la requete pour le nombre de lit double*/
     public function getNbLitDouble($typelogement){
-        $typelogement = $this->getTypeLogement($typelogement);
-        return $this->db->query("SELECT nblitdouble FROM typelogement WHERE typelogement = :typelogement: ORDER BY typelogement DESC;",["typelogement" => $typelogement[0]['typelogement']])->getResultArray();
+        return $this->db->query("SELECT nblitdouble FROM typelogement WHERE typelogement = :typelogement: ORDER BY typelogement DESC;",["typelogement" => $typelogement])->getResultArray();
     }
 
     /*Retourne la requete pour le nombre de lit simple*/
     public function getNbLitSimple($typelogement){
-        $typelogement = $this->getTypeLogement($typelogement);
-        return  $this->db->query("SELECT nblitsimple FROM typelogement WHERE typelogement = :typelogement: ORDER BY typelogement DESC;",["typelogement" => $typelogement[0]['typelogement']])->getResultArray();
+        return  $this->db->query("SELECT nblitsimple FROM typelogement WHERE typelogement = :typelogement: ORDER BY typelogement DESC;",["typelogement" => $typelogement])->getResultArray();
     }
     
     /*--------------------------------------Table réservation------------------------------------------------*/
