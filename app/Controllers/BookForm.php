@@ -2,7 +2,6 @@
 
 use CodeIgniter\Controller;
 use \App\Models\ControlSiteReservationModel;
-use \Config\Services;
 
 class BookForm extends Controller
 {
@@ -45,18 +44,18 @@ class BookForm extends Controller
         $leControlSiteReservation = new ControlSiteReservationModel($this->request->getPost('datedebut'), $this->request->getPost('datefin'), $this->request->getPost('nbpersonne'), 
         $this->request->getPost('typelogement'), $this->request->getPost('pension'), $this->request->getPost('menage'));
 
-        if(!$leControlSiteReservation->Erreur()){
+        if($leControlSiteReservation->Erreur()){
             $tabException = $leControlSiteReservation->getException();
             foreach($tabException as $Exception){
                 foreach($Exception as $errorField => $errorValue){
                     $this->validator->setError($errorField, $errorValue);
                 }
             }
-            //echo view('form/book',['validation' => $this->validator]);  
+            echo view('form/book',['validation' => $this->validator]);  
         }
         else {
-            //echo view('form/sucess'); 
-        }    
+            echo view('form/sucess'); 
+        } 
     }
 }
 

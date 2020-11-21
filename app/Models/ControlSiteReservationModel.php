@@ -71,7 +71,7 @@ class ControlSiteReservationModel extends Model{
             $this->addException(array("nbpersonne" => "Le nombre de personnes n'est pas correcte par rapport à la capacité!"));   
             $erreur = true; 
         }
-        //return $erreur;
+        return $erreur;
     }
 
     /*
@@ -79,7 +79,7 @@ class ControlSiteReservationModel extends Model{
     parametre : tableau d'erreur
     retour : void
     */
-    public function addException(array $tab) {
+    public function addException(array $tab) : void {
         $this->exception[] = $tab;
     }
 
@@ -89,26 +89,22 @@ class ControlSiteReservationModel extends Model{
     retour : retourne si la capacité est correcte
     */
 
-    public function controlCapacite(){
+    public function controlCapacite() : bool{
         $siteReservationModel = new SiteReservationModel();
         if($siteReservationModel->getNbLitDouble($this->getTypeLogement())[0]['nblitdouble'] != 0 || 
             $siteReservationModel->getNbLitSimple($this->getTypeLogement())[0]['nblitsimple'] != 0){
-            if($this->getNbPersonne() <= intval($siteReservationModel->getNbLitDouble($this->getTypeLogement()))*2){
-                echo("Je suis la 1");
-                //return true;
+            if($this->getNbPersonne() <= intval($siteReservationModel->getNbLitDouble($this->getTypeLogement())[0]['nblitdouble'])*2){
+                return true;
             }
-            elseif($this->getNbPersonne() <= intval($siteReservationModel->getNbLitSimple($this->getTypeLogement()))){
-                echo("Je suis la 2");
-                //return true;
+            elseif($this->getNbPersonne() <= intval($siteReservationModel->getNbLitSimple($this->getTypeLogement())[0]['nblitsimple'])){
+                return true;
             }
             else{
-                echo("Je suis la 3");
-                //return false;
+                return false;
             }
         }
         else{
-                echo("Je suis la 4");
-                //return false;
+                return false;
         }
         }
     
