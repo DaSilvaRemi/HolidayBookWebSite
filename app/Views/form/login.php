@@ -12,6 +12,7 @@ and open the template in the editor.
     <body>
     <?= $validation->listErrors(); ?>
     <?= form_open('Connexion'); ?>
+    <h3>Page de connection</h3>
     
     <h5>Utilisateur</h5>
     <input type="text" name="user" placeholder="utilisateur" size="50"/>
