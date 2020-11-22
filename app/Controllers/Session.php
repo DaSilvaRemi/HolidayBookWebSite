@@ -17,8 +17,12 @@ abstract class Session {
     
     private static $session;
     
-    public static function initSession($idUser) {
+    public static function startSession(){
         Session::$session = \Config\Services::session();
+    }
+    
+    public static function initSession($idUser) {
+        Session::startSession();
         Session::setSessionData("idUser", $idUser);
     }
     
@@ -31,7 +35,7 @@ abstract class Session {
         if(isset(Session::$session)){
             return false;
         }
-        elseif(Session::hasSessionData("idUser")){
+        elseif(Session::hasSessionData('idUser')){
             Session::destructSession();
             return false;
         }
@@ -42,6 +46,10 @@ abstract class Session {
     
     public static function hasSessionData($idChamp){
         return Session::$session->has($idChamp);
+    }
+    
+    public static function getSessionData($idChamp = null){
+        return Session::$session->get($idChamp);
     }
     
     public static function setSessionData($idChamp, $value = ""){

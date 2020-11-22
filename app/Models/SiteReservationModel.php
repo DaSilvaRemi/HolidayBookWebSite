@@ -73,6 +73,18 @@ class SiteReservationModel extends Model{
         return $this->db->query("SELECT id_user FROM public.user WHERE login = :login: ",["login" => $login])->getResultArray();
     }
     
+    public function getNameUser($login = null, $idUser = null){
+        if(!empty($idUser)){
+            return $this->db->query('SELECT nom FROM public.user WHERE id_user = :iduser:;',['iduser' => $idUser])->getResultArray();
+        }
+        elseif(!empty($login)) {
+            return $this->db->query('SELECT nom FROM public.user WHERE id_user = :iduser:;',['iduser' => $this->getIdUser($login)[0]['id_user']])->getResultArray();
+        }
+        else{
+            return false;
+        }
+    }
+
     public function countUserLogin($login){
         return $this->db->query("SELECT COUNT(login) FROM public.user WHERE login = :login:",['login' => $login])->getResultArray();
     }
