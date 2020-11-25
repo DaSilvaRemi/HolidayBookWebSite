@@ -11,10 +11,11 @@
     <select name="typelogement">
         <option value="">-----Veuillez sélectionnez une option------</option>
         <?php 
-        $tabQuery = \App\Controllers\BookForm::showData();
-        foreach ($tabQuery as $tabTypeLogement) {
+        if(isset($data)){
+           foreach ($data as $tabTypeLogement) {
                 echo '<option value="'.$tabTypeLogement["typelogement"].'">'.$tabTypeLogement["typelogement"].'</option>';  
-        } 
+            }  
+        }   
  ?> 
            
     </select>

@@ -32,10 +32,10 @@ abstract class Session {
     }
     
     public static function verifySession(){
-        if(isset(Session::$session)){
+        if(!isset(Session::$session)){
             return false;
         }
-        elseif(Session::hasSessionData('idUser')){
+        elseif(Session::getSessionData('idUser') === NULL){
             Session::destructSession();
             return false;
         }
@@ -44,11 +44,7 @@ abstract class Session {
         }
     }
     
-    public static function hasSessionData($idChamp){
-        return Session::$session->has($idChamp);
-    }
-    
-    public static function getSessionData($idChamp = null){
+    public static function getSessionData($idChamp = ''){
         return Session::$session->get($idChamp);
     }
     

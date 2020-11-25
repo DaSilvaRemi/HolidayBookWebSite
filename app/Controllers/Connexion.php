@@ -47,7 +47,7 @@ class Connexion extends Controller{
             ]);
         }
         else{
-            Session::initSession($SiteReservationModel->getIdUser($this->request->getPost('user')));
+            Session::initSession($SiteReservationModel->getIdUser($this->request->getPost('user'))[0]['id_user']);
             Session::setSessionData('nom', $SiteReservationModel->getNameUser($this->request->getPost('user'))[0]['nom']);
             echo view("form/pageadmin");
         }

@@ -8,13 +8,18 @@ class BookForm extends Controller
     public function index()
     {
         helper('form');
+        Session::startSession();
+        if(!Session::verifySession()){
+            return redirect()->to(site_url('Connexion')); 
+        }
         
         if (!$this->validate(['datedebut' => 'required','datefin' => 'required','pension' => 'required','typelogement' => 'required' ],
         ['datedebut' => ['required' => 'Merci d\'indiquer une date de début de séjour.'],'datefin' => ['required' => 'Merci d\'indiquer une date de fin de séjour.'],
         'pension'    => ['required' => 'Merci d\'indiquer votre pension.'], 'typelogement' => ['required' => 'Veuillez selectionnez un type de séjour']]))
         {
+            $SiteReservationModel = new \App\Models\SiteReservationModel();
             echo view('form/book', [
-                'validation' => $this->validator
+                'validation' => $this->validator, 'data' => $SiteReservationModel->getTypeLogement()
             ]);
         }
         else
@@ -22,12 +27,7 @@ class BookForm extends Controller
             $this->control();
         }
     }
-    
-    public static function showData(){
-        $model = new \App\Models\SiteReservationModel();
-        return $model->getTypeLogement();
-    }
-    
+
     /* 
     fonction : Vérifie les éventuel erreurs lors de la création de l'objet(Durée de date incorrecte ou/et nombre de personne incorrecte)
     parametre : void
@@ -35,7 +35,7 @@ class BookForm extends Controller
         -la vue success quand tout se passe bien
         -la vue book lorqu'il y'a une erreur et affiche celle ci.
     */
-    public function control(){
+    private function control(){
         $leControlSiteReservation = new ControlSiteReservationModel($this->request->getPost('datedebut'), $this->request->getPost('datefin'), $this->request->getPost('nbpersonne'), 
         $this->request->getPost('typelogement'), $this->request->getPost('pension'), $this->request->getPost('menage'));
 
@@ -46,12 +46,13 @@ class BookForm extends Controller
                     $this->validator->setError($errorField, $errorValue);
                 }
             }
-            echo view('form/book',['validation' => $this->validator]);  
+            $SiteReservationModel = new \App\Models\SiteReservationModel();
+            echo view('form/book',['validation' => $this->validator, 'data' => $SiteReservationModel->getTypeLogement()] );  
         }
         else {
-            $leControlSiteReservation->insertData(1); //Mettre à la place du un l'id de l'utilisateur(on peut le stocker dans une session)
+            Session::startSession();
+            $leControlSiteReservation->insertData(Session::getSessionData('idUser')); //Mettre à la place du un l'id de l'utilisateur(on peut le stocker dans une session)
             echo view('form/sucess'); 
         } 
     }
 }
-
