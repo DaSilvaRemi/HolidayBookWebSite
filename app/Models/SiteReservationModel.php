@@ -46,7 +46,7 @@ class SiteReservationModel extends Model{
     -parametre : idSejour => int => PRIMARY KEY => Correspond à l'id de la réservation
      * valide => boolean => setByDefault(true) => Champs de validation
     -retour : void     */
-    public function alterIsValide($idSejour, $valide = true) : void{
+    public function updateisValide($idSejour, $valide = true) : void{
         $this->db->query("UPDATE public.reservation SET valide = :valide: WHERE id_sejour = :id_sejour:;",["valide" => $valide, "is_sejour" => $idSejour]);
     }
     
@@ -93,5 +93,8 @@ class SiteReservationModel extends Model{
         return $this->db->query("SELECT COUNT(id_user) FROM public.user WHERE login = :login: AND mdp = :mdp:",['login' => $login, 'mdp' => $mdp])->getResultArray();
     }
     
+    public function insertUser($nom, $prenom, $login, $mdp) {
+        return $this->db->query('INSERT INTO public.user(nom, prenom, login, mdp) VALUES(:nom:, :prenom:, :login:, :mdp:);',['nom' => nom, 'prenom' => $prenom, 'login' => $login, 'mdp' => $mdp]);
+    }
     
 }

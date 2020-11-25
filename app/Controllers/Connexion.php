@@ -18,11 +18,6 @@ class Connexion extends Controller{
     public function index() {
         helper('form');
         
-        Session::startSession();
-        if(Session::verifySession()){
-            Session::destructSession();
-        }
-        
         if (!$this->validate(['user' => 'required|min_length[4]|max_length[20]','password' => 'required|min_length[4]|max_length[30]'],
         ['user' => ['required' => 'Merci d\'indiquer un login.', 'min_length' => 'Merci d\'indiquer un login d\'au moins 4 caractère', 
             'max_length' => 'La longueur du login ne peut pas dépasser 20 caractère'],
@@ -56,6 +51,14 @@ class Connexion extends Controller{
             Session::setSessionData('nom', $SiteReservationModel->getNameUser($this->request->getPost('user'))[0]['nom']);
             echo view("form/pageadmin");
         }
+    }
+    
+    public function deconnexion() {
+        Session::startSession();
+        if(Session::verifySession()){
+            Session::destructSession();
+        }
+        $this->index();
     }
    
 }
