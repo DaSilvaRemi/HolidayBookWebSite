@@ -1,36 +1,86 @@
 <!DOCTYPE html>
-<!--
-To change this license header, choose License Headers in Project Properties.
-To change this template file, choose Tools | Templates
-and open the template in the editor.
--->
-<html>
-    <head>
-        <meta charset="UTF-8">
-        <title>Page de connection</title>
-    </head>
-    <body>
-    <?= form_open('Connexion'); ?>
-    <h3>Page de connection</h3>
-    
-    <?php if(isset($validation)){
+   <html>
+      <head>
+         <title>Profile</title>
+         <meta charset="utf-8">
+
+      </head>
+   <body>
+
+<!--header-->
+<!--header-->
+<!--Formulaire-->
+ <?= form_open('Profile'); ?>
+<h1>Profile</h1>
+ <?php if(isset($validation)){
         $validation->listErrors();
     }?>
     <?php if(isset($connexion)){
      echo $connexion;
     } ?>
-    <h5>Utilisateur</h5>
-    <input type="text" name="user" placeholder="utilisateur" size="50"/>
+<!--mail-->
+<form method="post">
+   <h3><label for="mail">Votre mail</label></h3>
+   <label for="mail">Adresse e-mail actuelle</label>  
+   <input type="email" name="mail" id="mail" placeholder="Ex: nomcompte@gmail.com" maxlenght= "20" size="30" />
+ 
+   <br>
 
-    <h5>Mot de passe</h5>
-    <input type="password" name="password" placeholder="password" size="50"/>
+   <label for="newmail">Nouvel e-mail</label>
+   <input type="email" name="mail" id="newmail"/>
 
-    <br/><br/><br/>
-    <div><input type="submit" value="Envoyer" />
-        <input type="reset" value="Annuler" /></div>
-    <br/><br/>
-    <div><?php echo anchor('CreateUser', '<input type="button" value="Créer un compte" />'); ?> 
+   <br>
+   <br>
+   <input type="submit" value="Envoyer"/>
+   
+   <!--mail-->
+   <!--langue-->
+   <h3><label for="langue">Votre langue</label></h3>
+   <select name="langue" id="langue">
+      <option value="france">France</option>
+      <option value="epsagne">Espagne</option>
+      <option value="italie">Italie</option>
+      <option value="royaume-uni">Royaume-uni</option>
+      <option value="canada">Canada</option>
+      <option value="etats-unis">Etats-unis</option>
+      <option value="japon">Japon</option>
+      <option value="chine">Chine</option>
+      <option value="france">France</option>
+       </select>
+       <br>
+       <br>
+   <input type="submit" value="Envoyer"/>
 
-    </form>
-    </body>
-</html>
+   <!--langue-->
+
+    
+
+
+
+
+
+    <!--mail-->
+    <!--mot de passe-->
+   <h3><label for="pass">Changer votre mot de passe</label></h3>
+   
+   <label for="newpass">Nouveau mot de passe</label>
+   <input type="password" name="pass" id="newpass"/>
+   <br>
+   <label for="newpass">Réécrire nouveau mot de passe</label>
+   <input type="password" name="pass" id="tapenewpass"/>
+    <br>
+    <br>
+   <input type="submit" value="Changer votre mot de passe"/>
+
+   
+
+   
+
+    <!--mot de passe-->
+
+<!--Formulaire-->
+<!--footer-->
+<!--footer-->
+</form>
+</body>
+</html> 
