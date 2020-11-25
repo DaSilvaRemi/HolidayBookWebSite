@@ -17,6 +17,12 @@ use \CodeIgniter\Controller;
 class CreateUser extends Controller{
     public function index(){
         helper('form');
+        helper('html');
+        
+        echo link_tag('css/nav.css');
+        echo link_tag('css/stylepp.css');
+        echo link_tag('css/form.css');
+        echo view('template/header');
         
         if (!$this->validate(['nom' => 'required|min_length[3]|max_length[60]', 'prenom' => 'required|min_length[3]|max_length[60]', 'user' => 'required|min_length[4]|max_length[20]',
             'password' => 'required|min_length[4]|max_length[30]'],

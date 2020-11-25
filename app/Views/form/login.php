@@ -6,23 +6,23 @@ and open the template in the editor.
 -->
 <html>
     <head>
-        <meta charset="UTF-8">
-        <title>Page de connection</title>
+        <title>Page de connexion</title>
     </head>
     <body>
+    <section class="formulaire">
     <?= form_open('Connexion'); ?>
-    <h3>Page de connection</h3>
+      
     
-    <?php if(isset($validation)){
-        $validation->listErrors();
-    }?>
     <?php if(isset($connexion)){
      echo $connexion;
     } ?>
-    <h5>Utilisateur</h5>
+        
+    <h3>Page de connexion</h3>
+    
+    <label for="user">Utilisateur</label>
     <input type="text" name="user" placeholder="utilisateur" size="50"/>
 
-    <h5>Mot de passe</h5>
+    <label for="password">Mot de passe</label>
     <input type="password" name="password" placeholder="password" size="50"/>
 
     <br/><br/><br/>
@@ -30,7 +30,12 @@ and open the template in the editor.
         <input type="reset" value="Annuler" /></div>
     <br/><br/>
     <div><?php echo anchor('CreateUser', '<input type="button" value="Créer un compte" />'); ?> 
+    
+    <?php if(isset($validation)){
+        echo $validation->listErrors();
+    }?>
 
     </form>
+    </section>
     </body>
 </html>

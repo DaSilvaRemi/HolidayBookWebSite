@@ -8,10 +8,17 @@ class BookForm extends Controller
     public function index()
     {
         helper('form');
+        helper('html');
+        
         Session::startSession();
         if(!Session::verifySession()){
             return redirect()->to(site_url('Connexion')); 
         }
+        
+        echo link_tag('css/nav.css');
+        echo link_tag('css/stylepp.css');
+        echo link_tag('css/form.css');
+        echo view('template/header');
         
         if (!$this->validate(['datedebut' => 'required','datefin' => 'required','pension' => 'required','typelogement' => 'required' ],
         ['datedebut' => ['required' => 'Merci d\'indiquer une date de début de séjour.'],'datefin' => ['required' => 'Merci d\'indiquer une date de fin de séjour.'],

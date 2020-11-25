@@ -10,6 +10,7 @@ and open the template in the editor.
         <title>Page de connection</title>
     </head>
     <body>
+    <section class="formulaire">
     <?= form_open('Connexion'); ?>
     <h3>Page de connection</h3>
     
@@ -19,18 +20,18 @@ and open the template in the editor.
     <?php if(isset($connexion)){
      echo $connexion;
     } ?>
-    <h5>Utilisateur</h5>
+    <h5>Mot de passe</h5>
     <input type="text" name="user" placeholder="utilisateur" size="50"/>
 
-    <h5>Mot de passe</h5>
+    <h5>Confirmer le mot de passe</h5>
     <input type="password" name="password" placeholder="password" size="50"/>
 
     <br/><br/><br/>
-    <div><input type="submit" value="Envoyer" />
-        <input type="reset" value="Annuler" /></div>
+    <div><input type="submit" value="Changer le mot de passe" />
+    <?php echo anchor('Annuler', '<input type="reset" value="Annuler"/>'); ?> </div>
     <br/><br/>
-    <div><?php echo anchor('CreateUser', '<input type="button" value="Créer un compte" />'); ?> 
 
     </form>
+    </section>
     </body>
 </html>

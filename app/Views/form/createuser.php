@@ -10,7 +10,7 @@ and open the template in the editor.
         <title>Page de création de compte</title>
     </head>
     <body>
-    <?= $validation->listErrors(); ?>
+    <section class="formulaire">
     <?= form_open('CreateUser'); ?>
     <h3>Page de création de compte</h3>
     
@@ -21,14 +21,21 @@ and open the template in the editor.
     <input type="text" name="prenom" placeholder="Prénom" size="50"/>
     
     <h5>Login</h5>
-    <input type="texte" name="user" placeholder="username" size="50"/>
+    <input type="text" name="user" placeholder="Utilisateur" size="50"/>
     
     <h5>Mot de Passe</h5>
     <input type="password" name="password" placeholder="password" size="50"/>
+    
+    <br/><br/>
+    <?php if(isset($validation)){
+       echo $validation->listErrors();
+    }?>
 
-    <br/><br/><br/>
+    <br/>
     <div><input type="submit" value="Envoyer" />
     <?php echo anchor('Connexion', '<input type="button" value="Annuler"/>'); ?> </div>
     </form>
+    </section>
     </body>
+    
 </html>
