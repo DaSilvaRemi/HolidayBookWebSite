@@ -94,7 +94,7 @@ class SiteReservationModel extends Model{
     }
     
     public function insertUser($nom, $prenom, $login, $mdp) {
-        return $this->db->query('INSERT INTO public.user(nom, prenom, login, mdp) VALUES(:nom:, :prenom:, :login:, :mdp:);',['nom' => nom, 'prenom' => $prenom, 'login' => $login, 'mdp' => $mdp]);
+        return $this->db->query('INSERT INTO public.user(nom, prenom, login, mdp) VALUES(:nom:, :prenom:, :login:, :mdp:);',['nom' => $nom, 'prenom' => $prenom, 'login' => $login, 'mdp' => $mdp]);
     }
     
 }
