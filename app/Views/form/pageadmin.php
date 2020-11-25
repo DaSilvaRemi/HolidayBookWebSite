@@ -13,7 +13,7 @@ and open the template in the editor.
         <?php
         App\Controllers\Session::verifySession();
         echo("Bonjour ".App\Controllers\Session::getSessionData('nom'));
-        echo anchor('Connexion', 'Déconnexion');
+        echo anchor('Connexion/deconnexion', 'Déconnexion');
         ?>
     </body>
 </html>

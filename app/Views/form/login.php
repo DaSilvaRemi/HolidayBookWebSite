@@ -10,10 +10,15 @@ and open the template in the editor.
         <title>Page de connection</title>
     </head>
     <body>
-    <?= $validation->listErrors(); ?>
     <?= form_open('Connexion'); ?>
     <h3>Page de connection</h3>
     
+    <?php if($validation->listErrors() != null){
+        $validation->listErrors();
+    }?>
+    <?php if(isset($connexion)){
+     echo $connexion;
+    } ?>
     <h5>Utilisateur</h5>
     <input type="text" name="user" placeholder="utilisateur" size="50"/>
 
@@ -23,6 +28,8 @@ and open the template in the editor.
     <br/><br/><br/>
     <div><input type="submit" value="Envoyer" />
         <input type="reset" value="Annuler" /></div>
+    <br/><br/>
+    <div><?php echo anchor('CreateUser', '<input type="button" value="Créer un compte" />'); ?> </div>
 
     </form>
     </body>

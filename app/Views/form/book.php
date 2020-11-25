@@ -13,7 +13,6 @@
         <?php 
         $tabQuery = \App\Controllers\BookForm::showData();
         foreach ($tabQuery as $tabTypeLogement) {
-            var_dump($tabTypeLogement);
                 echo '<option value="'.$tabTypeLogement["typelogement"].'">'.$tabTypeLogement["typelogement"].'</option>';  
         } 
  ?> 
