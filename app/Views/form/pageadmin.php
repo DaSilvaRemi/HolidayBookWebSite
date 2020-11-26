@@ -14,10 +14,18 @@ and open the template in the editor.
         <table>
         <?php
         foreach ($tabQueryReservations as $LesReservations) {
-            echo('<tr><td><h3>Mr/Mme'.$Lesreservations['nom'].'</h3></td>');
-            echo('<td><h3>Debut de la reservation : '.$Lesreservations['datedebut'].'</h3></td>');
+            echo('<tr><td><h3>Mr/Mme'.$Lesreservations['nom'].'</h3></td>');                        //Collone Nom  
+            echo('<td><h3>Debut de la reservation : '.$Lesreservations['datedebut'].'</h3></td>');  //Collone Date
+            echo('<td><h3>Nb de personnes : '.$Lesreservations['nbpersonne'].'</h3></td>');         //Collone Nb de personnes
             
-            echo('<td><input type="radio" name="Selection" value="'.$LesReservations['id_reservation'].'"></tr>');
+            echo('<td>');                   //Si la reservation est déjà validée, le radio n'apparait pas
+            if ($LesReservations['valide'] == false){
+                echo('<input type="radio" name="Selection" value="'.$LesReservations['id_reservation'].'">');
+            } else {
+                echo('<h3>Validée</h3>');
+            }
+            echo('</td>');
+            
         }
             App\Controllers\Session::verifySession();
             echo("Bonjour ".App\Controllers\Session::getSessionData('nom'));
