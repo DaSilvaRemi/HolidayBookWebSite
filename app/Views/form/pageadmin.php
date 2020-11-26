@@ -13,7 +13,7 @@ and open the template in the editor.
         <form>
         <table>
         <?php
-        foreach ($tabQueryReservations as $LesReservations) {
+        foreach ($tabReservation as $LesReservations) {
             echo('<tr><td><h3>Mr/Mme'.$Lesreservations['nom'].'</h3></td>');                        //Collone Nom  
             echo('<td><h3>Debut de la reservation : '.$Lesreservations['datedebut'].'</h3></td>');  //Collone Date
             echo('<td><h3>Nb de personnes : '.$Lesreservations['nbpersonne'].'</h3></td>');         //Collone Nb de personnes
