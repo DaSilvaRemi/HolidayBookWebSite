@@ -22,7 +22,6 @@ class CreateUser extends Controller{
         echo link_tag('css/nav.css');
         echo link_tag('css/stylepp.css');
         echo link_tag('css/form.css');
-        echo view('template/header');
         
         if (!$this->validate(['nom' => 'required|min_length[3]|max_length[60]', 'prenom' => 'required|min_length[3]|max_length[60]', 'user' => 'required|min_length[4]|max_length[20]',
             'password' => 'required|min_length[4]|max_length[30]'],
@@ -35,6 +34,7 @@ class CreateUser extends Controller{
          'password' => ['required' => 'Merci d\'indiquer votre mot de passe','min_length' => 'Merci d\'indiquer un mot de passe d\'au moins 4 caractère', 
             'max_length' => 'La longueur du mot de passe ne peut pas dépasser 30 caractère']]))
         {
+            echo view('template/header');
             echo view('form/createuser', [
                 'validation' => $this->validator
             ]);
@@ -49,6 +49,7 @@ class CreateUser extends Controller{
         $SiteReservationModel = new \App\Models\SiteReservationModel();
         if(intval($SiteReservationModel->countUserLogin($this->request->getPost('user'))[0]['count']) != 0){
             $this->validator->setError("user", "Ce nom d'utilisateur existe déja");
+            echo view('template/header');
             echo view('form/login', [
                 'validation' => $this->validator, 'connexion' => 'votre compte existe déja'
             ]);
@@ -56,6 +57,7 @@ class CreateUser extends Controller{
         }
         else{
             $SiteReservationModel->insertUser($this->request->getPost('nom'), $this->request->getPost('prenom'), $this->request->getPost('user'), $this->request->getPost('password'));
+            echo view('template/header');
             echo view('form/login', [
                 'validation' => $this->validator, 'connexion' => 'Vous avez créer votre compte'
             ]);

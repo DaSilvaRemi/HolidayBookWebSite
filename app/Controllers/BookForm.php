@@ -18,13 +18,13 @@ class BookForm extends Controller
         echo link_tag('css/nav.css');
         echo link_tag('css/stylepp.css');
         echo link_tag('css/form.css');
-        echo view('template/header');
         
         if (!$this->validate(['datedebut' => 'required','datefin' => 'required','pension' => 'required','typelogement' => 'required' ],
         ['datedebut' => ['required' => 'Merci d\'indiquer une date de début de séjour.'],'datefin' => ['required' => 'Merci d\'indiquer une date de fin de séjour.'],
         'pension'    => ['required' => 'Merci d\'indiquer votre pension.'], 'typelogement' => ['required' => 'Veuillez selectionnez un type de séjour']]))
         {
             $SiteReservationModel = new \App\Models\SiteReservationModel();
+            echo view('template/header');
             echo view('form/book', [
                 'validation' => $this->validator, 'data' => $SiteReservationModel->getTypeLogement()
             ]);
@@ -54,11 +54,13 @@ class BookForm extends Controller
                 }
             }
             $SiteReservationModel = new \App\Models\SiteReservationModel();
+            echo view('template/header');
             echo view('form/book',['validation' => $this->validator, 'data' => $SiteReservationModel->getTypeLogement()] );  
         }
         else {
             Session::startSession();
             $leControlSiteReservation->insertData(Session::getSessionData('idUser')); //Mettre à la place du un l'id de l'utilisateur(on peut le stocker dans une session)
+            echo view('template/header');
             echo view('form/sucess'); 
         } 
     }

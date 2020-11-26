@@ -2,10 +2,11 @@
     <title>Réservation de séjour</title>
 </head>
 <body>
-    <section id="formulaire">
-    <?= $validation->listErrors(); ?>
+    <section class="formulaire">
     <?= form_open('BookForm'); ?>
-    <h5>Type Logement</h5>
+    <h3>Réservation de séjour</h3>
+    
+    <label for="typelogement">Type de logement</label>
     <select name="typelogement">
         <option value="">-----Veuillez sélectionnez une option------</option>
         <?php 
@@ -38,9 +39,12 @@
     
     <label for="menage">Ménage fin de séjour</label>
     <input type="checkbox" name="menage" value="menage">
+    
+    <?php if(isset($validation)){
+        echo $validation->listErrors();
+    }?>
 
     <div><input type="submit" value="Envoyer" /></div>
-
     </form>
     </section>
 </body>

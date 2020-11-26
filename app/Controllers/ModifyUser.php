@@ -27,13 +27,13 @@ class ModifyUser extends Controller{
         echo link_tag('css/nav.css');
         echo link_tag('css/stylepp.css');
         echo link_tag('css/form.css');
-        echo view('template/header');
         
         if (!$this->validate(['user' => 'required','datefin' => 'required','pension' => 'required','typelogement' => 'required' ],
         ['datedebut' => ['required' => 'Merci d\'indiquer une date de début de séjour.'],'datefin' => ['required' => 'Merci d\'indiquer une date de fin de séjour.'],
         'pension'    => ['required' => 'Merci d\'indiquer votre pension.'], 'typelogement' => ['required' => 'Veuillez selectionnez un type de séjour']]))
         {
             $SiteReservationModel = new \App\Models\SiteReservationModel();
+            echo view('template/header');
             echo view('form/book', [
                 'validation' => $this->validator, 'data' => $SiteReservationModel->getTypeLogement()
             ]);
