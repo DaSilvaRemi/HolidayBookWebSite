@@ -33,10 +33,9 @@ and open the template in the editor.
   .formulaire label{
       color: black;
   }
-  
   /* Full-width inputs */
   input[type="text"],input[type="password"],input[type="radio"],
-  input[type="checkbox"],input[type="date"],select option,select{
+  input[type="checkbox"],input[type="date"],input[type="number"],input[type="checkbox"],select option,select{
     width: 100%;
     padding: 12px 20px;
     margin: 8px 0;
