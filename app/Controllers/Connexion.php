@@ -40,7 +40,7 @@ class Connexion extends Controller{
         }
     }
     
-    public function verifyLoginPassword(){
+    private function verifyLoginPassword(){
         $SiteReservationModel = new \App\Models\SiteReservationModel;
         if(intval($SiteReservationModel->countIdUserValide($this->request->getPost('user'), $this->request->getPost('password'))[0]['count']) != 1){
             if($SiteReservationModel->countUserLogin($this->request->getPost('user'))[0]['count'] != 1 ){
@@ -55,7 +55,12 @@ class Connexion extends Controller{
         else{
             Session::initSession($SiteReservationModel->getIdUser($this->request->getPost('user'))[0]['id_user']);
             Session::setSessionData('nom', $SiteReservationModel->getNameUser($this->request->getPost('user'))[0]['nom']);
-            echo view("form/pageadmin");
+            if(Session::getSessionData('idUser') == 1){
+                echo view("form/pageadmin",['tabReservation' => $SiteReservationModel->getLesReservations()]);
+            }
+            else {
+                
+            }
         }
     }
     

@@ -41,13 +41,39 @@ class SiteReservationModel extends Model{
     }
     
     /*--------------------------------------Table réservation------------------------------------------------*/
+    public function getIdReservation(){
+        $this->db->query("SELECT id_reservation FROM public.reservation;")->getResultArray();
+    }
+
+    public function getDateDebut() {
+        $this->db->query("SELECT datedebut FROM public.reservation;")->getResultArray();
+    }
+    
+    public function getNbPersonne() {
+        $this->db->query("SELECT nbpersonne FROM public.reservation;")->getResultArray();
+    }
+    
+    public function getValide() {
+        $this->db->query("SELECT valide FROM public.reservation;")->getResultArray();
+    }
+    
+    public function getIdUser_Reservation() {
+        $this->db->query("SELECT id_user FROM public.reservation;")->getResultArray();
+    }
+    
+    public function getLesReservations(){
+        $this->db->query("SELECT datedebut, nbpersonne, (SELECT nom FROM user), valide FROM public.reservation INNER JOIN public.user ON public.reservation.id_user = public.user.id_user;")->getResultArray();
+    }
+    
+    
+    
     /*
     -fonction : Modifie le champs valide lorsque l'admin à accepté une réservation
     -parametre : idSejour => int => PRIMARY KEY => Correspond à l'id de la réservation
      * valide => boolean => setByDefault(true) => Champs de validation
     -retour : void     */
-    public function updateisValide($idSejour, $valide = true) : void{
-        $this->db->query("UPDATE public.reservation SET valide = :valide: WHERE id_sejour = :id_sejour:;",["valide" => $valide, "is_sejour" => $idSejour]);
+    public function updateisValide($idReservation, $valide = true) : void{
+        $this->db->query("UPDATE public.reservation SET valide = :valide: WHERE id_reservation = :id_reservation:;",["valide" => $valide, "id_reservation" => $idReservation]);
     }
     
     /*
