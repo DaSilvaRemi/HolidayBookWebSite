@@ -18,8 +18,8 @@ and open the template in the editor.
         <li><a class="click" href="login.php" id="Login">Mes Réservations</a>
       <!-- Attention à l'ordre !! : la premier de la liste est le bloc le plus à droite-->
       </li>
-      <li class="droite" title="Cinephil">
-        <a class="click" href="http://cinephil.cinefan.free.fr/fr/1accueil-base-de-donnees-cinema/index.html" target="_blank">Connexion</a>
+      <li class="droite">
+        <a class="click" href="" target="_blank">Connexion</a>
       </li>
     </ul>
   </nav>

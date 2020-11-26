@@ -21,10 +21,10 @@ and open the template in the editor.
      echo $connexion;
     } ?>
     <h5>Mot de passe</h5>
-    <input type="text" name="user" placeholder="utilisateur" size="50"/>
+    <input type="password" name="password" placeholder="utilisateur" size="50"/>
 
     <h5>Confirmer le mot de passe</h5>
-    <input type="password" name="password" placeholder="password" size="50"/>
+    <input type="password" name="confirmPassword" placeholder="password" size="50"/>
 
     <br/><br/><br/>
     <div><input type="submit" value="Changer le mot de passe" />
