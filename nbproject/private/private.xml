@@ -3,10 +3,13 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/var/www/html/codeigniter2/app/Views/form/sucess.php</file>
-            <file>file:/var/www/html/codeigniter2/app/Controllers/BookForm.php</file>
-            <file>file:/var/www/html/codeigniter2/app/Models/BookModel.php</file>
-            <file>file:/var/www/html/codeigniter2/app/Views/form/book.php</file>
+            <file>file:/var/www/html/SiteReservation/SiteVacanceReservationBTSSIO/app/Views/form/modifypassword.php</file>
+            <file>file:/var/www/html/SiteReservation/SiteVacanceReservationBTSSIO/app/Controllers/Connexion.php</file>
+            <file>file:/var/www/html/SiteReservation/SiteVacanceReservationBTSSIO/app/Models/Date.php</file>
+            <file>file:/var/www/html/SiteReservation/SiteVacanceReservationBTSSIO/app/Controllers/BookForm.php</file>
+            <file>file:/var/www/html/SiteReservation/SiteVacanceReservationBTSSIO/app/Controllers/ModifPassword.php</file>
+            <file>file:/var/www/html/SiteReservation/SiteVacanceReservationBTSSIO/app/Views/form/book.php</file>
+            <file>file:/var/www/html/SiteReservation/SiteVacanceReservationBTSSIO/app/Models/SiteReservationModel.php</file>
         </group>
     </open-files>
 </project-private>

@@ -21,7 +21,7 @@ class App extends BaseConfig
 	| environments.
 	|
 	*/
-	public $baseURL = 'http://localhost/codeigniter2/public';
+	public $baseURL = 'http://localhost/SiteReservation/SiteVacanceReservationBTSSIO/public/';
 
 	/*
 	|--------------------------------------------------------------------------
