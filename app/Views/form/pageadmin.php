@@ -10,10 +10,20 @@ and open the template in the editor.
         <title></title>
     </head>
     <body>
+        <form>
+        <table>
         <?php
-        App\Controllers\Session::verifySession();
-        echo("Bonjour ".App\Controllers\Session::getSessionData('nom'));
-        echo anchor('Connexion/deconnexion', 'Déconnexion');
+        foreach ($tabQueryReservations as $LesReservations) {
+            echo('<tr><td><h3>Mr/Mme'.$Lesreservations['nom'].'</h3></td>');
+            echo('<td><h3>Debut de la reservation : '.$Lesreservations['datedebut'].'</h3></td>');
+            
+            echo('<td><input type="radio" name="Selection" value="'.$LesReservations['id_reservation'].'"></tr>');
+        }
+            App\Controllers\Session::verifySession();
+            echo("Bonjour ".App\Controllers\Session::getSessionData('nom'));
+            echo anchor('Connexion/deconnexion', 'Déconnexion');
         ?>
+        </table>
+        </form>
     </body>
 </html>
