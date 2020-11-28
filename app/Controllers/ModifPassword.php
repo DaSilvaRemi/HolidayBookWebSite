@@ -18,6 +18,11 @@ class ModifyUser extends Controller{
         helper('form');
         helper('html');
         
+        Session::startSession();
+        if(!Session::verifySession()){
+            return redirect()->to(site_url('Connexion')); 
+        }
+        
         echo link_tag('css/nav.css');
         echo link_tag('css/stylepp.css');
         echo link_tag('css/form.css');
@@ -29,32 +34,37 @@ class ModifyUser extends Controller{
             'max_length' => 'La longueur du mot de passe ne peut pas dépasser 30 caractère']]))
         {
             echo view('template/header');
-            echo view('form/login', [
+            echo view('form/modifypassword', [
                 'validation' => $this->validator
             ]);
         }
         else
         {
-            $this->verifyLoginPassword();
+            $this->verifPassword();
         }
     }
     
-    public function verifyLoginPassword(){
-        $SiteReservationModel = new \App\Models\SiteReservationModel;
-        if(intval($SiteReservationModel->countIdUserValide($this->request->getPost('user'), $this->request->getPost('password'))[0]['count']) != 1){
-            if($SiteReservationModel->countUserLogin($this->request->getPost('user'))[0]['count'] != 1 ){
-                $this->validator->setError("user", "Votre nom d'utilisateur n'éxiste pas !");
-            }else{
-                $this->validator->setError("password", "Le mot de passe est incorrect !");
-            }
-            echo view('form/login', [
+    private function verifPassword(){
+        if($this->request->getPost('password') != $this->request->getPost('confirmPassword')){
+            $this->validator->setError("password","vos mot de passe ne correspondent pas");
+            echo view('template/header');
+            echo view('form/modifypassword', [
                 'validation' => $this->validator
             ]);
         }
         else{
-            Session::initSession($SiteReservationModel->getIdUser($this->request->getPost('user'))[0]['id_user']);
-            Session::setSessionData('nom', $SiteReservationModel->getNameUser($this->request->getPost('user'))[0]['nom']);
-            echo view("form/pageadmin");
+            Session::startSession();
+            $SiteReservationModel = new \App\Models\SiteReservationModel;
+            if(int($SiteReservationModel->countUserMdp(Session::getSessionData('idUser'), $this->request->getPost('password')))[0]['count'] != 0){
+                $this->validator->setError("password", "Le mot de passe que vous avez entré est déja lié à vôtre compte !");
+                echo view('template/header');
+                echo view('form/modifypassword', [
+                'validation' => $this->validator
+                ]);
+            }
+            else{
+                return redirect()->to(site_url('Connexion/deconnexion')); 
+            }
         }
     }
 }
