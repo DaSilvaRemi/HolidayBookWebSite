@@ -14,13 +14,7 @@ and open the template in the editor.
     <?= form_open('ModifyPassword'); ?>
     <h3>Changement de mot de passe</h3>
     <p>Vous serez rediriger sur la page de connexion après la demande</p>
-    
-    <?php if(isset($validation)){
-        $validation->listErrors();
-    }?>
-    <?php if(isset($connexion)){
-     echo $connexion;
-    } ?>
+   
     <h5>Mot de passe</h5>
     <input type="password" name="password" placeholder="password" size="50"/>
 
@@ -31,6 +25,9 @@ and open the template in the editor.
     <div><input type="submit" value="Changer le mot de passe" />
     <?php echo anchor('Annuler', '<input type="reset" value="Annuler"/>'); ?> </div>
     <br/><br/>
+    <?php if(isset($validation)){
+        echo $validation->listErrors();
+    }?>
 
     </form>
     </section>

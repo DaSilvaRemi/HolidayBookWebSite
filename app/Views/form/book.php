@@ -28,9 +28,9 @@
     <label for="nbpersonne">Nombre de personnes</label>
     <input type="number" name="nbpersonne" min="1" max="4" value="1" size="50" />
 
-    <label for="pension">Nombre de personnes</label>
+    <label for="pension">Choix de la pension</label>
     <select name="pension">
-        <option value="">-----Veuillez sélectionnez une option-----</option>
+        <option value="">-----Veuillez sélectionnez une pension-----</option>
         <option value="pensioncomplete">pension complète</option>
         <option value="demipension">demi-pension</option>
     </select>

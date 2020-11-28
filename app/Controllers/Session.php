@@ -28,7 +28,6 @@ abstract class Session {
     
     public static function destructSession() {
         Session::$session->destroy();
-        Session::$session->stop();
     }
     
     public static function verifySession(){

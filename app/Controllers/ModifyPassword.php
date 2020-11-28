@@ -41,7 +41,9 @@ class ModifyPassword extends Controller{
         }
         else
         {
-            $this->verifPassword();
+            if($this->verifPassword()){
+                return redirect()->to(site_url('Connexion/deconnexion')); 
+            }
         }
     }
     
@@ -56,7 +58,7 @@ class ModifyPassword extends Controller{
         else{
             Session::startSession();
             $SiteReservationModel = new \App\Models\SiteReservationModel;
-            if(int($SiteReservationModel->countUserMdp(Session::getSessionData('idUser'), $this->request->getPost('password')))[0]['count'] != 0){
+            if(intval($SiteReservationModel->countUserMdp(Session::getSessionData('idUser'), $this->request->getPost('password'))[0]['count']) != 0){
                 $this->validator->setError("password", "Le mot de passe que vous avez entré est déja lié à vôtre compte !");
                 echo view('template/header');
                 echo view('form/modifypassword', [
@@ -64,7 +66,8 @@ class ModifyPassword extends Controller{
                 ]);
             }
             else{
-                return redirect()->to(site_url('Connexion/deconnexion')); 
+                $SiteReservationModel->updateUserMdp(Session::getSessionData('idUser'), $this->request->getPost('password'));
+                return true;
             }
         }
     }
