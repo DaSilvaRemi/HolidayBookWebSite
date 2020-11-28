@@ -10,7 +10,7 @@ and open the template in the editor.
         <title></title>
     </head>
     <body>
-        <form>
+        <?= form_open('CreateUser'); ?>
         <table>
         <?php
         foreach ($tabReservation as $LesReservations) {
