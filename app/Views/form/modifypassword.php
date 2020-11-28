@@ -7,12 +7,13 @@ and open the template in the editor.
 <html>
     <head>
         <meta charset="UTF-8">
-        <title>Page de connection</title>
+        <title>Changement de mot de passe</title>
     </head>
     <body>
     <section class="formulaire">
-    <?= form_open('ModifPassword'); ?>
-    <h3>Page de connection</h3>
+    <?= form_open('ModifyPassword'); ?>
+    <h3>Changement de mot de passe</h3>
+    <p>Vous serez rediriger sur la page de connexion après la demande</p>
     
     <?php if(isset($validation)){
         $validation->listErrors();
@@ -21,10 +22,10 @@ and open the template in the editor.
      echo $connexion;
     } ?>
     <h5>Mot de passe</h5>
-    <input type="password" name="password" placeholder="utilisateur" size="50"/>
+    <input type="password" name="password" placeholder="password" size="50"/>
 
     <h5>Confirmer le mot de passe</h5>
-    <input type="password" name="confirmPassword" placeholder="password" size="50"/>
+    <input type="password" name="confirmPassword" placeholder="Confirm password" size="50"/>
 
     <br/><br/><br/>
     <div><input type="submit" value="Changer le mot de passe" />
