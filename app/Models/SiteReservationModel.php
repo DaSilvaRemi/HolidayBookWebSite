@@ -42,27 +42,28 @@ class SiteReservationModel extends Model{
     
     /*--------------------------------------Table réservation------------------------------------------------*/
     public function getIdReservation(){
-        $this->db->query("SELECT id_reservation FROM public.reservation;")->getResultArray();
+        return $this->db->query("SELECT id_reservation FROM public.reservation;")->getResultArray();
     }
 
     public function getDateDebut() {
-        $this->db->query("SELECT datedebut FROM public.reservation;")->getResultArray();
+        return $this->db->query("SELECT datedebut FROM public.reservation;")->getResultArray();
     }
     
     public function getNbPersonne() {
-        $this->db->query("SELECT nbpersonne FROM public.reservation;")->getResultArray();
+        return $this->db->query("SELECT nbpersonne FROM public.reservation;")->getResultArray();
     }
     
     public function getValide() {
-        $this->db->query("SELECT valide FROM public.reservation;")->getResultArray();
+        return $this->db->query("SELECT valide FROM public.reservation;")->getResultArray();
     }
     
     public function getIdUser_Reservation() {
-        $this->db->query("SELECT id_user FROM public.reservation;")->getResultArray();
+        return $this->db->query("SELECT id_user FROM public.reservation;")->getResultArray();
     }
     
     public function getLesReservations(){
-        $this->db->query("SELECT datedebut, nbpersonne, (SELECT nom FROM user), valide FROM public.reservation INNER JOIN public.user ON public.reservation.id_user = public.user.id_user;")->getResultArray();
+        return $this->db->query("SELECT datedebut, nbpersonne, (SELECT nom FROM user), valide FROM public.reservation INNER JOIN public.user ON "
+                . "public.reservation.id_user = public.user.id_user;")->getResultArray();
     }
     
     
@@ -110,6 +111,10 @@ class SiteReservationModel extends Model{
             return false;
         }
     }
+    
+    public function countUserMdp($idUser, $mdp){
+        return $this->db->query('SELECT COUNT(mdp) FROM public.user WHERE id_user = :iduser: AND mdp = :mdp:;',['iduser' => $idUser, 'mdp' => $mdp])->getResultArray();
+    }
 
     public function countUserLogin($login){
         return $this->db->query("SELECT COUNT(login) FROM public.user WHERE login = :login:",['login' => $login])->getResultArray();
@@ -120,7 +125,11 @@ class SiteReservationModel extends Model{
     }
     
     public function insertUser($nom, $prenom, $login, $mdp) {
-        return $this->db->query('INSERT INTO public.user(nom, prenom, login, mdp) VALUES(:nom:, :prenom:, :login:, :mdp:);',['nom' => $nom, 'prenom' => $prenom, 'login' => $login, 'mdp' => $mdp]);
+        $this->db->query('INSERT INTO public.user(nom, prenom, login, mdp) VALUES(:nom:, :prenom:, :login:, :mdp:);',['nom' => $nom, 'prenom' => $prenom, 'login' => $login, 'mdp' => $mdp]);
+    }
+    
+    public function updateUserMdp($idUser, $mdp){
+        $this->db->query('UPDATE public.user SET mdp = :mdp: WHERE id_user = :id_user:',['mdp' => $mdp, 'id_user' => $idUser]);
     }
     
 }
