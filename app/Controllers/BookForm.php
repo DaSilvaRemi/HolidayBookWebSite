@@ -12,7 +12,7 @@ class BookForm extends Controller
         
         Session::startSession();
         if(!Session::verifySession()){
-            return redirect()->to(site_url('Connexion')); 
+            return redirect()->to(site_url('Connexion/deconnexion')); 
         }
         
         echo link_tag('css/nav.css');
@@ -60,7 +60,7 @@ class BookForm extends Controller
         }
         else {
             Session::startSession();
-            $leControlSiteReservation->insertData(Session::getSessionData('idUser')); //Mettre à la place du un l'id de l'utilisateur(on peut le stocker dans une session)
+            $leControlSiteReservation->insertData(Session::getSessionData('idUser'));
             echo view('template/header');
             echo view('form/sucess'); 
         } 

@@ -56,10 +56,10 @@ class Connexion extends Controller{
             Session::initSession($SiteReservationModel->getIdUser($this->request->getPost('user'))[0]['id_user']);
             Session::setSessionData('nom', $SiteReservationModel->getNameUser($this->request->getPost('user'))[0]['nom']);
             if(Session::getSessionData('idUser') == 1){
-                echo view("form/pageadmin",['tabReservation' => $SiteReservationModel->getLesReservations()]);
+                return redirect()->to(site_url('PageAdmin')); 
             }
             else {
-                
+                return redirect()->to(site_url('PageUser')); 
             }
         }
     }
