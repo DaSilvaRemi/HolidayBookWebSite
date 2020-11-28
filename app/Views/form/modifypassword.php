@@ -11,7 +11,7 @@ and open the template in the editor.
     </head>
     <body>
     <section class="formulaire">
-    <?= form_open('Connexion'); ?>
+    <?= form_open('ModifPassword'); ?>
     <h3>Page de connection</h3>
     
     <?php if(isset($validation)){
