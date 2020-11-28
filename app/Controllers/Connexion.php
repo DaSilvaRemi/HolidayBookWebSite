@@ -1,20 +1,13 @@
 <?php
-
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
-
 namespace App\Controllers;
 use \CodeIgniter\Controller;
 
-/**
- * Description of Connexion
- *
- * @author remi
- */
 class Connexion extends Controller{
+    /* 
+    fonction : Vérifie si les champs manquant du formulaire sont bien rempli
+    parametre : void
+    retour : Si une erreur est détecté on retourne sur la vue et on affiche l'erreur. Sinon on appelle verifyLoginPassword
+    */
     public function index() {
         helper('form');
         helper('html');
@@ -40,6 +33,12 @@ class Connexion extends Controller{
         }
     }
     
+    /* 
+    fonction : Vérifie si le login et le mot de passe correspondent 
+    parametre : void
+    retour : Si une erreur est détecté on retourne sur la vue et on affiche l'erreur. 
+     * Sinon on appelle les controleur soit de la pageadmin ou de la pageuser selon l'id de la session
+    */
     private function verifyLoginPassword(){
         $SiteReservationModel = new \App\Models\SiteReservationModel;
         if(intval($SiteReservationModel->countIdUserValide($this->request->getPost('user'), $this->request->getPost('password'))[0]['count']) != 1){
@@ -64,6 +63,11 @@ class Connexion extends Controller{
         }
     }
     
+    /* 
+    fonction : Déconnecte l'utilisateur et renvoie sur la page index
+    parametre : void
+    retour : void
+    */
     public function deconnexion() {
         Session::startSession();
         if(Session::verifySession()){

@@ -15,6 +15,11 @@ use \CodeIgniter\Controller;
  * @author remi
  */
 class CreateUser extends Controller{
+    /* 
+    fonction : Vérifie si les champs manquant du formulaire sont bien rempli
+    parametre : void
+    retour : Si une erreur est détecté on retourne sur la vue et on affiche l'erreur. Sinon on appelle verifyLoginExist
+    */
     public function index(){
         helper('form');
         helper('html');
@@ -45,7 +50,13 @@ class CreateUser extends Controller{
         }
     }
     
-    public function verifyLoginExist() {
+    /* 
+    fonction : Vérifie si le compte existe ou pas sinon onc crée le compte
+    parametre : void
+    retour : Si une erreur est détecté on retourne sur la vue et on affiche l'erreur. 
+     * Sinon on retourne sur la page de connexion pour demander à l'utilisateur de se connecté
+    */
+    private function verifyLoginExist() {
         $SiteReservationModel = new \App\Models\SiteReservationModel();
         if(intval($SiteReservationModel->countUserLogin($this->request->getPost('user'))[0]['count']) != 0){
             $this->validator->setError("user", "Ce nom d'utilisateur existe déja");

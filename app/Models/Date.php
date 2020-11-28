@@ -43,14 +43,26 @@ class Date {
         return Date::explodeValue($this->getFormatDate());
     }
 
+    /*
+    -fonction : Modifie la date
+    -parametre : date => String
+    -retour : void     */
     public function setDate($date){
         $this->date = $date;
     }
 
+    /*
+    -fonction : Modifie le format de la date
+    -parametre : $formatDate => String
+    -retour : void     */
     public function setFormatDate($formatDate){
         $this->formatDate = $formatDate;
     }
 
+    /*
+    -fonction : Change le format de la date
+    -parametre : $formatDate => String => setByDefault('YYYY-MM-DD') => Correspond au format souhaité
+    -retour : void     */
     public function changeDateFormat($formatDate = "YYYY-MM-DD"){
         $formatDate = strtoupper($formatDate);
         $tabFormatDateTemp = Date::explodeValue($formatDate);

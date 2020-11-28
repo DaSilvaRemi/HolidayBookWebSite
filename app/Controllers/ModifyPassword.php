@@ -15,6 +15,11 @@ use CodeIgniter\Controller;
  * @author remi
  */
 class ModifyPassword extends Controller{
+     /* 
+    fonction : Vérifie si l'utilisateur est connecté et si les champs manquant du formulaire sont bien rempli
+    parametre : void
+    retour : Si une erreur est détecté on retourne sur la vue et on affiche l'erreur ou on renvoie sur la page Connexion. Sinon on appelle verifPassword
+    */
     public function index() {
         helper('form');
         helper('html');
@@ -47,6 +52,12 @@ class ModifyPassword extends Controller{
         }
     }
     
+    /* 
+    fonction : Vérifie si les mot de passe sont équivalent et que l'utilisateur ne rentre pas son mot passe actuel
+    parametre : void
+    retour : Si une erreur est détecté on retourne sur la vue et on affiche l'erreur. 
+     * Sinon on retourne sur la page de connexion pour demander à l'utilisateur de se connecté
+    */
     private function verifPassword(){
         if($this->request->getPost('password') != $this->request->getPost('confirmPassword')){
             $this->validator->setError("password","vos mot de passe ne correspondent pas");
@@ -54,6 +65,7 @@ class ModifyPassword extends Controller{
             echo view('form/modifypassword', [
                 'validation' => $this->validator
             ]);
+            return false;
         }
         else{
             Session::startSession();
@@ -64,6 +76,7 @@ class ModifyPassword extends Controller{
                 echo view('form/modifypassword', [
                 'validation' => $this->validator
                 ]);
+                return false;
             }
             else{
                 $SiteReservationModel->updateUserMdp(Session::getSessionData('idUser'), $this->request->getPost('password'));

@@ -5,6 +5,11 @@ use \App\Models\ControlSiteReservationModel;
 
 class BookForm extends Controller
 {
+    /* 
+    fonction : Vérifie si l'utilisateur est connecté, si les champs manquant du formulaire sont bien rempli
+    parametre : void
+    retour : Si une erreur est détecté on retourne sur la vue et on affiche l'erreur. Sinon on appelle control
+    */
     public function index()
     {
         helper('form');
@@ -32,7 +37,9 @@ class BookForm extends Controller
         }
         else
         {
-            $this->control();
+            if($this->control()){
+                return redirect()->to(site_url('PageUser'));
+            }
         }
     }
 
@@ -57,12 +64,12 @@ class BookForm extends Controller
             $SiteReservationModel = new \App\Models\SiteReservationModel();
             echo view('template/header');
             echo view('form/book',['validation' => $this->validator, 'data' => $SiteReservationModel->getTypeLogement()] );  
+            return false;
         }
         else {
             Session::startSession();
             $leControlSiteReservation->insertData(Session::getSessionData('idUser'));
-            echo view('template/header');
-            echo view('form/sucess'); 
+            return true;
         } 
     }
 }
