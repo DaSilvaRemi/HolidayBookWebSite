@@ -1,9 +1,12 @@
 <?php
 namespace App\Controllers;
 use \CodeIgniter\Controller;
-
+use \App\Models\Session;
+/**
+ * 
+ */
 class Connexion extends Controller{
-    /* 
+    /** 
     fonction : Vérifie si les champs manquant du formulaire sont bien rempli
     parametre : void
     retour : Si une erreur est détecté on retourne sur la vue et on affiche l'erreur. Sinon on appelle verifyLoginPassword
@@ -33,7 +36,7 @@ class Connexion extends Controller{
         }
     }
     
-    /* 
+    /** 
     fonction : Vérifie si le login et le mot de passe correspondent 
     parametre : void
     retour : Si une erreur est détecté on retourne sur la vue et on affiche l'erreur. 
@@ -63,7 +66,7 @@ class Connexion extends Controller{
         }
     }
     
-    /* 
+    /** 
     fonction : Déconnecte l'utilisateur et renvoie sur la page index
     parametre : void
     retour : void
