@@ -34,14 +34,9 @@ class PageUser extends Controller{
         $SiteReservationModel = new \App\Models\SiteReservationModel;
         if(!empty($this->request->getPost('idReservation'))){
             $SiteReservationModel->updateisValide($this->request->getPost('idReservation'), "Annuler");
+        }
             echo view('template/header');
             echo view("form/pageuser",['tabReservation' => $SiteReservationModel->getLesReservations()]);
             echo view('template/footer');
-        }
-        else{
-            echo view('template/header');
-            echo view("form/pageuser",['tabReservation' => $SiteReservationModel->getLesReservations()]);
-            echo view('template/footer'); 
-        }
     }
 }
