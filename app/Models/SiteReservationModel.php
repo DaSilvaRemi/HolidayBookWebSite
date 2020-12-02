@@ -68,7 +68,7 @@ class SiteReservationModel extends Model{
     
     /*Retourne toutes les réservations de tous les utilisateurs*/
     public function getLesReservations(){
-        return $this->db->query("SELECT datedebut, nbpersonne, (SELECT nom FROM user), valide FROM public.reservation INNER JOIN public.user ON "
+        return $this->db->query("SELECT datedebut, nbpersonne, (SELECT nom FROM user), pension, valide FROM public.reservation INNER JOIN public.user ON "
                 . "public.reservation.id_user = public.user.id_user;")->getResultArray();
     }
     
@@ -77,7 +77,7 @@ class SiteReservationModel extends Model{
     -parametre : idUser => int => UNIQUE KEY => Correspond à l'id de l'user
     -retour : void     */
     public function getLesReservationsByUser($idUser){
-        return $this->db->query("SELECT datedebut, nbpersonne, (SELECT nom FROM user), valide FROM public.reservation INNER JOIN public.user ON "
+        return $this->db->query("SELECT datedebut, nbpersonne, (SELECT nom FROM user), pension, valide FROM public.reservation INNER JOIN public.user ON "
                 . "public.reservation.id_user = public.user.id_user WHERE id_user = :id_user;",['id_user' => $idUser])->getResultArray();
     }
     

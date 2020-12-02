@@ -23,6 +23,8 @@ class PageUser extends Controller{
      * Sinon on retourne sur la page de connexion pour demander à l'utilisateur de se connecté
     */
     public function index() {
+        helper('form');
+        helper('html');
         Session::startSession();
         if(!Session::verifySession()){
             return redirect()->to(site_url('Connexion')); 
