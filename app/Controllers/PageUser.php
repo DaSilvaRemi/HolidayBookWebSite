@@ -25,14 +25,23 @@ class PageUser extends Controller{
     public function index() {
         helper('form');
         helper('html');
+        
         Session::startSession();
         if(!Session::verifySession()){
             return redirect()->to(site_url('Connexion')); 
         }
+        
         $SiteReservationModel = new \App\Models\SiteReservationModel;
-        echo view('template/header');
-        echo view("form/pageuser",['tabReservation' => $SiteReservationModel->getLesReservations()]);
-        echo view('template/footer');
-
+        if(!empty($this->request->getPost('idReservation'))){
+            $SiteReservationModel->updateisValide($this->request->getPost('idReservation'), "Annuler");
+            echo view('template/header');
+            echo view("form/pageuser",['tabReservation' => $SiteReservationModel->getLesReservations()]);
+            echo view('template/footer');
+        }
+        else{
+            echo view('template/header');
+            echo view("form/pageuser",['tabReservation' => $SiteReservationModel->getLesReservations()]);
+            echo view('template/footer'); 
+        }
     }
 }
