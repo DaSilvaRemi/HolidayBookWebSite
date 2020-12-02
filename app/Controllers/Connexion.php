@@ -32,7 +32,9 @@ class Connexion extends Controller{
         }
         else
         {
-            $this->verifyLoginPassword();
+            if($this->verifyLoginPassword()){
+               return redirect()->to(site_url('Home')); 
+            }
         }
     }
     
@@ -57,7 +59,7 @@ class Connexion extends Controller{
         else{
             Session::initSession($SiteReservationModel->getIdUser($this->request->getPost('user'))[0]['id_user']);
             Session::setSessionData('nom', $SiteReservationModel->getNameUser($this->request->getPost('user'))[0]['nom']);
-            return redirect()->to(site_url('Home')); 
+            return true; 
         }
     }
     
