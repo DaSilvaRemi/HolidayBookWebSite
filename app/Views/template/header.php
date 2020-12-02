@@ -4,23 +4,28 @@ To change this license header, choose License Headers in Project Properties.
 To change this template file, choose Tools | Templates
 and open the template in the editor.
 -->
-<html>
-<head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <meta name="description" content="Site CCVEN Réservation">
-</head>
 
-<header>
-  <nav>
-    <ul>
-        <li><a class="click" href="index.php">Réservation</a></li>
-        <li><a class="click" href="login.php" id="Login">Mes Réservations</a>
-      <!-- Attention à l'ordre !! : la premier de la liste est le bloc le plus à droite-->
-      </li>
-      <li class="droite">
-        <a class="click" href="" target="_blank">Connexion</a>
-      </li>
-    </ul>
+<!-- Navigation -->
+  <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
+    <div class="container">
+      <a class="navbar-brand" href="#">CVVEN</a>
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarResponsive">
+        <ul class="navbar-nav ml-auto">
+          <li class="nav-item active">
+            <a class="nav-link" href="BookForm">Réservation
+              <span class="sr-only">(current)</span>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#" target="_blank">Mes Réservations</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="Connexion" >Connexion</a>
+          </li>
+        </ul>
+      </div>
+    </div>
   </nav>
-</header>

@@ -33,6 +33,8 @@ and open the template in the editor.
 
     <br/>
     <div><input type="submit" value="Envoyer" />
+        
+        <! -- Annuler + redirection sur Connexion -->
     <?php echo anchor('Connexion', '<input type="button" value="Annuler"/>'); ?> </div>
     </form>
     </section>

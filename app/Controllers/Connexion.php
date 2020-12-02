@@ -16,16 +16,16 @@ class Connexion extends Controller{
         echo link_tag('css/stylepp.css');
         echo link_tag('css/form.css');
         
-        if (!$this->validate(['user' => 'required|min_length[4]|max_length[20]','password' => 'required|min_length[4]|max_length[30]'],
+        if (!$this->validate(['user' => 'required|min_length[4]|max_length[20]',
+            'password' => 'required|min_length[4]|max_length[30]'],
         ['user' => ['required' => 'Merci d\'indiquer un login.', 'min_length' => 'Merci d\'indiquer un login d\'au moins 4 caractère', 
             'max_length' => 'La longueur du login ne peut pas dépasser 20 caractère'],
             'password' => ['required' => 'Merci d\'indiquer votre mot de passe','min_length' => 'Merci d\'indiquer un mot de passe d\'au moins 4 caractère', 
             'max_length' => 'La longueur du mot de passe ne peut pas dépasser 30 caractère']]))
         {
             echo view('template/header');
-            echo view('form/login', [
-                'validation' => $this->validator
-            ]);
+            echo view('form/login', ['validation' => $this->validator]);
+            echo view('template/footer');
         }
         else
         {

@@ -6,18 +6,18 @@ and open the template in the editor.
 -->
 <html>
     <head>
-        <title>Page de connexion</title>
+        <title>Connexion</title>
     </head>
     <body>
     <section class="formulaire">
     <?= form_open('Connexion'); ?>
-      
     
-    <?php if(isset($connexion)){
-     echo $connexion;
+    <?php 
+    if(isset($connexion)){
+        echo $connexion;
     } ?>
         
-    <h3>Page de connexion</h3>
+    <h3>Connexion</h3>
     
     <label for="user">Utilisateur</label>
     <input type="text" name="user" placeholder="utilisateur" size="50"/>
@@ -36,6 +36,6 @@ and open the template in the editor.
     }?>
 
     </form>
-    </section>
+    </section>  
     </body>
 </html>

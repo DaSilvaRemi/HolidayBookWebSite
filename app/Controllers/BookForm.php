@@ -24,16 +24,18 @@ class BookForm extends Controller
         echo link_tag('css/stylepp.css');
         echo link_tag('css/form.css');
         
-        if (!$this->validate(['datedebut' => 'required','datefin' => 'required','pension' => 'required','typelogement' => 'required' ],
-        ['datedebut' => ['required' => 'Merci d\'indiquer une date de début de séjour.'],'datefin' => ['required' => 'Merci d\'indiquer une date de fin de séjour.'],
-        'pension'    => ['required' => 'Merci d\'indiquer votre pension.'], 'typelogement' => ['required' => 'Veuillez selectionnez un type de séjour']]))
+        if (!$this->validate(['datedebut' => 'required','datefin' => 'required',
+            'pension' => 'required','typelogement' => 'required' ],
+        ['datedebut' => ['required' => 'Merci d\'indiquer une date de début de séjour.'],
+        'datefin' => ['required' => 'Merci d\'indiquer une date de fin de séjour.'],
+        'pension'    => ['required' => 'Merci d\'indiquer votre pension.'], 
+        'typelogement' => ['required' => 'Veuillez selectionnez un type de séjour']]))
         {
             echo($this->request->getPost('pension'));
             $SiteReservationModel = new \App\Models\SiteReservationModel();
             echo view('template/header');
-            echo view('form/book', [
-                'validation' => $this->validator, 'data' => $SiteReservationModel->getTypeLogement()
-            ]);
+            echo view('form/book', ['validation' => $this->validator, 'data' => $SiteReservationModel->getTypeLogement()]);
+            echo view('template/footer');
         }
         else
         {
@@ -52,7 +54,9 @@ class BookForm extends Controller
     */
     private function control(){
         $leControlSiteReservation = new ControlSiteReservationModel($this->request->getPost('datedebut'), $this->request->getPost('datefin'), $this->request->getPost('nbpersonne'), 
-        $this->request->getPost('typelogement'), $this->request->getPost('pension'), $this->request->getPost('menage'));
+        $this->request->getPost('typelogement'), 
+                $this->request->getPost('pension'), 
+                $this->request->getPost('menage'));
 
         if($leControlSiteReservation->Erreur()){
             $tabException = $leControlSiteReservation->getException();
@@ -63,7 +67,8 @@ class BookForm extends Controller
             }
             $SiteReservationModel = new \App\Models\SiteReservationModel();
             echo view('template/header');
-            echo view('form/book',['validation' => $this->validator, 'data' => $SiteReservationModel->getTypeLogement()] );  
+            echo view('form/book',['validation' => $this->validator, 'data' => $SiteReservationModel->getTypeLogement()] );
+            echo view('template/footer');
             return false;
         }
         else {
