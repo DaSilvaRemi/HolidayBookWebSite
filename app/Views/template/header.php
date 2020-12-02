@@ -25,6 +25,9 @@ and open the template in the editor.
           <li class="nav-item">
             <a class="nav-link" href="Connexion" >Connexion</a>
           </li>
+          <li class="nav-item">
+            <a class="nav-link" href="Connexion/deconnexion" >Déconnexion</a>
+          </li>
         </ul>
       </div>
     </div>

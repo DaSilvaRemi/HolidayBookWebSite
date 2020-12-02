@@ -3,8 +3,10 @@
 class Home extends BaseController
 {
 	public function index()
-	{       
-            return view('welcome_message');
+	{    
+            echo view('template/header');
+            echo view('welcome_message');
+            echo view('template/footer');
                 
 	}
 

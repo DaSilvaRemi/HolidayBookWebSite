@@ -40,5 +40,6 @@ header nav ul {
   header nav ul .droite 
   {
     float:right;
-    margin: 15px;
+    margin-top: -8px;
+    margin-right: -5px;
   }

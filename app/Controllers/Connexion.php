@@ -59,12 +59,7 @@ class Connexion extends Controller{
         else{
             Session::initSession($SiteReservationModel->getIdUser($this->request->getPost('user'))[0]['id_user']);
             Session::setSessionData('nom', $SiteReservationModel->getNameUser($this->request->getPost('user'))[0]['nom']);
-            if(Session::getSessionData('idUser') == 1){
-                return redirect()->to(site_url('PageAdmin')); 
-            }
-            else {
-                return redirect()->to(site_url('PageUser')); 
-            }
+            return redirect()->to(site_url('Home')); 
         }
     }
     
