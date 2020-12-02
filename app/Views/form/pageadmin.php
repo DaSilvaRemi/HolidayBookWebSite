@@ -23,30 +23,35 @@ and open the template in the editor.
                 <H1>Gestion de réservations</H1>
             </div>
             <div class="row">
+                  <?= form_open('PageAdmin'); ?>
                 <table class="table">
                     <tr>
                     <th scope="col">Nom</th>
                     <th scope="col">Date début</th>
-                    <th scope="col">Date de fin</th>
-                    <th scope="col">Validation / refus</th>
+                    <th scope="col">Nombre de personnes</th>
+                    <th scope="col">Pension</th>
+                    <th scope="col">Etat de la réservation</th>
+                    <th scope="col">Annuler</th>
                     </tr>
-
-                    <?php
                     
-                    //equivalent de boucle for en Java
-                    foreach ($tabReservation as $LesReservations) {
-                        echo "<tr scope='row'>";
-                        echo "<td>"."Mr/Mme".$Lesreservations['pension']."</td>";                        
-                        echo "<td>"."Debut de la reservation : ".$Lesreservations['datedebut']."</td>";  
-                        echo "<td>"."Nb de personnes : ".$Lesreservations['nbpersonne']."</td>";
-                        //echo "<td>"."test"."</td>";                        
-                        //echo "<td>"."test"."</td>";  
-                        //echo "<td>"."test"."</td>"; 
-                        echo "<td>";
-                        //echo form_button(array('name'=>'modifier','type'=>'submit','class'=>'btn btn-warning', 'content'=>'<i class="fa fa-pencil-square-o"></i>'));
-                        //echo form_button(array('nom'=>'refuser','type'=>'submit','class'=>'btn btn-danger', 'content'=>'<i class="fa fa-trash"></i>'));
-                        echo "</td>";
-                        echo "</tr>";
+                    <?php
+                    if(isset($tabReservation)){
+                        foreach ($tabReservation as $LesReservations) {
+                            echo "<tr scope='row'>";
+                            echo "<td>".$LesReservations['nom']."</td>";
+                            echo "<td>".$LesReservations['datedebut']."</td>";                        
+                            echo "<td>".$LesReservations['nbpersonne']."</td>";
+                            echo "<td>".$LesReservations['pension']."</td>";
+                            echo "<td>".$LesReservations['valide']."</td>";
+                            echo "<td>";
+                            echo form_button(array('name'=>'modifier','type'=>'submit','class'=>'btn btn-warning', 'content'=>'<i class="fa fa-pencil-square-o"></i>'));
+                            echo form_button(array('nom'=>'refuser','type'=>'submit','class'=>'btn btn-danger', 'content'=>'<i class="fa fa-trash"></i>'));
+                            echo "</td>";
+                            echo "</tr>";
+                        }  
+                    }
+                    else {
+                        echo 'Erreur : Champs Vide !!!';
                     }
                 ?>     
                 </table>

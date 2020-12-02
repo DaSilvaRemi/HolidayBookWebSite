@@ -6,7 +6,7 @@
  <!-- Footer -->
   <footer class="py-3 bg-dark">
     <div class="container">
-      <p class="m-0 text-left text-white">Copyright CVVEN project &copy; Your Website 2020</p>
+      <p class="m-0 text-left text-white ml-auto">Copyright CVVEN project &copy; Your Website 2020</p>
     </div>
     <!-- /.container -->
   </footer>
