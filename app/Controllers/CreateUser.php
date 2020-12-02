@@ -12,7 +12,7 @@ use \CodeIgniter\Controller;
 /**
  * Description of CreateUser
  *
- * @author remi
+ * @author 
  */
 class CreateUser extends Controller{
     /* 
@@ -28,7 +28,9 @@ class CreateUser extends Controller{
         echo link_tag('css/stylepp.css');
         echo link_tag('css/form.css');
         
-        if (!$this->validate(['nom' => 'required|min_length[3]|max_length[60]', 'prenom' => 'required|min_length[3]|max_length[60]', 'user' => 'required|min_length[4]|max_length[20]',
+        if (!$this->validate(['nom' => 'required|min_length[3]|max_length[60]', 
+            'prenom' => 'required|min_length[3]|max_length[60]', 
+            'user' => 'required|min_length[4]|max_length[20]',
             'password' => 'required|min_length[4]|max_length[30]'],
         ['nom' => ['required' => 'Merci d\'indiquer un nom.', 'min_length' => 'Merci d\'indiquer un nom d\'au moins 3 caractère', 
             'max_length' => 'La longueur du nom ne peut pas dépasser 60 caractère'], 
@@ -40,9 +42,8 @@ class CreateUser extends Controller{
             'max_length' => 'La longueur du mot de passe ne peut pas dépasser 30 caractère']]))
         {
             echo view('template/header');
-            echo view('form/createuser', [
-                'validation' => $this->validator
-            ]);
+            echo view('form/createuser', ['validation' => $this->validator]);
+            echo view('template/footer');
         }
         else
         {
@@ -61,18 +62,14 @@ class CreateUser extends Controller{
         if(intval($SiteReservationModel->countUserLogin($this->request->getPost('user'))[0]['count']) != 0){
             $this->validator->setError("user", "Ce nom d'utilisateur existe déja");
             echo view('template/header');
-            echo view('form/login', [
-                'validation' => $this->validator, 'connexion' => 'votre compte existe déja'
-            ]);
-            
+            echo view('form/login', ['validation' => $this->validator, 'connexion' => 'votre compte existe déja']);
+            echo view('template/footer');
         }
         else{
             $SiteReservationModel->insertUser($this->request->getPost('nom'), $this->request->getPost('prenom'), $this->request->getPost('user'), $this->request->getPost('password'));
             echo view('template/header');
-            echo view('form/login', [
-                'validation' => $this->validator, 'connexion' => 'Vous avez créer votre compte'
-            ]);
-            
+            echo view('form/login', ['validation' => $this->validator, 'connexion' => 'Vous avez créer votre compte']);
+            echo view('template/footer');
         }
     }
 }

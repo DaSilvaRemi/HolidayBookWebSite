@@ -8,11 +8,12 @@
 
 namespace App\Controllers;
 use \CodeIgniter\Controller;
+use \CodeIgniter\Models;
 
 /**
  * Description of PageAdmin
  *
- * @author remi
+ * @author 
  */
 class PageAdmin extends Controller{
     /* 
@@ -22,11 +23,15 @@ class PageAdmin extends Controller{
      * Sinon on retourne sur la page de connexion pour demander à l'utilisateur de se connecté
     */
     public function index() {
+        helper('form');
         Session::startSession();
-        if(!Session::verifySession() && Session::getSessionData('idUser') != 1){
+        /*if(!Session::verifySession() && Session::getSessionData('idUser') != 1){
             return redirect()->to(site_url('Connexion/deconnexion')); 
-        }
+        }*/
+        
         $SiteReservationModel = new \App\Models\SiteReservationModel;
-        echo view("form/pageadmin",['tabReservation' => $SiteReservationModel->getLesReservations()]);
+        echo view('template/header');
+        echo view("form/pageadmin",['tabReservation' => $SiteReservationModel->get_Reservation()]);
+        echo view('template/footer');
     }
 }

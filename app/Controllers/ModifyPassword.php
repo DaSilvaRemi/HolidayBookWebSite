@@ -40,9 +40,8 @@ class ModifyPassword extends Controller{
             'max_length' => 'La longueur du mot de passe ne peut pas dépasser 30 caractère']]))
         {
             echo view('template/header');
-            echo view('form/modifypassword', [
-                'validation' => $this->validator
-            ]);
+            echo view('form/modifypassword', ['validation' => $this->validator]);
+            echo view('template/footer');
         }
         else
         {
@@ -62,9 +61,9 @@ class ModifyPassword extends Controller{
         if($this->request->getPost('password') != $this->request->getPost('confirmPassword')){
             $this->validator->setError("password","vos mot de passe ne correspondent pas");
             echo view('template/header');
-            echo view('form/modifypassword', [
-                'validation' => $this->validator
-            ]);
+            echo view('form/modifypassword', ['validation' => $this->validator]);
+            echo view('template/footer');
+            
             return false;
         }
         else{
@@ -73,9 +72,8 @@ class ModifyPassword extends Controller{
             if(intval($SiteReservationModel->countUserMdp(Session::getSessionData('idUser'), $this->request->getPost('password'))[0]['count']) != 0){
                 $this->validator->setError("password", "Le mot de passe que vous avez entré est déja lié à vôtre compte !");
                 echo view('template/header');
-                echo view('form/modifypassword', [
-                'validation' => $this->validator
-                ]);
+                echo view('form/modifypassword', ['validation' => $this->validator]);
+                echo view('template/footer');
                 return false;
             }
             else{

@@ -27,6 +27,9 @@ class PageUser extends Controller{
             return redirect()->to(site_url('Connexion')); 
         }
         $SiteReservationModel = new \App\Models\SiteReservationModel;
+        echo view('template/header');
         echo view("form/pageuser",['tabReservation' => $SiteReservationModel->getLesReservations()]);
+        echo view('template/footer');
+
     }
 }
