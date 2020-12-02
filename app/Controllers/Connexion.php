@@ -50,9 +50,11 @@ class Connexion extends Controller{
             }else{
                 $this->validator->setError("password", "Le mot de passe est incorrect !");
             }
+            echo view('template/header');
             echo view('form/login', [
                 'validation' => $this->validator
             ]);
+            echo view('template/footer');
         }
         else{
             Session::initSession($SiteReservationModel->getIdUser($this->request->getPost('user'))[0]['id_user']);
