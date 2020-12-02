@@ -51,9 +51,7 @@ class Connexion extends Controller{
                 $this->validator->setError("password", "Le mot de passe est incorrect !");
             }
             echo view('template/header');
-            echo view('form/login', [
-                'validation' => $this->validator
-            ]);
+            echo view('form/login', ['validation' => $this->validator]);
             echo view('template/footer');
         }
         else{
