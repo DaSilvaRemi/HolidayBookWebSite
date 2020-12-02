@@ -8,7 +8,7 @@
 
 namespace App\Controllers;
 use \CodeIgniter\Controller;
-use \CodeIgniter\Models;
+use \App\Models\Session;
 
 /**
  * Description of PageAdmin

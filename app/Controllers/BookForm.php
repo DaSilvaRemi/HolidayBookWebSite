@@ -2,6 +2,7 @@
 
 use CodeIgniter\Controller;
 use \App\Models\ControlSiteReservationModel;
+use \App\Models\Session;
 
 class BookForm extends Controller
 {

@@ -8,6 +8,7 @@
 
 namespace App\Controllers;
 use \CodeIgniter\Controller;
+use \App\Models\Session;
 
 /**
  * Description of PageUser
