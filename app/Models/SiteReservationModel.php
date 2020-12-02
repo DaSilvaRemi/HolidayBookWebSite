@@ -88,7 +88,7 @@ class SiteReservationModel extends Model{
     -parametre : idReservation => int => PRIMARY KEY => Correspond à l'id de la réservation
      * valide => boolean => setByDefault(true) => Champs de validation
     -retour : void     */
-    public function updateisValide($idReservation, $valide = true) : void{
+    public function updateisValide($idReservation, $valide = "Valide") : void{
         $this->db->query("UPDATE public.reservation SET valide = :valide: WHERE id_reservation = :id_reservation:;",["valide" => $valide, "id_reservation" => $idReservation]);
     }
     
@@ -106,7 +106,7 @@ class SiteReservationModel extends Model{
         $this->db->query("INSERT INTO public.reservation (datedebut, datefin, nbpersonne, pension, menage, valide, id_user, num_logement, typelogement) "
                 . "VALUES(:datedebut:, :datefin:, :nbpersonne:, :pension:, :menage: , :valide:, :id_user:, "
                 . "(SELECT num_logement FROM logement WHERE typelogement = :typelogement:), :typelogement:);",
-                ["datedebut" => $dateDebut, "datefin" => $dateFin, "nbpersonne" => $nbPersonne, "pension" => $pension, "menage" => $menage, "valide" => false,
+                ["datedebut" => $dateDebut, "datefin" => $dateFin, "nbpersonne" => $nbPersonne, "pension" => $pension, "menage" => $menage, "valide" => "En attente de validation",
                     "id_user" => $id_user, "typelogement" => $typelogement,]);
     }
     

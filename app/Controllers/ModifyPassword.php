@@ -27,7 +27,7 @@ class ModifyPassword extends Controller{
         
         Session::startSession();
         if(!Session::verifySession()){
-            return redirect()->to(site_url('Connexion')); 
+            return redirect()->to(site_url('Connexion/deconnexion')); 
         }
         
         echo link_tag('css/nav.css');
