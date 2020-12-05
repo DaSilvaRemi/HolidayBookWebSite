@@ -1,25 +1,21 @@
 <?php
-
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
-
 namespace App\Controllers;
 use \CodeIgniter\Controller;
 
 /**
- * Description of CreateUser
+ * CreateUser Classe technique permettant de créer un nouvel utilisateurs
  *
  * @author 
  */
 class CreateUser extends Controller{
-    /* 
-    fonction : Vérifie si les champs manquant du formulaire sont bien rempli
-    parametre : void
-    retour : Si une erreur est détecté on retourne sur la vue et on affiche l'erreur. Sinon on appelle verifyLoginExist
-    */
+    /**
+     * Vérifie si les champs manquant du formulaire sont bien rempli
+     * 
+     * @param void
+     * @return string|object  
+     * - string retourne la vue avec les erreurs
+     * - object redirige sur le controlleur verifyLoginExist.
+     */
     public function index(){
         helper('form');
         
@@ -46,12 +42,12 @@ class CreateUser extends Controller{
         }
     }
     
-    /* 
-    fonction : Vérifie si le compte existe ou pas sinon onc crée le compte
-    parametre : void
-    retour : Si une erreur est détecté on retourne sur la vue et on affiche l'erreur. 
-     * Sinon on retourne sur la page de connexion pour demander à l'utilisateur de se connecté
-    */
+    /**
+     * Vérifie si le compte existe ou pas sinon onc crée le compte
+     * 
+     * @param void
+     * @return string retourne la vue de connexion avec ou sans les erreur
+     */
     private function verifyLoginExist() {
         $SiteReservationModel = new \App\Models\SiteReservationModel();
         if(intval($SiteReservationModel->countUserLogin($this->request->getPost('user'))[0]['count']) != 0){

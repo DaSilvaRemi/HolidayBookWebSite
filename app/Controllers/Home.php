@@ -3,6 +3,12 @@ use \App\Models\Session;
 
 class Home extends BaseController
 {
+        /**
+        * Vérifie si le compte existe ou pas sinon onc crée le compte
+        * 
+        * @param void
+        * @return string retourne la page d'acceuil
+        */
 	public function index()
 	{    
             Session::startSession();

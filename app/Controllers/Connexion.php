@@ -3,21 +3,19 @@ namespace App\Controllers;
 use \CodeIgniter\Controller;
 use \App\Models\Session;
 /**
- * 
+ * Connexion : Classe Technique permettant de gérer la connexion
  */
 class Connexion extends Controller{
-    /** 
-    fonction : Vérifie si les champs manquant du formulaire sont bien rempli
-    parametre : void
-    retour : Si une erreur est détecté on retourne sur la vue et on affiche l'erreur. Sinon on appelle verifyLoginPassword
-    */
+    /**
+     * Vérifie si les champs manquant du formulaire sont bien rempli
+     * 
+     * @param void
+     * @return string|object  
+     * - string retourne la vue avec les erreurs
+     * - object redirige sur le controlleur hôme.
+     */
     public function index() {
         helper('form');
-        helper('html');
-        
-        echo link_tag('css/nav.css');
-        echo link_tag('css/stylepp.css');
-        echo link_tag('css/form.css');
         
         if (!$this->validate(['user' => 'required|min_length[4]|max_length[20]',
             'password' => 'required|min_length[4]|max_length[30]'],
@@ -38,12 +36,14 @@ class Connexion extends Controller{
         }
     }
     
-    /** 
-    fonction : Vérifie si le login et le mot de passe correspondent 
-    parametre : void
-    retour : Si une erreur est détecté on retourne sur la vue et on affiche l'erreur. 
-     * Sinon on appelle les controleur soit de la pageadmin ou de la pageuser selon l'id de la session
-    */
+     /**
+     * Vérifie si le login et le mot de passe correspondent 
+     * 
+     * @param void
+     * @return string|object  
+     * - string retourne la vue avec les erreurs
+     * - object redirige sur le controlleur hôme.
+     */
     private function verifyLoginPassword(){
         $SiteReservationModel = new \App\Models\SiteReservationModel;
         if(intval($SiteReservationModel->countIdUserValide($this->request->getPost('user'), $this->request->getPost('password'))[0]['count']) != 1){
@@ -63,11 +63,12 @@ class Connexion extends Controller{
         }
     }
     
-    /** 
-    fonction : Déconnecte l'utilisateur et renvoie sur la page index
-    parametre : void
-    retour : void
-    */
+    /**
+     * Déconnecte l'utilisateur et renvoie sur la page index
+     * 
+     * @param void
+     * @return void
+     */
     public function deconnexion() {
         Session::startSession();
         if(Session::verifySession()){

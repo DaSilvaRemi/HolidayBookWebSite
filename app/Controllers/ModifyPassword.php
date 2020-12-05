@@ -1,10 +1,5 @@
 <?php
 
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 
 namespace App\Controllers;
 use CodeIgniter\Controller;
@@ -16,11 +11,15 @@ use \App\Models\Session;
  * @author remi
  */
 class ModifyPassword extends Controller{
-     /* 
-    fonction : Vérifie si l'utilisateur est connecté et si les champs manquant du formulaire sont bien rempli
-    parametre : void
-    retour : Si une erreur est détecté on retourne sur la vue et on affiche l'erreur ou on renvoie sur la page Connexion. Sinon on appelle verifPassword
-    */
+    /**
+     * Vérifie si les champs manquant du formulaire sont bien rempli
+     * 
+     * @param void
+     * @return string|object  
+     * - string retourne la vue avec les erreurs
+     * - object redirige sur la Connexion si l'utilisateur n'est pas connecté
+     * - object redirige sur le controlleur verifyPassword si tout est bon
+     */
     public function index() {
         helper('form');
         
@@ -46,13 +45,14 @@ class ModifyPassword extends Controller{
             }
         }
     }
-    
-    /* 
-    fonction : Vérifie si les mot de passe sont équivalent et que l'utilisateur ne rentre pas son mot passe actuel
-    parametre : void
-    retour : Si une erreur est détecté on retourne sur la vue et on affiche l'erreur. 
-     * Sinon on retourne sur la page de connexion pour demander à l'utilisateur de se connecté
-    */
+    /**
+     * Vérifie si les mot de passe sont équivalent et que l'utilisateur ne rentre pas son mot passe actuel
+     * 
+     * @param void
+     * @return string|object  
+     * - string retourne la vue avec les erreurs
+     * - object redirige sur la Connexion et on demande à l'utilisateur de se connecter
+     */
     private function verifPassword(){
         if($this->request->getPost('password') != $this->request->getPost('confirmPassword')){
             $this->validator->setError("password","vos mot de passe ne correspondent pas");

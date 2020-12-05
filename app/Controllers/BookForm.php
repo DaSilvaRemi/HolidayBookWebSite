@@ -6,11 +6,12 @@ use \App\Models\Session;
 
 class BookForm extends Controller
 {
-    /* 
-    fonction : Vérifie si l'utilisateur est connecté, si les champs manquant du formulaire sont bien rempli
-    parametre : void
-    retour : Si une erreur est détecté on retourne sur la vue et on affiche l'erreur. Sinon on appelle control
-    */
+    /**
+     * Vérifie si l'utilisateur est connecté et que les champs du formulaire sont bien rempli
+     * 
+     * @param void
+     * @return void Si une erreur est détecté on retourne sur la vue et on affiche l'erreur. Sinon on appelle control
+     */
     public function index()
     {
         helper('form');
@@ -41,13 +42,15 @@ class BookForm extends Controller
         }
     }
 
-    /* 
-    fonction : Vérifie les éventuel erreurs lors de la création de l'objet(Durée de date incorrecte ou/et nombre de personne incorrecte)
-    parametre : void
-    retour : appelle les vues selon le résultat du test soit :
-        -la vue success quand tout se passe bien
-        -la vue book lorqu'il y'a une erreur et affiche celle ci.
-    */
+    
+    /**
+     * Vérifie les éventuel erreurs lors de la création de l'objet(Durée de date incorrecte ou/et nombre de personne incorrecte)
+     * 
+     * @param void
+     * @return bool|void    
+     * - true si on a reussi à insérer les données,
+     * - false en cas d'erreur.
+     */
     private function control(){
         $leControlSiteReservation = new ControlSiteReservationModel($this->request->getPost('datedebut'), $this->request->getPost('datefin'), $this->request->getPost('nbpersonne'), 
         $this->request->getPost('typelogement'), 

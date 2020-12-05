@@ -86,7 +86,7 @@ class SiteReservationModel extends Model{
     -parametre : idReservation => int => PRIMARY KEY => Correspond à l'id de la réservation
      * valide => boolean => setByDefault(true) => Champs de validation
     -retour : void     */
-    public function updateisValide($idReservation, $valide = "Valider") : void{
+    public function updateisValide($idReservation, $valide = "Valide") : void{
         $this->db->query("UPDATE public.reservation SET valide = :valide: WHERE id_reservation = :id_reservation:;",["valide" => $valide, "id_reservation" => $idReservation]);
     }
     
