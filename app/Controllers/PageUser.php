@@ -24,7 +24,6 @@ class PageUser extends Controller{
     */
     public function index() {
         helper('form');
-        helper('html');
         
         Session::startSession();
         if(!Session::verifySession()){
@@ -35,7 +34,7 @@ class PageUser extends Controller{
         if(!empty($this->request->getPost('idReservation'))){
             $SiteReservationModel->updateisValide($this->request->getPost('idReservation'), "Annuler");
         }
-            echo view('template/header');
+            echo view('template/header', ['iduser' => Session::getSessionData('idUser')]);
             echo view("form/pageuser",['tabReservation' => $SiteReservationModel->getLesReservations()]);
             echo view('template/footer');
     }

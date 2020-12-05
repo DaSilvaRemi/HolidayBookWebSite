@@ -22,11 +22,6 @@ class CreateUser extends Controller{
     */
     public function index(){
         helper('form');
-        helper('html');
-        
-        echo link_tag('css/nav.css');
-        echo link_tag('css/stylepp.css');
-        echo link_tag('css/form.css');
         
         if (!$this->validate(['nom' => 'required|min_length[3]|max_length[60]', 
             'prenom' => 'required|min_length[3]|max_length[60]', 

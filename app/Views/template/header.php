@@ -14,19 +14,34 @@ and open the template in the editor.
       </button>
       <div class="collapse navbar-collapse" id="navbarResponsive">
         <ul class="navbar-nav ml-auto">
-          <li class="nav-item active">
-            <?php echo anchor('BookForm', 'Reservations','class="nav-link"'); ?>
-              <span class="sr-only">(current)</span>
-            </a>
+          <?php if(isset($iduser)){ 
+            echo '<li class="nav-item active">';
+            echo anchor('BookForm', 'Reservations','class="nav-link"'); 
+            echo '<span class="sr-only">(current)</span>';
+          echo '</li>'; }?>
+          <li class="nav-item">
+            <?php if(isset($iduser)){
+                echo anchor('PageUser', 'Mes reservations','class="nav-link"'); 
+            } 
+            ?>
+          </li>
+          <li class="nav-item"> 
+            <?php
+            if(!isset($iduser)){
+                echo anchor('Connexion', 'Connexion','class="nav-link"'); 
+            }?>
+          </li>
+          <li class="nav-item"> 
+            <?php
+            if(isset($iduser)){
+                echo anchor('Changer mot de passe', 'ModifyPassword','class="nav-link"'); 
+            }?>
           </li>
           <li class="nav-item">
-            <?php echo anchor('PageUser', 'Mes reservations','class="nav-link"'); ?>
-          </li>
-          <li class="nav-item">
-            <?php echo anchor('Connexion', 'Connexion','class="nav-link"'); ?>
-          </li>
-          <li class="nav-item">
-            <?php echo anchor('Connexion/deconnexion', 'Deconnexion','class="nav-link"'); ?>
+            <?php if(isset($iduser)){
+            echo anchor('Connexion/deconnexion', 'Deconnexion','class="nav-link"'); 
+            }
+            ?>
           </li>
         </ul>
       </div>

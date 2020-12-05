@@ -24,14 +24,13 @@ class PageAdmin extends Controller{
     */
     public function index() {
         helper('form');
-        helper('html');
         Session::startSession();
         if(!Session::verifySession() || Session::getSessionData('idUser') != 1){
             return redirect()->to(site_url('PageUser')); 
         }
         
         $SiteReservationModel = new \App\Models\SiteReservationModel;
-        echo view('template/header');
+        echo view('template/header', ['iduser' => Session::getSessionData('idUser')]);
         echo view("form/pageadmin",['tabReservation' => $SiteReservationModel->getLesReservations()]);
         echo view('template/footer');
     }
