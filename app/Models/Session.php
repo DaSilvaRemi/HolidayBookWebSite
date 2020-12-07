@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Controllers;
+namespace App\Models;
 
 /**
  * Classe technique permettant de gérer les sessions

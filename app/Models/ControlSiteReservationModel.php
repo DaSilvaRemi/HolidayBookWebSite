@@ -3,6 +3,11 @@ namespace App\Models;
 use Date;
 use App\Models\SiteReservationModel;
 
+/**
+ * Classe métier permettant le controle des données relatifs à la BDD
+ * 
+ *@author Rémi  
+ */
 class ControlSiteReservationModel{
 
     private $dateDebut;
@@ -11,8 +16,25 @@ class ControlSiteReservationModel{
     private $typeLogement;
     private $pension;
     private $option;
+    /**
+     *Contient toutes les erreurs 
+     *  
+     * @var array
+     */
     private $exception;
 
+    /**
+     * Instancie un objet ControlSiteReservationModel
+     * 
+     * @uses Date
+     * @param Date $datedebut
+     * @param Date $datefin
+     * @param int $nbPersonne
+     * @param string $typeLogement
+     * @param string $pension
+     * @param bool $option
+     * @return void
+     */
     public function __construct($datedebut, $datefin, $nbPersonne, $typeLogement, $pension, $option){
         $this->dateDebut = new Date($datedebut);
         $this->dateFin = new Date($datefin);
@@ -28,46 +50,86 @@ class ControlSiteReservationModel{
 
     }
     
-    //retour : date de début du séjour
+    /**
+     * Retourne la date de début de séjour
+     * 
+     * @uses Date
+     * @param void
+     * @return Date $dateDebut
+     */
     public function getDateDebut(){
         return $this->dateDebut;
     }
     
-    //retour : date de fin du séjour
+    /**
+     * Retourne la date de fin de séjour
+     * 
+     * @uses Date
+     * @param void
+     * @return Date dateFin
+     */
     public function getDateFin(){
         return $this->dateFin;
     }
     
-    //retour : nombre de personne ayant réservé le séjour
+    /**
+     * Retourne le nombre de personne
+     * 
+     * @param void
+     * @return int nbPersonne
+     */
     public function getNbPersonne(){
         return $this->nbPersonne;
     }
     
-    //retour : le type de logement du séjour
+    /**
+     * Retourne le type de logement
+     * 
+     * @param void
+     * @return string $typeLogement
+     */
     public function getTypeLogement(){
         return $this->typeLogement;
     }
     
-    //retour : retourne le type de pension
+    /**
+     * Retourne la pension
+     * 
+     * @param void
+     * @return string $pension
+     */
     public function getPension(){
         return $this->pension;
     }
     
-    //retour : retourne les options sélectionné
+    /**
+     * Retourne l'option
+     * 
+     * @param void
+     * @return bool $option
+     */
     public function getOption(){
         return $this->option;
     }
     
-    //retour : retourne les erreurs
+    /**
+     * Retourne les erreurs
+     * 
+     * @param void
+     * @return array $exception
+     */
     public function getException(){
         return $this->exception;
     }
 
-    /*
-    fonction : Génère et ajoute des erreur à au tableau d'exception
-    parametre : Void
-    retour : erreur => bool 
-    */
+    /**
+     * Génère et ajoute des erreur à au tableau d'exception
+     * 
+     * Controle si la durée du séjour est strictement égale à 7 jours et que la capacité n'est pas supérieur à la capacité calculé dans la BDD
+     * 
+     * @param void
+     * @return bool $erreur
+     */
     public function Erreur() : bool{
         $erreur = false;
         if(!$this->controlDuree($this->getDateDebut(), $this->getDateFin())){
@@ -81,21 +143,22 @@ class ControlSiteReservationModel{
         return $erreur;
     }
 
-    /*
-    fonction : ajoute une exception
-    parametre : tableau d'erreur
-    retour : void
-    */
+    /**
+     * Ajoute une exception
+     * 
+     * @param array $tab
+     * @return void
+     */
     public function addException(array $tab) : void {
         $this->exception[] = $tab;
     }
 
-    /*
-    fonction : Controle si le nombre de personne est inférieur à la capacité des chambres
-    parametre : Aucun
-    retour : retourne si la capacité est correcte
-    */
-
+    /**
+     * Controle si le nombre de personne est inférieur à la capacité des chambres
+     * 
+     * @param void
+     * @return bool retourne si la capacité est correcte
+     */
     public function controlCapacite() : bool{
         $siteReservationModel = new SiteReservationModel();
         if($siteReservationModel->getNbLitDouble($this->getTypeLogement())[0]['nblitdouble'] != 0 || 
@@ -119,12 +182,12 @@ class ControlSiteReservationModel{
         }
         }
     
-
-    /*
-    fonction : Controle la durée du séjour s'il est égale à 7 jours
-    parametre : Void
-    retour : un booléan selon si la durée du séjour est bonne
-    */
+     /**
+     * Controle la durée du séjour s'il est égale à 7 jours
+     * 
+     * @param void
+     * @return bool retourne si la duré du sejour est correcte
+     */
     public function controlDuree() : bool{
         if($this->getDateFin()->getDay() - $this->getDateDebut()->getDay()  == 7){
             return true;
@@ -134,10 +197,11 @@ class ControlSiteReservationModel{
         }
     } 
 
-    /*
-    -fonction : Créer une réservation et détruit le modèle
-    -parametre : id_user => int => id de l'utilisateur connecté     
-    -retour : void     
+    /**
+     * Créer une réservation et détruit le modè
+     * 
+     * @param int $id_user id de l'utilisateur connecté
+     * @return void
      */
     public function insertData($id_user) : void{
         $siteReservationModel = new SiteReservationModel();
