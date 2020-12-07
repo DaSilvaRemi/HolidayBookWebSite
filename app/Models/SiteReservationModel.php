@@ -4,12 +4,19 @@ namespace App\Models;
 use CodeIgniter\Model;
 
 /**
- * Description of SiteReservationModel
- *Classe permettant de récuper les données de la base de données
+ * Classe héritière de Model permettant de récuper les données de la base de données
+ * 
  * @author dasilvaremi
  */
 class SiteReservationModel extends Model{
 
+    /**
+     * Constructeur par défault
+     * 
+     * @param pointer $db Valeur par défault = null; Permet de choisir sur qu'elle interface de la BDD on se connecte
+     * @param object $validation Valeur par défault = null;
+     * @return void
+     */
     public function __construct(\CodeIgniter\Database\ConnectionInterface &$db = null, \CodeIgniter\Validation\ValidationInterface $validation = null) {
         parent::__construct($db, $validation);
         $this->db->connect('default');
@@ -17,10 +24,12 @@ class SiteReservationModel extends Model{
 
     /*--------------------------------------Table typelogement------------------------------------------------*/
 
-    /*
-    fonction : retourne la colonne typelogement de la table typelogement
-    parametre : typelogement => String => setByDefault(null)     
-    retour : retourne un tableau contenant les résultat de la requête     */
+    /**
+     * retourne la colonne typelogement de la table typelogement
+     * 
+     * @param string $typelogement valeur par défault = ""
+     * @return array[array[string => value]] contient les résultat de la requête
+     */
     public function getTypeLogement($typelogement = ""){
         if(empty($typelogement)){
             return  $this->db->query("SELECT typelogement FROM public.typelogement;")->getResultArray();
@@ -30,76 +39,122 @@ class SiteReservationModel extends Model{
         }
     }
 
-    /*Retourne le résultat pour le nombre de lit double*/
+    /**
+     * retourne la colonne typelogement de la table typelogement
+     * 
+     * @param string $typelogement
+     * @return array[array[string => value]] contient les résultat de la requête
+     */
     public function getNbLitDouble($typelogement){
         return $this->db->query("SELECT nblitdouble FROM public.typelogement WHERE typelogement = :typelogement: ORDER BY typelogement DESC;",["typelogement" => $typelogement])->getResultArray();
     }
 
-    /*Retourne le résultat pour le nombre de lit simple*/
+    /**
+     * retourne le nombre de lits simples
+     * 
+     * @param string $typelogement
+     * @return array[array[string => value]] contient les résultat de la requête
+     */
     public function getNbLitSimple($typelogement){
         return  $this->db->query("SELECT nblitsimple FROM public.typelogement WHERE typelogement = :typelogement: ORDER BY typelogement DESC;",["typelogement" => $typelogement])->getResultArray();
     }
     
     /*--------------------------------------Table réservation------------------------------------------------*/
-     /*Retourne l'id de la réservation*/
+     /**
+     * retourne l'id de la réservation
+     * 
+     * @param void
+     * @return array[array[string => value]] contient les résultat de la requêtete
+     */
     public function getIdReservation(){
         return $this->db->query("SELECT id_reservation FROM public.reservation;")->getResultArray();
     }
 
-     /*Retourne la date de début*/
+    /**
+     * retourne la date de début
+     * 
+     * @param void
+     * @return array[array[string => value]] contient les résultat de la requête
+     */
     public function getDateDebut() {
         return $this->db->query("SELECT datedebut FROM public.reservation;")->getResultArray();
     }
     
-    /*Retourne le nombre de personne*/
+    /**
+     * retourne le nombre de personne pour une réservation
+     * 
+     * @param void
+     * @return array[array[string => value]] contient les résultat de la requête
+     */
     public function getNbPersonne() {
         return $this->db->query("SELECT nbpersonne FROM public.reservation;")->getResultArray();
     }
     
-    /*Retourne la validité de la réservation*/
+    /**
+     * retourne la validité d'une réservation
+     * 
+     * @param void
+     * @return array[array[string => value]] contient les résultat de la requête
+     */
     public function getValide() {
         return $this->db->query("SELECT valide FROM public.reservation;")->getResultArray();
     }
     
-    /*Retourne l'id de l'utilisateur de la réservation*/
+    /**
+     * retourne l'id de l'utilisateur
+     * 
+     * @param void
+     * @return array[array[string => value]] contient les résultat de la requête
+     */
     public function getIdUser_Reservation() {
         return $this->db->query("SELECT id_user FROM public.reservation;")->getResultArray();
     }
     
-    /*Retourne toutes les réservations de tous les utilisateurs*/
+    /**
+     * retourne toutes les reservations de tous les utilisateurs
+     * 
+     * @param void
+     * @return array[array[string => value]] contient les résultat de la requête
+     */
     public function getLesReservations(){
         return $this->db->query("SELECT id_reservation, datedebut, nbpersonne, (SELECT nom FROM user), pension, valide FROM public.reservation INNER JOIN public.user ON "
                 . "public.reservation.id_user = public.user.id_user ORDER BY valide DESC;")->getResultArray();
     }
     
-    /*
-    -fonction : /*Retourne toutes les réservations d'un utilisateur
-    -parametre : idUser => int => UNIQUE KEY => Correspond à l'id de l'user
-    -retour : void     */
+    /**
+     * Retourne toutes les réservations d'un utilisateur
+     * 
+     * @param int $idUser
+     * @return array[array[string => value]] contient les résultat de la requête
+     */
     public function getLesReservationsByUser($idUser){
         return $this->db->query("SELECT id_reservation, datedebut, nbpersonne, (SELECT nom FROM user), pension, valide FROM public.reservation INNER JOIN public.user ON "
                 . "public.reservation.id_user = public.user.id_user WHERE id_user = :id_user ORDER BY valide DESC;",['id_user' => $idUser])->getResultArray();
     }
     
-    /*
-    -fonction : Modifie le champs valide lorsque l'admin à accepté une réservation
-    -parametre : idReservation => int => PRIMARY KEY => Correspond à l'id de la réservation
-     * valide => boolean => setByDefault(true) => Champs de validation
-    -retour : void     */
+    /**
+     * Modifie le champs valide lorsque l'admin à accepté une réservation
+     * 
+     * @param int $idReservation
+     * @param string $valide valeur par défault = Valide
+     * @return void
+     */
     public function updateisValide($idReservation, $valide = "Valide") : void{
         $this->db->query("UPDATE public.reservation SET valide = :valide: WHERE id_reservation = :id_reservation:;",["valide" => $valide, "id_reservation" => $idReservation]);
     }
     
-    /*
-    -fonction : insère des données dans la table réservation     
-    -parametre : *typelogement => String
-     * id_user => int
-     * dateDebut => Date en format YYYY-MM-DD
-     * dateFin => Date en format YYYY-MM-DD 
-     * nbPersonne => int
-     * pension => String => Correspond au type de pension
-     * menage => boolean => Correspond à option   
-    -retour : void     */
+    /**
+     * insère des données dans la table réservation  
+     * 
+     * @param string $typelogement
+     * @param int $id_user
+     * @param string dateDebut Date en format YYYY-MM-DD 
+     * @param string dateFin Date en format YYYY-MM-DD 
+     * @param int nbPersonne
+     * @param string $pension Correspond au type de pension
+     * @param string $menage Correspond à option n
+     * @return void
+     */
     public function insertReservation($typelogement, $id_user,$dateDebut, $dateFin, $nbPersonne, $pension, $menage) : void{
         $this->db->query("INSERT INTO public.reservation (datedebut, datefin, nbpersonne, pension, menage, valide, id_user, num_logement, typelogement) "
                 . "VALUES(:datedebut:, :datefin:, :nbpersonne:, :pension:, :menage: , :valide:, :id_user:, "
@@ -109,19 +164,28 @@ class SiteReservationModel extends Model{
     }
     
     /*------------------------------------Table user---------------------------------------------------------*/
-    /*
-    -fonction : Retourne l'id de l'utilisateur
-    -parametre : login => String => UNIQUE KEY => Correspond à l'id de la réservation
-    -retour : array => Retourne toutes les réservations de tous les utilisateurs   */
+   
+     /**
+     * Retourne l'id de l'utilisateur
+     * 
+     * @param string $login UNIQUE KEY : Correspond au login
+     * @return array[array[string => value]] contient les résultat de la requête
+     */
     public function getIdUser($login) {
         return $this->db->query("SELECT id_user FROM public.user WHERE login = :login: ",["login" => $login])->getResultArray();
     }
     
-    /*
-    -fonction : Retourne le nom de l'utilisateur
-    -parametre : login => String => UNIQUE KEY => setByDefault(null) => Correspond à l'id de la réservation
-     * idUser => int => UNIQUE KEY => setByDefault(null) => Correspond à l'id de l'user
-    -retour : array => Retourne toutes les réservations de tous les utilisateurs   */
+    /**
+     * Retourne le nom de l'utilisateur
+     * 
+     * Au moins un des deux paramètre doit être non null
+     * 
+     * @param string $login Valeur par défault = null; UNIQUE KEY; Correspond au login
+     * @param int $idUser Valeur par défault = null; UNIQUE KEY; Correspond à l'id de l'utilisateur
+     * @return array[array[string => value]]|bool
+     * -array[array[string => value]] contient les résultat de la requête
+     * -false si les deux paramètres sont vides
+     */
     public function getNameUser($login = null, $idUser = null){
         if(!empty($idUser)){
             return $this->db->query('SELECT nom FROM public.user WHERE id_user = :iduser:;',['iduser' => $idUser])->getResultArray();
@@ -134,39 +198,47 @@ class SiteReservationModel extends Model{
         }
     }
     
-    /*
-    -fonction : Retourne le nombre de mot de passe
-    -parametre : idUser => int => UNIQUE KEY => Correspond à l'id de l'user
-     * mdp => String
-    -retour : array => Retourne le nombre de mot de passe   */
+     /**
+     * Retourne le nombre de mot de passe
+     * 
+     * @param int $idUser Valeur par défault = null; UNIQUE KEY; Correspond à l'id de l'utilisateur
+     * @param string $mdp Correspond au mot de passe
+     * @return array contient les résultat de la requête
+     */
     public function countUserMdp($idUser, $mdp){
         return $this->db->query('SELECT COUNT(mdp) FROM public.user WHERE id_user = :iduser: AND mdp = :mdp:;',['iduser' => $idUser, 'mdp' => $mdp])->getResultArray();
     }
 
-    /*
-    -fonction : Retourne le nombre d'user
-    -parametre : login => String => UNIQUE KEY => Correspond au login de l'user
-    -retour : array => Retourne le nombre d'user  */
+    /**
+     * Retourne le nombre d'user
+     * 
+     * @param string $login Valeur UNIQUE KEY; Correspond au login
+     * @return array contient les résultat de la requête
+     */
     public function countUserLogin($login){
         return $this->db->query("SELECT COUNT(login) FROM public.user WHERE login = :login:",['login' => $login])->getResultArray();
     }
     
-    /*
-    -fonction : COmpte s'il y a bien qu'un user qui existe avec ce mot de passe et ce login
-    -parametre : login => String => UNIQUE KEY => Correspond au login de l'user
-     * mdp => String
-    -retour : array => Compte le nombre d'user avec le login et le mot de passe  */
+    /**
+     * Compte s'il y a bien qu'un user qui existe avec ce mot de passe et ce login
+     * 
+     * @param string $login UNIQUE KEY; Correspond au login
+     * @param string $mdp Correspond au mot de passe
+     * @return array contient les résultat de la requête
+     */
     public function countIdUserValide($login, $mdp){
         return $this->db->query("SELECT COUNT(id_user) FROM public.user WHERE login = :login: AND mdp = :mdp:",['login' => $login, 'mdp' => $mdp])->getResultArray();
     }
     
-    /*
-    -fonction : Insere un user
-    -parametre : nom => String
-     * prenom => String
-     * login => String => UNIQUE KEY
-     * mdp => String
-    -retour : void  */
+    /**
+     * Insert un user
+     * 
+     * @param string string
+     * @param string $prenom
+     * @param string $login UNIQUE KEY; Correspond au login
+     * @param string $mdp Correspond au mot de passe
+     * @return void
+     */
     public function insertUser($nom, $prenom, $login, $mdp) {
         $this->db->query('INSERT INTO public.user(nom, prenom, login, mdp) VALUES(:nom:, :prenom:, :login:, :mdp:);',['nom' => $nom, 'prenom' => $prenom, 'login' => $login, 'mdp' => $mdp]);
     }
@@ -176,6 +248,13 @@ class SiteReservationModel extends Model{
     -parametre : login => String => UNIQUE KEY => Correspond au login de l'utilisateur
      *  mdp => String 
     -retour : void  */
+    /**
+     * Modifie le mot de passe
+     * 
+     * @param int $idUser Valeur par défault = null; UNIQUE KEY; Correspond à l'id de l'utilisateur
+     * @param string $mdp Correspond au mot de passe
+     * @return void
+     */
     public function updateUserMdp($idUser, $mdp){
         $this->db->query('UPDATE public.user SET mdp = :mdp: WHERE id_user = :id_user:',['mdp' => $mdp, 'id_user' => $idUser]);
     }
