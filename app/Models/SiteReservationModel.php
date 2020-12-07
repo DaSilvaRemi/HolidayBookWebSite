@@ -28,7 +28,7 @@ class SiteReservationModel extends Model{
      * retourne la colonne typelogement de la table typelogement
      * 
      * @param string $typelogement
-     * @return array<int,array<string,string|int>> contient les résultat de la requêtete
+     * @return array<int,array<string,string|int>> contient les résultat de la requête
      */
     public function getTypeLogement($typelogement = ""){
         if(empty($typelogement)){
@@ -53,7 +53,7 @@ class SiteReservationModel extends Model{
      * retourne le nombre de lits simples
      * 
      * @param string $typelogement
-     * @return array<int,array<string,string|int>> contient les résultat de la requêtee
+     * @return array<int,array<string,string|int>> contient les résultat de la requête
      */
     public function getNbLitSimple($typelogement){
         return  $this->db->query("SELECT nblitsimple FROM public.typelogement WHERE typelogement = :typelogement: ORDER BY typelogement DESC;",["typelogement" => $typelogement])->getResultArray();
