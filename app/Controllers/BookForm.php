@@ -4,6 +4,9 @@ use CodeIgniter\Controller;
 use \App\Models\ControlSiteReservationModel;
 use \App\Models\Session;
 
+/**
+ * Classe technique permettant d'afficher le formulaire de réservation
+ */
 class BookForm extends Controller
 {
     /**

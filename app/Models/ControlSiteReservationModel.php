@@ -146,7 +146,7 @@ class ControlSiteReservationModel{
     /**
      * Ajoute une exception
      * 
-     * @param array $tab
+     * @param array<int,string> $tab
      * @return void
      */
     public function addException(array $tab) : void {
