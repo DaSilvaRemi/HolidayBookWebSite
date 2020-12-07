@@ -1,6 +1,12 @@
 <?php namespace App\Controllers;
 use \App\Models\Session;
 
+/**
+ * Classe technique permettant d'afficher la page index
+ *
+ * @author Mathieu
+ * @author Rémi
+ */
 class Home extends BaseController
 {
         /**

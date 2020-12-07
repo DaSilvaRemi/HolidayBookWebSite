@@ -1,19 +1,14 @@
 <?php
-
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
-
 namespace App\Controllers;
 use \CodeIgniter\Controller;
 use \App\Models\Session;
 
 /**
- * Description of PageAdmin
+ * Classe technique permettant de visualiser en admin
  *
- * @author 
+ * @author Mathieu
+ * @author Rémi
+ * @author Martin
  */
 class PageAdmin extends Controller{
     /* 

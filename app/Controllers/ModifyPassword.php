@@ -6,9 +6,11 @@ use CodeIgniter\Controller;
 use \App\Models\Session;
 
 /**
- * Description of ModifyUser
+ * CreateUser Classe technique permettant de modifier son mot de passe
  *
- * @author remi
+ * @author Mathieu
+ * @author Rémi
+ * @author Louis
  */
 class ModifyPassword extends Controller{
     /**

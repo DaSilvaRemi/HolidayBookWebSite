@@ -3,9 +3,9 @@ namespace App\Controllers;
 use \CodeIgniter\Controller;
 
 /**
- * CreateUser Classe technique permettant de créer un nouvel utilisateurs
+ * Classe technique permettant de créer un nouvel utilisateurs
  *
- * @author 
+ * @author Rémi
  */
 class CreateUser extends Controller{
     /**
