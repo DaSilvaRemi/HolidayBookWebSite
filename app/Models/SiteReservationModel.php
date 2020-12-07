@@ -27,8 +27,8 @@ class SiteReservationModel extends Model{
     /**
      * retourne la colonne typelogement de la table typelogement
      * 
-     * @param string $typelogement valeur par défault = ""
-     * @return array<int,array<string,value>> contient les résultat de la requête
+     * @param string $typelogement
+     * @return array<int,array<string,string|int>> contient les résultat de la requêtete
      */
     public function getTypeLogement($typelogement = ""){
         if(empty($typelogement)){
@@ -43,7 +43,7 @@ class SiteReservationModel extends Model{
      * retourne la colonne typelogement de la table typelogement
      * 
      * @param string $typelogement
-     * @return array<int,array<string,value>> contient les résultat de la requêtes
+     * @return array<int,array<string,string|int>> contient les résultat de la requête
      */
     public function getNbLitDouble($typelogement){
         return $this->db->query("SELECT nblitdouble FROM public.typelogement WHERE typelogement = :typelogement: ORDER BY typelogement DESC;",["typelogement" => $typelogement])->getResultArray();
@@ -53,7 +53,7 @@ class SiteReservationModel extends Model{
      * retourne le nombre de lits simples
      * 
      * @param string $typelogement
-     * @return array<int,array<string,value>> contient les résultat de la requête
+     * @return array<int,array<string,string|int>> contient les résultat de la requêtee
      */
     public function getNbLitSimple($typelogement){
         return  $this->db->query("SELECT nblitsimple FROM public.typelogement WHERE typelogement = :typelogement: ORDER BY typelogement DESC;",["typelogement" => $typelogement])->getResultArray();
@@ -64,7 +64,7 @@ class SiteReservationModel extends Model{
      * retourne l'id de la réservation
      * 
      * @param void
-     * @return array<int,array<string,value>> contient les résultat de la requête
+     * @return array<int,array<string,string|int>> contient les résultat de la requête
      */
     public function getIdReservation(){
         return $this->db->query("SELECT id_reservation FROM public.reservation;")->getResultArray();
@@ -74,7 +74,7 @@ class SiteReservationModel extends Model{
      * retourne la date de début
      * 
      * @param void
-     * @return array<int,array<string,value>> contient les résultat de la requête
+     * @return array<int,array<string,string|int>> contient les résultat de la requête
      */
     public function getDateDebut() {
         return $this->db->query("SELECT datedebut FROM public.reservation;")->getResultArray();
@@ -84,7 +84,7 @@ class SiteReservationModel extends Model{
      * retourne le nombre de personne pour une réservation
      * 
      * @param void
-     * @return array<int,array<string,value>> contient les résultat de la requête
+     * @return array<int,array<string,string|int>> contient les résultat de la requête
      */
     public function getNbPersonne() {
         return $this->db->query("SELECT nbpersonne FROM public.reservation;")->getResultArray();
@@ -94,7 +94,7 @@ class SiteReservationModel extends Model{
      * retourne la validité d'une réservation
      * 
      * @param void
-     * @return array<int,array<string,value>> contient les résultat de la requête
+     * @return array<int,array<string,string|int>> contient les résultat de la requête
      */
     public function getValide() {
         return $this->db->query("SELECT valide FROM public.reservation;")->getResultArray();
@@ -104,7 +104,7 @@ class SiteReservationModel extends Model{
      * retourne l'id de l'utilisateur
      * 
      * @param void
-     * @return array<int,array<string,value>> contient les résultat de la requête
+     * @return array<int,array<string,string|int>> contient les résultat de la requête
      */
     public function getIdUser_Reservation() {
         return $this->db->query("SELECT id_user FROM public.reservation;")->getResultArray();
@@ -114,7 +114,7 @@ class SiteReservationModel extends Model{
      * retourne toutes les reservations de tous les utilisateurs
      * 
      * @param void
-     * @return array<int,array<string,value>> contient les résultat de la requête
+     * @return array<int,array<string,string|int>> contient les résultat de la requête
      */
     public function getLesReservations(){
         return $this->db->query("SELECT id_reservation, datedebut, nbpersonne, (SELECT nom FROM user), pension, valide FROM public.reservation INNER JOIN public.user ON "
@@ -125,7 +125,7 @@ class SiteReservationModel extends Model{
      * Retourne toutes les réservations d'un utilisateur
      * 
      * @param int $idUser
-     * @return array<int,array<string,value>> contient les résultat de la requête
+     * @return array<int,array<string,string|int>> contient les résultat de la requête
      */
     public function getLesReservationsByUser($idUser){
         return $this->db->query("SELECT id_reservation, datedebut, nbpersonne, (SELECT nom FROM user), pension, valide FROM public.reservation INNER JOIN public.user ON "
@@ -169,7 +169,7 @@ class SiteReservationModel extends Model{
      * Retourne l'id de l'utilisateur
      * 
      * @param string $login UNIQUE KEY : Correspond au login
-     * @return array<int,array<string,value>> contient les résultat de la requête
+     * @return array<int,array<string,string|int>> contient les résultat de la requêtee
      */
     public function getIdUser($login) {
         return $this->db->query("SELECT id_user FROM public.user WHERE login = :login: ",["login" => $login])->getResultArray();
@@ -180,10 +180,10 @@ class SiteReservationModel extends Model{
      * 
      * Au moins un des deux paramètre doit être non null
      * 
-     * @param string $login Valeur par défault = null; UNIQUE KEY; Correspond au login
-     * @param int $idUser Valeur par défault = null; UNIQUE KEY; Correspond à l'id de l'utilisateur
-     * @return @return array<int,array<string,value>>|bool
-     * -array<int,array<string,value>> contient les résultat de la requête
+     * @param string $login UNIQUE KEY; Correspond au login
+     * @param int $idUser UNIQUE KEY; Correspond à l'id de l'utilisateur
+     * @return @return array<int,array<string,int>>|bool
+     * -array<int,array<string,int>> contient les résultat de la requête
      * -false si les deux paramètres sont vides
      */
     public function getNameUser($login = null, $idUser = null){
@@ -201,9 +201,9 @@ class SiteReservationModel extends Model{
      /**
      * Retourne le nombre de mot de passe
      * 
-     * @param int $idUser Valeur par défault = null; UNIQUE KEY; Correspond à l'id de l'utilisateur
+     * @param int $idUser UNIQUE KEY; Correspond à l'id de l'utilisateur
      * @param string $mdp Correspond au mot de passe
-     * @return array<int,array<string,value>> contient les résultat de la requête
+     * @return array<int,array<string,string|int>> contient les résultat de la requête
      */
     public function countUserMdp($idUser, $mdp){
         return $this->db->query('SELECT COUNT(mdp) FROM public.user WHERE id_user = :iduser: AND mdp = :mdp:;',['iduser' => $idUser, 'mdp' => $mdp])->getResultArray();
@@ -224,7 +224,7 @@ class SiteReservationModel extends Model{
      * 
      * @param string $login UNIQUE KEY; Correspond au login
      * @param string $mdp Correspond au mot de passe
-     * @return array<int,array<string,value>> contient les résultat de la requête
+     * @return array<int,array<string,string|int>> contient les résultat de la requête
      */
     public function countIdUserValide($login, $mdp){
         return $this->db->query("SELECT COUNT(id_user) FROM public.user WHERE login = :login: AND mdp = :mdp:",['login' => $login, 'mdp' => $mdp])->getResultArray();
