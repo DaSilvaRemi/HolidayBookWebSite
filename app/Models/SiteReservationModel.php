@@ -136,7 +136,7 @@ class SiteReservationModel extends Model{
      * Modifie le champs valide lorsque l'admin à accepté une réservation
      * 
      * @param int $idReservation
-     * @param string $valide valeur par défault = Valide
+     * @param string $valide
      * @return void
      */
     public function updateisValide($idReservation, $valide = "Valide") : void{
@@ -182,7 +182,7 @@ class SiteReservationModel extends Model{
      * 
      * @param string $login UNIQUE KEY; Correspond au login
      * @param int $idUser UNIQUE KEY; Correspond à l'id de l'utilisateur
-     * @return @return array<int,array<string,int>>|bool
+     * @return array<int,array<string,int>>|bool
      * -array<int,array<string,int>> contient les résultat de la requête
      * -false si les deux paramètres sont vides
      */
