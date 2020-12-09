@@ -118,7 +118,7 @@ class SiteReservationModel extends Model{
      */
     public function getLesReservations(){
         return $this->db->query("SELECT id_reservation, datedebut, nbpersonne, (SELECT nom FROM user), pension, valide FROM public.reservation INNER JOIN public.user ON "
-                . "public.reservation.id_user = public.user.id_user ORDER BY valide DESC;")->getResultArray();
+                . "public.reservation.id_user = public.user.id_user ORDER BY valide;")->getResultArray();
     }
     
     /**
@@ -129,7 +129,7 @@ class SiteReservationModel extends Model{
      */
     public function getLesReservationsByUser($idUser){
         return $this->db->query("SELECT id_reservation, datedebut, nbpersonne, (SELECT nom FROM user), pension, valide FROM public.reservation INNER JOIN public.user ON "
-                . "public.reservation.id_user = public.user.id_user WHERE id_user = :id_user ORDER BY valide DESC;",['id_user' => $idUser])->getResultArray();
+                . "public.reservation.id_user = public.user.id_user WHERE public.reservation.id_user = :id_user: ORDER BY valide;",['id_user' => $idUser])->getResultArray();
     }
     
     /**

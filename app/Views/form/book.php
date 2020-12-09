@@ -39,7 +39,7 @@
             <select name="pension" class="form-control">
                 <option value="">-----Veuillez sélectionnez une pension-----</option>
                 <option value="pensioncomplete">pension complète</option>
-                <opion value="demipension">demi-pension</option>
+                <option value="demipension">demi-pension</option>
             </select>
         </div>
         <div class="form-check">
