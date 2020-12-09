@@ -1,7 +1,6 @@
 <?php
 namespace App\Controllers;
 use \CodeIgniter\Controller;
-
 /**
  * Classe technique permettant de créer un nouvel utilisateurs
  *
@@ -18,6 +17,7 @@ class CreateUser extends Controller{
      */
     public function index(){
         helper('form');
+        
         
         if (!$this->validate(['nom' => 'required|min_length[3]|max_length[60]', 
             'prenom' => 'required|min_length[3]|max_length[60]', 

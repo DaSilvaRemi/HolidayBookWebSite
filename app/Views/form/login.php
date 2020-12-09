@@ -1,41 +1,41 @@
-<!DOCTYPE html>
 <!--
 To change this license header, choose License Headers in Project Properties.
 To change this template file, choose Tools | Templates
 and open the template in the editor.
 -->
-<html>
-    <head>
-        <title>Connexion</title>
-    </head>
-    <body>
-    <section class="formulaire">
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<title>CVVEN CONNEXION</title>
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css">
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+<script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"></script>
+<link rel="stylesheet" href="<?= base_url('css/form.css'); ?>"> 
+</head>
+<body>
+<div class="login-form">
     <?= form_open('Connexion'); ?>
-    
-    <?php 
-    if(isset($connexion)){
-        echo $connexion;
-    } ?>
-        
-    <h3>Connexion</h3>
-    
-    <label for="user">Utilisateur</label>
-    <input type="text" name="user" placeholder="utilisateur" size="50"/>
-
-    <label for="password">Mot de passe</label>
-    <input type="password" name="password" placeholder="password" size="50"/>
-
-    <br/><br/><br/>
-    <div><input type="submit" value="Envoyer" />
-        <input type="reset" value="Annuler" /></div>
-    <br/><br/>
-    <div><?php echo anchor('CreateUser', '<input type="button" value="Créer un compte" />'); ?> 
-    
-    <?php if(isset($validation)){
-        echo $validation->listErrors();
-    }?>
-
+        <h2 class="text-center">Connexion</h2>       
+        <div class="form-group">
+            <input type="text" class="form-control" placeholder="Identifiant" id="user" name="user" required="required">
+        </div>
+        <div class="form-group">
+            <input type="password" class="form-control" placeholder="Mot de passe" id="password" name="password" required="required">
+        </div>
+        <div class="form-group">
+            <button type="submit" class="btn btn-primary btn-block" id="Envoyer" >Connexion</button>
+        </div>
+        <div class="clearfix">
+             <?php if(isset($validation)){
+                echo $validation->listErrors();}?>
+        </div>
     </form>
-    </section>  
-    </body>
+    <p class="text-center"><?php echo anchor('CreateUser', 'Créer un compte'); ?></p>
+</div>
+</body>
 </html>
+
