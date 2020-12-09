@@ -32,9 +32,10 @@ and open the template in the editor.
             }?>
           </li>
           <li class="nav-item"> 
+              <!--<!-- Probleme à ce niveau -->
             <?php
             if(isset($iduser)){
-                echo anchor('Changer mot de passe', 'ModifyPassword','class="nav-link"'); 
+                echo anchor('ModifyPassword', 'Changer mot de passe','class="nav-link"'); 
             }?>
           </li>
           <li class="nav-item">
