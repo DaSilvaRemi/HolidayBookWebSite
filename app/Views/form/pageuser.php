@@ -18,8 +18,8 @@ and open the template in the editor.
                 <h1>Gestion de réservations</h1>
             </div>
             <div class="row">
-                <table class="table">
-                    <tr>
+                <table class="table table-bordered table-hover"">
+                    <tr class="thead-light">
                     <th scope="col">Nom</th>
                     <th scope="col">Date début</th>
                     <th scope="col">Nombre de personnes</th>
