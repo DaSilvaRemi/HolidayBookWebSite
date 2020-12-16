@@ -23,9 +23,9 @@ and open the template in the editor.
                 <H1>Gestion de réservations</H1>
             </div>
             <div class="row">
-                  <?= form_open('PageAdmin'); ?>
-                <table class="table">
-                    <tr>
+                <?= form_open('PageAdmin'); ?>
+                <table class="table table-bordered table-hover">
+                    <tr class="thead-light" >
                     <th scope="col">Nom / Prenom</th>
                     <th scope="col">Login</th>
                     <th scope="col">Action</th>
@@ -38,8 +38,8 @@ and open the template in the editor.
                             echo "<td>".$LesUtilisateurs['nom']." - ".$LesUtilisateurs['prenom']."</td>";
                             echo "<td>".$LesUtilisateurs['login']."</td>";                        
                             echo "<td>";
-                            echo form_button(array('name'=>'modifier','type'=>'submit','class'=>'btn btn-warning', 'content'=>'<i class="fa fa-pencil-square-o"></i>'));
-                            echo form_button(array('nom'=>'refuser','type'=>'submit','class'=>'btn btn-danger', 'content'=>'<i class="fa fa-trash"></i>'));
+                            echo form_button(array('name'=>'modifierUser','type'=>'submit','class'=>'btn btn-warning', 'content'=>'<i class="fa fa-pencil-square-o"></i>'));
+                            echo form_button(array('nom'=>'supprimerUser','type'=>'submit','class'=>'btn btn-danger', 'content'=>'<i class="fa fa-trash"></i>'));
                             echo "</td>";
                             echo "</tr>";
                         }  
@@ -49,6 +49,7 @@ and open the template in the editor.
                     }
                 ?>     
                 </table>
+                <?php echo anchor('CreateUser', '<input class="btn btn-success btn-block" value="AJOUTER +" />'); ?>
             </div>
     </body>
 </html>
