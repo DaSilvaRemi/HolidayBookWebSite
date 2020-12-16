@@ -175,6 +175,14 @@ class SiteReservationModel extends Model{
         return $this->db->query("SELECT id_user FROM public.user WHERE login = :login: ",["login" => $login])->getResultArray();
     }
     
+    /** Retourne tout les utilisateurs sauf admin
+     * 
+     */
+    public function getLesUtilisateurs(){
+        return $this->db->query("SELECT id_user, nom, prenom, login FROM public.user WHERE id_user != 1;")->getResultArray();
+    }
+    
+    
     /**
      * Retourne le nom de l'utilisateur
      * 
