@@ -55,7 +55,7 @@ and open the template in the editor.
                     }
                     ?>     
                 </table>
-                <?php echo anchor('AddUserAdmin', '<input class="btn btn-success btn-block fa fa-user" value="Ajouter un utilisateur test"/>'); ?>
+                <?php echo anchor('AddUserAdmin', '<input class="btn btn-success btn-block fa fa-user" value="Ajouter un utilisateur"/>'); ?>
             </div>
     </body>
 </html>
