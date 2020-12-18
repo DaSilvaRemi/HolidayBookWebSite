@@ -182,6 +182,41 @@ class SiteReservationModel extends Model{
         return $this->db->query("SELECT id_user, nom, prenom, login FROM public.user WHERE id_user != 1;")->getResultArray();
     }
     
+    public function deleteReservation($idUser){
+        $this->db->query("DELETE FROM public.reservation WHERE id_user=:id_user:",["id_user" => $idUser]);
+    }
+    
+    public function deleteUser($idUser){
+        $this->db->query("DELETE FROM public.user WHERE id_user=:id_user:",["id_user" => $idUser]);
+    } 
+   
+        
+     /**
+     * recupère les informations de l'utlisateurs
+     * 
+     *Recupere les infos utilisateurs par rapport a son id
+     * 
+     * @param int $idUser UNIQUE KEY; Correspond à l'id de l'utilisateur
+     * @return array<int,array<string,int>>|bool
+     * -array<int,array<string,int>> contient les résultat de la requête
+     */
+    public function getInfoUser($idUser){
+        return $this->db->query("SELECT nom,prenom,mdp FROM public.user WHERE id_user=:id_user:",["id_user"=> $idUser])->getResultArray();
+    }
+    
+     /**
+     * Modifie les informations utilisateurs
+     * 
+     *Recuper l'id et les nouvelles informations de l'utilisateur
+     * 
+     * @param int $idUser UNIQUE KEY; Correspond à l'id de l'utilisateur
+     * @return array<int,array<string,int>>|bool
+     * -array<int,array<string,int>> contient les résultat de la requête
+     */
+    public function setInfoUser($idUser,$nom,$prenom,$mdp){
+        $this->db->query("UPDATE public.user SET nom=:nom:, prenom=:prenom:,"
+                . "mdp=:mdp:, WHERE id_user=:id_user:",["nom"=>$nom,"prenom"=>$prenom,"mdp"=>$mdp]);
+    }
     
     /**
      * Retourne le nom de l'utilisateur
