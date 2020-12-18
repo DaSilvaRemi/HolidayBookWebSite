@@ -20,11 +20,18 @@ class GestionUser extends Controller{
     public function index() {
         helper('form');
         Session::startSession();
+        var_dump(Session::verifySession());
         if(!Session::verifySession() || Session::getSessionData('idUser') != 1){
-            return redirect()->to(site_url('PageUser')); 
+            //return redirect()->to(site_url('PageUser')); 
         }
         
+        
         $SiteReservationModel = new \App\Models\SiteReservationModel;
+        if(!empty($this->request->getPost('idUtilisateur'))){
+            $SiteReservationModel->deleteReservation($this->request->getPost('idUtilisateur'));
+            $SiteReservationModel->deleteUser($this->request->getPost('idUtilisateur'));
+        }
+        
         echo view('template/header', ['iduser' => Session::getSessionData('idUser')]);
         echo view("form/gestionuser",['tabUtilisateurs' => $SiteReservationModel->getLesUtilisateurs()]);
         echo view('template/footer');

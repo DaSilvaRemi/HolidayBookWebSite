@@ -5,7 +5,6 @@ To change this template file, choose Tools | Templates
 and open the template in the editor.
 -->
 <html>
-<?= form_open('PageAdmin'); ?>
     <head>
 
         <meta charset="UTF-8">
@@ -19,37 +18,44 @@ and open the template in the editor.
 
         <div class="container">
             <div class="row">
-                
+
                 <H1>Gestion de réservations</H1>
             </div>
             <div class="row">
-                <?= form_open('PageAdmin'); ?>
                 <table class="table table-bordered table-hover">
                     <tr class="thead-light" >
-                    <th scope="col">Nom / Prenom</th>
-                    <th scope="col">Login</th>
-                    <th scope="col">Action</th>
+                        <th scope="col">Nom / Prenom</th>
+                        <th scope="col">Login</th>
+                        <th scope="col">Action</th>
+
                     </tr>
-                    
+
                     <?php
-                    if(isset($tabUtilisateurs)){
+                    if (isset($tabUtilisateurs)) {
                         foreach ($tabUtilisateurs as $LesUtilisateurs) {
-                            echo "<tr scope='row'>";
-                            echo "<td>".$LesUtilisateurs['nom']." - ".$LesUtilisateurs['prenom']."</td>";
-                            echo "<td>".$LesUtilisateurs['login']."</td>";                        
-                            echo "<td>";
-                            echo form_button(array('name'=>'modifierUser','type'=>'submit','class'=>'btn btn-warning', 'content'=>'<i class="fa fa-pencil-square-o"></i>'));
-                            echo form_button(array('nom'=>'supprimerUser','type'=>'submit','class'=>'btn btn-danger', 'content'=>'<i class="fa fa-trash"></i>'));
-                            echo "</td>";
-                            echo "</tr>";
-                        }  
-                    }
-                    else {
+                            if (isset($LesUtilisateurs['id_user'])) {
+                                echo "<tr scope='row'>";
+                                echo "<td>" . $LesUtilisateurs['nom'] . " - " . $LesUtilisateurs['prenom'] . "</td>";
+                                echo "<td>" . $LesUtilisateurs['login'] . "</td>";
+                                echo "<td>";
+                                echo form_open('GestionUser');
+                                echo anchor('AddUserAdmin', '<button class="btn btn-warning fa fa-pencil-square-o"/>');
+                                echo "</form>";
+
+                                echo form_open('GestionUser');
+                                echo '<input name="idUtilisateur" type="hidden" value="' . $LesUtilisateurs['id_user'] . '"/>';
+                                echo form_button(array('nom' => 'supprimerUser', 'type' => 'submit', 'class' => 'btn btn-danger', 'content' => '<i class="fa fa-trash"></i>'));
+                                echo "</form>";
+                                echo "</td>";
+                                echo "</tr>";
+                            }
+                        }
+                    } else {
                         echo 'Erreur : Champs Vide !!!';
                     }
-                ?>     
+                    ?>     
                 </table>
-                <?php echo anchor('CreateUser', '<input class="btn btn-success btn-block" value="AJOUTER +" />'); ?>
+                <?php echo anchor('AddUserAdmin', '<input class="btn btn-success btn-block fa fa-user" value="Ajouter un utilisateur"/>'); ?>
             </div>
     </body>
 </html>
