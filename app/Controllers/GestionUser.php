@@ -20,9 +20,8 @@ class GestionUser extends Controller{
     public function index() {
         helper('form');
         Session::startSession();
-        var_dump(Session::verifySession());
         if(!Session::verifySession() || Session::getSessionData('idUser') != 1){
-            //return redirect()->to(site_url('PageUser')); 
+            return redirect()->to(site_url('PageUser')); 
         }
         
         
