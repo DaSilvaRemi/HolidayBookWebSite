@@ -136,6 +136,17 @@ class SiteReservationModel extends Model{
     }
     
     /**
+     * Retourne toutes les réservations d'un utilisateur
+     * 
+     * @param int $id_user UNIQUE KEY; Correspond à l'id de l'utilisateur
+     * @return array<int,array<string,string|int>> contient les résultat de la requête
+     */
+    public function getLesReservationsById($id_reservation){
+        return $this->db->query("SELECT id_reservation, datedebut, nbpersonne, (SELECT nom FROM user), pension, valide FROM public.reservation "
+                . "WHERE public.reservation.id_reservation = :id_reservation: ORDER BY valide;",['id_reservation' => $id_reservation])->getResultArray();
+    }
+    
+    /**
      * Modifie le champs valide lorsque l'admin à accepté une réservation
      * 
      * @param int $id_reservation PRIMARY KEY; Correspond à l'id de la réservation
@@ -144,6 +155,20 @@ class SiteReservationModel extends Model{
      */
     public function updateisValide($id_reservation, $valide = "Valide") : void{
         $this->db->query("UPDATE public.reservation SET valide = :valide: WHERE id_reservation = :id_reservation:;",["valide" => $valide, "id_reservation" => $id_reservation]);
+    }
+    
+    /**
+     * Modifie les informations utilisateurs
+     * 
+     * @param int $id_user UNIQUE KEY; Correspond à l'id de l'utilisateur
+     * @param String $nom Nom de l'utilisateur
+     * @param String $prenom Prénom de l'utilisateur
+     * @param String $mdp Mot de passe de l'utilisateur
+     * @return void
+     */
+    public function updateReservation($id_user,$nom,$prenom,$mdp){
+        $this->db->query("UPDATE public.user SET nom=:nom:, prenom=:prenom:,"
+                . "mdp=:mdp:, WHERE id_user=:id_user:;",['id_user' => $id_user,'nom'=>$nom,'prenom'=>$prenom,'mdp'=>$mdp]);
     }
     
     /**
@@ -166,6 +191,7 @@ class SiteReservationModel extends Model{
                     "id_user" => $id_user, "typelogement" => $typelogement,]);
     }
     
+
     /**
      * Supprimer une reservation
      * 
