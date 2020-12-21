@@ -167,9 +167,11 @@ class SiteReservationModel extends Model{
      * @param String $mdp Mot de passe de l'utilisateur
      * @return void
      */
-    public function updateReservation($id_reservation, $typelogement, $dateDebut, $dateFin, $nbPersonne, $pension, $menage){
-        $this->db->query("UPDATE public.user SET nom=:nom:, prenom=:prenom:,"
-                . "mdp=:mdp:, WHERE id_user=:id_user:;",['id_user' => $id_user,'nom'=>$nom,'prenom'=>$prenom,'mdp'=>$mdp]);
+    public function updateReservation($id_reservation, $typelogement, $dateDebut, $dateFin, $nbpersonne, $pension, $menage){
+        $this->db->query("UPDATE public.reservation SET typelogement = :typelogement:, datedebut = :datedebut:, dateFin = :datefin:, nbpersonne = :nbpersonne:,"
+                . "pension = :pension:, menage = :menage:, valide = :valide: WHERE id_reservation = :id_reservation:;",['id_reservation' => $id_reservation, 
+                    'typelogement'=>$typelogement, 'dateDebut'=>$dateDebut, 'dateFin'=>$dateFin, 'nbpersonne'=>$nbpersonne, 'pension'=>$pension, 'menage'=>$menage, 
+                    'valide' => 'Modifiée']);
     }
     
     /**

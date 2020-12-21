@@ -43,7 +43,14 @@ class ModifyReservation extends Controller{
         }  
     }
     
-    
+    /**
+     * Vérifie les éventuel erreurs lors de la création de l'objet(Durée de date incorrecte ou/et nombre de personne incorrecte)
+     * 
+     * Dans tous les cas on met à jour la BDD que sa soit avec les ancienne ou les nouvelles données
+     * 
+     * @param void
+     * @return void
+     */
     private function verifFieldModif() : void{
         $InfoReservation = $this->verifFieldIsSame();
         $leControlSiteReservation = new ControlSiteReservationModel($InfoReservation['datedebut'], $InfoReservation['datefin'], $InfoReservation['nbpersonne'],
@@ -69,6 +76,14 @@ class ModifyReservation extends Controller{
         }
     }
     
+    /**
+     * Vérifie si les champs sont remplis et si ils sont les mêmes
+     * 
+     * Lorsqu'un champs entré est différent de celui de la BDD il est remplacé.
+     * 
+     * @param void
+     * @return array<String,mixed>   
+     */
     private function verifFieldIsSame() : array{
         $SiteReservationModel = new \App\Models\SiteReservationModel;
         $InfoReservation = $SiteReservationModel->getLesReservationsById($this->request->getPost('idUpdateReservation'))[0];
