@@ -8,13 +8,6 @@ use \App\Models\Session;
  *
  */
 class PageUser extends Controller{
-    /* 
-    fonction : Vérifie l'utilisateur est connecté, puis on charge la vue
-    parametre : void
-    retour : Si une erreur est détecté on retourne sur la vue et on affiche l'erreur. 
-     * Sinon on retourne sur la page de connexion pour demander à l'utilisateur de se connecté
-    */
-    
     /**
      * Récupère les informations de changement d'états de la réservation si l'utilisateur est bien sur connecté
      * 
@@ -31,7 +24,7 @@ class PageUser extends Controller{
         
         Session::startSession();
         if(!Session::verifySession()){
-            return redirect()->to(site_url('Connexion')); 
+            return redirect()->to(site_url('Connexion/deconnexion')); 
         }
         
         $SiteReservationModel = new \App\Models\SiteReservationModel;
