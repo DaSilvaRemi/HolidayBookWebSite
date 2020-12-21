@@ -33,7 +33,7 @@
           </li>
           
           <li class="nav-item">
-                <?php if(isset($iduser)){                               
+                <?php if(isset($iduser) && $iduser == 1){                               
                     echo anchor('GestionUser', ' ','class="nav-link fa fa-user fa-2x text-primary"');  
                 } 
                 ?>           
@@ -41,13 +41,13 @@
         
           <!-- Creation utilisateur -->
           <li class="nav-item">
-            <?php if(isset($iduser)){                
-                echo anchor('CreateUser', ' ','class="nav-link fa fa-user-plus fa-2x text-primary"'); 
+            <?php if(isset($iduser) && $iduser == 1){                
+                echo anchor('AddUserAdmin', ' ','class="nav-link fa fa-user-plus fa-2x text-primary"'); 
             } 
             ?>
           </li>
           
-                    <li class="nav-item"> 
+            <li class="nav-item"> 
             <?php
             if(isset($iduser)){                        
                 echo anchor('ModifyPassword', '  ','class="nav-link fa fa-cog fa-2x text-warning"'); 
