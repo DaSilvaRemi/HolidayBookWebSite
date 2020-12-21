@@ -39,13 +39,17 @@ and open the template in the editor.
                             echo "<td>".$LesReservations['valide']."</td>";
                             echo "<td>";
                             echo "";
-                            echo form_open('PageUser');
                             //echo form_button(array('name'=>'modifier','type'=>'submit','class'=>'btn btn-warning', 'content'=>'<i class="fa fa-pencil-square-o"></i>'));
-                            if($LesReservations['valide'] !== "Valider"){
+                            if($LesReservations['valide'] == "En attente de validation" || $LesReservations['valide'] == "Modifiée"){
+                                echo form_open('PageUser');
                                 echo '<input name="idReservation" type="hidden" value="'.$LesReservations['id_reservation'].'"/>'; 
+                                echo form_button(array('nom'=>'supprimer','type'=>'submit','class'=>'btn', 'content'=>'<i class="fa fa-times-circle fa-lg text-danger"></i>')); 
+                                echo "</form>";
                             }
-                            echo form_button(array('nom'=>'supprimer','type'=>'submit','class'=>'btn btn-danger', 'content'=>'<i class="fa fa-trash"></i>')); 
-                            echo "</form>";
+                            else{
+                                echo 'Annulation impossible ';
+                                echo '<i class="fa fa-exclamation-circle text-danger"></i>';
+                            }
                             echo "</td>";
                             echo "</tr>";
                         }  
