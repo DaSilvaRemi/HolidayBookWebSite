@@ -21,7 +21,7 @@ class GestionReservation extends Controller{
         helper('form');
         Session::startSession();
         if(!Session::verifySession() || Session::getSessionData('idUser') != 1){
-            return redirect()->to(site_url('PageUser')); 
+            return redirect()->to(site_url('Connexion/deconnexion')); 
         }
         
         $SiteReservationModel = new \App\Models\SiteReservationModel;
