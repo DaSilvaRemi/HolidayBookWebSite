@@ -127,23 +127,23 @@ class SiteReservationModel extends Model{
     /**
      * Retourne toutes les réservations d'un utilisateur
      * 
-     * @param int $idUser
+     * @param int $id_user UNIQUE KEY; Correspond à l'id de l'utilisateur
      * @return array<int,array<string,string|int>> contient les résultat de la requête
      */
-    public function getLesReservationsByUser($idUser){
+    public function getLesReservationsByUser($id_user){
         return $this->db->query("SELECT id_reservation, datedebut, nbpersonne, (SELECT nom FROM user), pension, valide FROM public.reservation INNER JOIN public.user ON "
-                . "public.reservation.id_user = public.user.id_user WHERE public.reservation.id_user = :id_user: ORDER BY valide;",['id_user' => $idUser])->getResultArray();
+                . "public.reservation.id_user = public.user.id_user WHERE public.reservation.id_user = :id_user: ORDER BY valide;",['id_user' => $id_user])->getResultArray();
     }
     
     /**
      * Modifie le champs valide lorsque l'admin à accepté une réservation
      * 
-     * @param int $idReservation
+     * @param int $id_reservation PRIMARY KEY; Correspond à l'id de la réservation
      * @param string $valide
      * @return void
      */
-    public function updateisValide($idReservation, $valide = "Valide") : void{
-        $this->db->query("UPDATE public.reservation SET valide = :valide: WHERE id_reservation = :id_reservation:;",["valide" => $valide, "id_reservation" => $idReservation]);
+    public function updateisValide($id_reservation, $valide = "Valide") : void{
+        $this->db->query("UPDATE public.reservation SET valide = :valide: WHERE id_reservation = :id_reservation:;",["valide" => $valide, "id_reservation" => $id_reservation]);
     }
     
     /**
@@ -167,13 +167,23 @@ class SiteReservationModel extends Model{
     }
     
     /**
-     * Supprimer une réservation
+     * Supprimer une reservation
      * 
-     * @param int $idUser UNIQUE KEY; Correspond à l'id de l'utilisateur
+     * @param int $id_reservation PRIMARY KEY; Correspond à l'id de la réservation
      * @return void
      */
-    public function deleteReservation($idUser){
-        $this->db->query("DELETE FROM public.reservation WHERE id_user=:id_user:;",["id_user" => $idUser]);
+    public function deleteReservation($id_reservation){
+        $this->db->query("DELETE FROM public.reservation WHERE id_reservation=:id_reservation:;",["id_reservation" => $id_reservation]);
+    }
+    
+    /**
+     * Supprimer toutes les réservation d'un utilisateur
+     * 
+     * @param int $id_user UNIQUE KEY; Correspond à l'id de l'utilisateur
+     * @return void
+     */
+    public function deleteAllReservationByUser($id_user){
+        $this->db->query("DELETE FROM public.reservation WHERE id_user=:id_user:;",["id_user" => $id_user]);
     }
     
     /*------------------------------------Table user---------------------------------------------------------*/
@@ -202,12 +212,12 @@ class SiteReservationModel extends Model{
      * 
      *Recupere les infos utilisateurs par rapport a son id
      * 
-     * @param int $idUser UNIQUE KEY; Correspond à l'id de l'utilisateur
+     * @param int $id_user UNIQUE KEY; Correspond à l'id de l'utilisateur
      * @return array<int,array<string,int>>|bool
      * -array<int,array<string,int>> contient les résultat de la requête
      */
-    public function getInfoUser($idUser){
-        return $this->db->query("SELECT nom,prenom,mdp FROM public.user WHERE id_user=:id_user:",["id_user"=> $idUser])->getResultArray();
+    public function getInfoUser($id_user){
+        return $this->db->query("SELECT nom,prenom,mdp FROM public.user WHERE id_user=:id_user:",["id_user"=> $id_user])->getResultArray();
     }
     
     /**
@@ -216,17 +226,17 @@ class SiteReservationModel extends Model{
      * Au moins un des deux paramètre doit être non null
      * 
      * @param string $login UNIQUE KEY; Correspond au login
-     * @param int $idUser UNIQUE KEY; Correspond à l'id de l'utilisateur
+     * @param int $id_user UNIQUE KEY; Correspond à l'id de l'utilisateur
      * @return array<int,array<string,int>>|bool
      * -array<int,array<string,int>> contient les résultat de la requête
      * -false si les deux paramètres sont vides
      */
-    public function getNameUser($login = null, $idUser = null){
-        if(!empty($idUser)){
-            return $this->db->query('SELECT nom FROM public.user WHERE id_user = :iduser:;',['iduser' => $idUser])->getResultArray();
+    public function getNameUser($login = null, $id_user = null){
+        if(!empty($id_user)){
+            return $this->db->query('SELECT nom FROM public.user WHERE id_user = :id_user:;',['id_user' => $id_user])->getResultArray();
         }
         elseif(!empty($login)) {
-            return $this->db->query('SELECT nom FROM public.user WHERE id_user = :iduser:;',['iduser' => $this->getIdUser($login)[0]['id_user']])->getResultArray();
+            return $this->db->query('SELECT nom FROM public.user WHERE id_user = :id_user:;',['id_user' => $this->getIdUser($login)[0]['id_user']])->getResultArray();
         }
         else{
             return false;
@@ -240,8 +250,8 @@ class SiteReservationModel extends Model{
      * @param string $mdp Correspond au mot de passe
      * @return array<int,array<string,string|int>> contient les résultat de la requête
      */
-    public function countUserMdp($idUser, $mdp){
-        return $this->db->query('SELECT COUNT(mdp) FROM public.user WHERE id_user = :iduser: AND mdp = :mdp:;',['iduser' => $idUser, 'mdp' => $mdp])->getResultArray();
+    public function countUserMdp($id_user, $mdp){
+        return $this->db->query('SELECT COUNT(mdp) FROM public.user WHERE id_user = :id_user: AND mdp = :mdp:;',['id_user' => $id_user, 'mdp' => $mdp])->getResultArray();
     }
 
     /**
@@ -268,7 +278,7 @@ class SiteReservationModel extends Model{
     /**
      * Insert un user
      * 
-     * @param string string
+     * @param string $nom
      * @param string $prenom
      * @param string $login UNIQUE KEY; Correspond au login
      * @param string $mdp Correspond au mot de passe
@@ -281,36 +291,36 @@ class SiteReservationModel extends Model{
     /**
      * Modifie le mot de passe
      * 
-     * @param int $idUser UNIQUE KEY; Correspond à l'id de l'utilisateur
+     * @param int $id_user UNIQUE KEY; Correspond à l'id de l'utilisateur
      * @param string $mdp Correspond au mot de passe
      * @return void
      */
-    public function updateUserMdp($idUser, $mdp){
-        $this->db->query('UPDATE public.user SET mdp = :mdp: WHERE id_user = :id_user:;',['mdp' => $mdp, 'id_user' => $idUser]);
+    public function updateUserMdp($id_user, $mdp){
+        $this->db->query('UPDATE public.user SET mdp = :mdp: WHERE id_user = :id_user:;',['mdp' => $mdp, 'id_user' => $id_user]);
     }
     
     /**
      * Modifie les informations utilisateurs
      * 
-     * @param int $idUser UNIQUE KEY; Correspond à l'id de l'utilisateur
+     * @param int $id_user UNIQUE KEY; Correspond à l'id de l'utilisateur
      * @param String $nom Nom de l'utilisateur
      * @param String $prenom Prénom de l'utilisateur
      * @param String $mdp Mot de passe de l'utilisateur
      * @return void
      */
-    public function updateInfoUser($idUser,$nom,$prenom,$mdp){
+    public function updateInfoUser($id_user,$nom,$prenom,$mdp){
         $this->db->query("UPDATE public.user SET nom=:nom:, prenom=:prenom:,"
-                . "mdp=:mdp:, WHERE id_user=:id_user:;",['iduser' => $idUser,'nom'=>$nom,'prenom'=>$prenom,'mdp'=>$mdp]);
+                . "mdp=:mdp:, WHERE id_user=:id_user:;",['id_user' => $id_user,'nom'=>$nom,'prenom'=>$prenom,'mdp'=>$mdp]);
     }
     
      /**
      * Supprime un utilisateur
      * 
-     * @param int $idUser UNIQUE KEY; Correspond à l'id de l'utilisateur
+     * @param int $id_user UNIQUE KEY; Correspond à l'id de l'utilisateur
      * @return void
      */
-    public function deleteUser($idUser){
-        $this->db->query("DELETE FROM public.user WHERE id_user=:id_user:;",["id_user" => $idUser]);
+    public function deleteUser($id_user){
+        $this->db->query("DELETE FROM public.user WHERE id_user=:id_user:;",["id_user" => $id_user]);
     } 
     
 }
