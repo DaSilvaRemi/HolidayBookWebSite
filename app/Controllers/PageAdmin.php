@@ -26,9 +26,8 @@ class PageAdmin extends Controller{
             return redirect()->to(site_url('PageUser')); 
         }
         
-        $SiteReservationModel = new \App\Models\SiteReservationModel;
         echo view('template/header', ['iduser' => Session::getSessionData('idUser')]);
-        echo view("form/pageadmin",['tabReservation' => $SiteReservationModel->getLesReservations()]);
+        echo view("form/pageadmin");
         echo view('template/footer');
     }
 }
