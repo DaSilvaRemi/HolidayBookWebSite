@@ -5,7 +5,7 @@
     <header class="jumbotron my-4">
       <h1 class="display-3">Site CVVEN</h1>
       <p class="lead">Reservation de sejours vacances pour tout les BTS SIO!</p>
-      <a href="#" class="btn btn-primary btn-lg">Je reverve</a>
+      <?php echo anchor('BookForm', 'Je reserve ','class="btn btn-primary btn-lg"');  ?>
     </header>
 
     <!-- Page Features -->
@@ -19,7 +19,7 @@
             <p class="card-text">Réserver un appartement avec une magnifique vue </p>
           </div>
           <div class="card-footer">
-            <a href="#" class="btn btn-primary">Reserver mon sejour !</a>
+            <?php echo anchor('BookForm', 'Je reserve ','class="btn btn-primary btn-lg"');  ?>
           </div>
         </div>
       </div>
@@ -29,10 +29,10 @@
           <img class="card-img-top" src="http://placehold.it/500x325" alt="">
           <div class="card-body">
             <h4 class="card-title">Séjour Chambre Double</h4>
-            <p class="card-text">Envie de partager un séjour à deux cette chambre est faites pour vous !</p>
+            <p class="card-text">Envie de partager un séjour à deux cette chambre est faite pour vous !</p>
           </div>
           <div class="card-footer">
-            <a href="#" class="btn btn-primary">Reserver mon sejour !</a>
+            <?php echo anchor('BookForm', 'Je reserve ','class="btn btn-primary btn-lg"');  ?>
           </div>
         </div>
       </div>
@@ -42,10 +42,10 @@
           <img class="card-img-top" src="http://placehold.it/500x325" alt="">
           <div class="card-body">
             <h4 class="card-title">Séjour à 3</h4>
-            <p class="card-text">Envie de partir en famille réserver ces chambre avec vue sur de célèbre lieux d'interêts</p>
+            <p class="card-text">Envie de partir en famille réserver cette chambre pour vire un moment innoubliable</p>
           </div>
           <div class="card-footer">
-            <a href="#" class="btn btn-primary">Reserver mon sejour !</a>
+            <?php echo anchor('BookForm', 'Je reserve ','class="btn btn-primary btn-lg"');  ?>
           </div>
         </div>
       </div>
@@ -55,10 +55,10 @@
           <img class="card-img-top" src="http://placehold.it/500x325" alt="">
           <div class="card-body">
             <h4 class="card-title">Séjour à 4</h4>
-            <p class="card-text">Vous avez une grande familleou vous partez en groupe alors profiter de ce séjour pour 4 personnes</p>
+            <p class="card-text">Vous avez une grande famille ou vous partez en groupe alors profiter de ce séjour pour 4 personnes</p>
           </div>
           <div class="card-footer">
-            <a href="#" class="btn btn-primary">Reserver mon sejour !</a>
+            <?php echo anchor('BookForm', 'Je reserve ','class="btn btn-primary btn-lg"');  ?>
           </div>
         </div>
       </div>
