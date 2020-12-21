@@ -23,7 +23,6 @@ and open the template in the editor.
                 <H1>Gestion de réservations</H1>
             </div>
             <div class="row">
-                  <?= form_open('GestionReservation'); ?>
                 <table class="table">
                     <tr>
                     <th scope="col">Nom</th>
@@ -44,11 +43,40 @@ and open the template in the editor.
                             echo "<td>".$LesReservations['pension']."</td>";
                             echo "<td>".$LesReservations['valide']."</td>";
                             echo "<td>";
-                            echo form_button(array('name'=>'valider','type'=>'submit','class'=>'btn', 'content'=>'<i class="fa fa-check-circle text-success"></i>'));
-                            echo form_button(array('name'=>'modifier','type'=>'submit','class'=>'btn btn-outline-warning', 'content'=>'<i class="fa fa-pencil-square-o"></i>'));
-                            echo form_button(array('nom'=>'refuser','type'=>'submit','class'=>'btn', 'content'=>'<i class="fa fa-trash text-danger"></i>'));
+                            //Si la réservation est en attente ou modifiée on peut alors la validée
+                            if($LesReservations['valide'] == "En attente de validation" || $LesReservations['valide'] == "Modifiée"){
+                                echo form_open('GestionReservation');
+                                echo '<input name="idReservationValide" type="hidden" value="'.$LesReservations['id_reservation'].'"/>'; 
+                                echo form_button(array('name'=>'valider','type'=>'submit','class'=>'btn', 'content'=>'<i class="fa fa-check-circle fa-lg text-success"></i>'));
+                                echo '</form>';
+                            }
+                            
+                            //Si la réservation est en attente ou modifiée on peut alors la validée
+                            if($LesReservations['valide'] == "En attente de validation" || $LesReservations['valide'] == "Modifiée"){
+                                echo form_open('GestionReservation');
+                                echo '<input name="idReservationRefus" type="hidden" value="'.$LesReservations['id_reservation'].'"/>'; 
+                                echo form_button(array('name'=>'refuser','type'=>'submit','class'=>'btn', 'content'=>'<i class="fa fa-times-circle fa-lg text-danger"></i>'));
+                                echo '</form>';
+                            }
+                           
+                            //Si la réservation est en attente ou modifiée on peut alors la modifiée
+                            if($LesReservations['valide'] == "En attente de validation" || $LesReservations['valide'] == "Modifiée"){
+                                echo form_open('GestionReservation');
+                                echo '<input name="idReservation" type="hidden" value="'.$LesReservations['id_reservation'].'"/>';
+                                echo form_button(array('name'=>'modifier','type'=>'submit','class'=>'btn', 'content'=>'<i class="fa fa-pencil-square-o fa-lg text-warning"></i>'));
+                                echo '</form>';
+                            }
+                            
+                            //Si la réservation n'est pas valide alors on peut la supprimée
+                            if($LesReservations['valide'] != "Validée"){
+                                echo form_open('GestionReservation');
+                                echo '<input name="idReservationSuppr" type="hidden" value="'.$LesReservations['id_reservation'].'"/>';
+                                echo form_button(array('nom'=>'supprimer','type'=>'submit','class'=>'btn', 'content'=>'<i class="fa fa-trash fa-lg text-danger"></i>'));
+                                echo '</form>';
+                                
+                            }
                             echo "</td>";
-                            echo "</tr>";
+                            echo "</tr>";   
                         }  
                     }
                     else {
