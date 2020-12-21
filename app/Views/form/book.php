@@ -27,10 +27,10 @@
     </select>
         </div>  
           <div class="form-group">
-            <input type="date" name="datedebut" min="2021-01-01" size="50" step="7" class="form-control"/>
+            <input type="date" name="datedebut" min="2021-01-02" size="50" step="7" class="form-control"/>
         </div>
           <div class="form-group">
-            <input type="date" name="datefin" min="2021-01-08" size="50" step="7" class="form-control"/>
+            <input type="date" name="datefin" min="2021-01-09" size="50" step="7" class="form-control"/>
         </div>
         <div class="form-group">
             <input type="number" name="nbpersonne" min="1" max="4" value="1" size="50"  class="form-control"/>
