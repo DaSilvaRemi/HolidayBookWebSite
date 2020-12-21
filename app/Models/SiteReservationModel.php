@@ -35,7 +35,8 @@ class SiteReservationModel extends Model{
             return  $this->db->query("SELECT typelogement FROM public.typelogement;")->getResultArray();
         }
         else{
-            return $this->db->query("SELECT typelogement FROM public.typelogement WHERE typelogement = :typelogement: LIMIT 1;",["typelogement" => $typelogement])->getResultArray();
+            return $this->db->query("SELECT typelogement FROM public.typelogement WHERE typelogement = :typelogement: LIMIT 1;",
+                    ["typelogement" => $typelogement])->getResultArray();
         }
     }
 
@@ -46,7 +47,8 @@ class SiteReservationModel extends Model{
      * @return array<int,array<string,string|int>> contient les résultat de la requête
      */
     public function getNbLitDouble($typelogement){
-        return $this->db->query("SELECT nblitdouble FROM public.typelogement WHERE typelogement = :typelogement: ORDER BY typelogement DESC;",["typelogement" => $typelogement])->getResultArray();
+        return $this->db->query("SELECT nblitdouble FROM public.typelogement WHERE typelogement = :typelogement: ORDER BY typelogement DESC;"
+                ,["typelogement" => $typelogement])->getResultArray();
     }
 
     /**
@@ -56,7 +58,8 @@ class SiteReservationModel extends Model{
      * @return array<int,array<string,string|int>> contient les résultat de la requête
      */
     public function getNbLitSimple($typelogement){
-        return  $this->db->query("SELECT nblitsimple FROM public.typelogement WHERE typelogement = :typelogement: ORDER BY typelogement DESC;",["typelogement" => $typelogement])->getResultArray();
+        return  $this->db->query("SELECT nblitsimple FROM public.typelogement WHERE typelogement = :typelogement: ORDER BY typelogement DESC;"
+                ,["typelogement" => $typelogement])->getResultArray();
     }
     
     /*--------------------------------------Table réservation------------------------------------------------*/
@@ -147,7 +150,7 @@ class SiteReservationModel extends Model{
      * insère des données dans la table réservation  
      * 
      * @param string $typelogement
-     * @param int $id_user
+     * @param int $id_user UNIQUE KEY; Correspond à l'id de l'utilisateur
      * @param string dateDebut Date en format YYYY-MM-DD 
      * @param string dateFin Date en format YYYY-MM-DD 
      * @param int nbPersonne
@@ -163,34 +166,37 @@ class SiteReservationModel extends Model{
                     "id_user" => $id_user, "typelogement" => $typelogement,]);
     }
     
+    /**
+     * Supprimer une réservation
+     * 
+     * @param int $idUser UNIQUE KEY; Correspond à l'id de l'utilisateur
+     * @return void
+     */
+    public function deleteReservation($idUser){
+        $this->db->query("DELETE FROM public.reservation WHERE id_user=:id_user:;",["id_user" => $idUser]);
+    }
+    
     /*------------------------------------Table user---------------------------------------------------------*/
    
      /**
      * Retourne l'id de l'utilisateur
      * 
      * @param string $login UNIQUE KEY : Correspond au login
-     * @return array<int,array<string,string|int>> contient les résultat de la requêtee
+     * @return array<int,array<string,string|int>> contient les résultat de la requête
      */
     public function getIdUser($login) {
-        return $this->db->query("SELECT id_user FROM public.user WHERE login = :login: ",["login" => $login])->getResultArray();
+        return $this->db->query("SELECT id_user FROM public.user WHERE login = :login:;",["login" => $login])->getResultArray();
     }
     
-    /** Retourne tout les utilisateurs sauf admin
+    /**
+     * Retourne tous les utilisateurs sauf l'administrateur
      * 
+     * @return array<int,array<string,string|int>> contient les résultat de la requête
      */
     public function getLesUtilisateurs(){
         return $this->db->query("SELECT id_user, nom, prenom, login FROM public.user WHERE id_user != 1;")->getResultArray();
     }
-    
-    public function deleteReservation($idUser){
-        $this->db->query("DELETE FROM public.reservation WHERE id_user=:id_user:",["id_user" => $idUser]);
-    }
-    
-    public function deleteUser($idUser){
-        $this->db->query("DELETE FROM public.user WHERE id_user=:id_user:",["id_user" => $idUser]);
-    } 
    
-        
      /**
      * recupère les informations de l'utlisateurs
      * 
@@ -202,20 +208,6 @@ class SiteReservationModel extends Model{
      */
     public function getInfoUser($idUser){
         return $this->db->query("SELECT nom,prenom,mdp FROM public.user WHERE id_user=:id_user:",["id_user"=> $idUser])->getResultArray();
-    }
-    
-     /**
-     * Modifie les informations utilisateurs
-     * 
-     *Recuper l'id et les nouvelles informations de l'utilisateur
-     * 
-     * @param int $idUser UNIQUE KEY; Correspond à l'id de l'utilisateur
-     * @return array<int,array<string,int>>|bool
-     * -array<int,array<string,int>> contient les résultat de la requête
-     */
-    public function setInfoUser($idUser,$nom,$prenom,$mdp){
-        $this->db->query("UPDATE public.user SET nom=:nom:, prenom=:prenom:,"
-                . "mdp=:mdp:, WHERE id_user=:id_user:",["nom"=>$nom,"prenom"=>$prenom,"mdp"=>$mdp]);
     }
     
     /**
@@ -259,7 +251,7 @@ class SiteReservationModel extends Model{
      * @return array<int,array<string,value>> contient les résultat de la requête
      */
     public function countUserLogin($login){
-        return $this->db->query("SELECT COUNT(login) FROM public.user WHERE login = :login:",['login' => $login])->getResultArray();
+        return $this->db->query("SELECT COUNT(login) FROM public.user WHERE login = :login:;",['login' => $login])->getResultArray();
     }
     
     /**
@@ -270,7 +262,7 @@ class SiteReservationModel extends Model{
      * @return array<int,array<string,string|int>> contient les résultat de la requête
      */
     public function countIdUserValide($login, $mdp){
-        return $this->db->query("SELECT COUNT(id_user) FROM public.user WHERE login = :login: AND mdp = :mdp:",['login' => $login, 'mdp' => $mdp])->getResultArray();
+        return $this->db->query("SELECT COUNT(id_user) FROM public.user WHERE login = :login: AND mdp = :mdp:;",['login' => $login, 'mdp' => $mdp])->getResultArray();
     }
     
     /**
@@ -289,12 +281,36 @@ class SiteReservationModel extends Model{
     /**
      * Modifie le mot de passe
      * 
-     * @param int $idUser Valeur par défault = null; UNIQUE KEY; Correspond à l'id de l'utilisateur
+     * @param int $idUser UNIQUE KEY; Correspond à l'id de l'utilisateur
      * @param string $mdp Correspond au mot de passe
      * @return void
      */
     public function updateUserMdp($idUser, $mdp){
-        $this->db->query('UPDATE public.user SET mdp = :mdp: WHERE id_user = :id_user:',['mdp' => $mdp, 'id_user' => $idUser]);
+        $this->db->query('UPDATE public.user SET mdp = :mdp: WHERE id_user = :id_user:;',['mdp' => $mdp, 'id_user' => $idUser]);
     }
+    
+    /**
+     * Modifie les informations utilisateurs
+     * 
+     * @param int $idUser UNIQUE KEY; Correspond à l'id de l'utilisateur
+     * @param String $nom Nom de l'utilisateur
+     * @param String $prenom Prénom de l'utilisateur
+     * @param String $mdp Mot de passe de l'utilisateur
+     * @return void
+     */
+    public function updateInfoUser($idUser,$nom,$prenom,$mdp){
+        $this->db->query("UPDATE public.user SET nom=:nom:, prenom=:prenom:,"
+                . "mdp=:mdp:, WHERE id_user=:id_user:;",['iduser' => $idUser,'nom'=>$nom,'prenom'=>$prenom,'mdp'=>$mdp]);
+    }
+    
+     /**
+     * Supprime un utilisateur
+     * 
+     * @param int $idUser UNIQUE KEY; Correspond à l'id de l'utilisateur
+     * @return void
+     */
+    public function deleteUser($idUser){
+        $this->db->query("DELETE FROM public.user WHERE id_user=:id_user:;",["id_user" => $idUser]);
+    } 
     
 }
