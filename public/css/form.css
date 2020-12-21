@@ -1,87 +1,4 @@
-/*
-To change this license header, choose License Headers in Project Properties.
-To change this template file, choose Tools | Templates
-and open the template in the editor.
-*/
-/* 
-    Created on : 25 nov. 2020, 12:25:57
-    Author     : remi
-*/
 
-.formulaire {
-    width: 600px;
-    margin: 0 auto;
-    margin-top: 10%;
-  }
-  
-  /* Bordered form */
-  .formulaire form {
-    width: 100%;
-    padding: 30px;
-    margin-bottom: 10rem;
-    border: 1px solid #f1f1f1;
-    background: #fff;
-    box-shadow: 0 0 20px 0 rgba(0, 0, 0, 0.2), 0 5px 5px 0 rgba(0, 0, 0, 0.24);
-  }
-  .formulaire h3 {
-    width: 38%;
-    margin: 0 auto;
-    padding-bottom: 10px;
-    text-align: center;
-  }
-  
-  .formulaire label{
-      color: black;
-  }
-  /* Full-width inputs */
-  input[type="text"],input[type="password"],input[type="radio"],
-  input[type="checkbox"],input[type="date"],input[type="number"],input[type="checkbox"],select option,select{
-    width: 100%;
-    padding: 12px 20px;
-    margin: 8px 0;
-    display: inline-block;
-    border: 1px solid #ccc;
-    box-sizing: border-box;
-  }
-  
-  /* Set a style for all buttons */
-  input[type="submit"] {
-    background-color: #149414;
-    color: white;
-    padding: 14px 20px;
-    margin: 8px 0;
-    border: none;
-    cursor: pointer;
-    width: 100%;
-  }
-  
-  input[type="reset"] {
-    background-color: #850606;
-    color: white;
-    padding: 14px 20px;
-    margin: 8px 0;
-    border: none;
-    cursor: pointer;
-    width: 100%;
-  }
-  
-  input[type="button"]{
-      background-color: #22427C 	;
-    color: white;
-    padding: 14px 20px;
-    margin: 8px 0;
-    border: none;
-    cursor: pointer;
-    width: 100%;
-  }
-  
-  
-  input[type="submit"]:hover, input[type="button"]:hover, input[type="reset"]:hover {
-    background-color: white;
-    color: #22427C;
-    border: 1px solid #22427C ;
-  }
-  
   /*Formulaires*/
  
   /*Creation de compte*/
@@ -112,7 +29,7 @@ and open the template in the editor.
 .login-form {
     width: 340px;
     margin: 70px auto;
-  	font-size: 15px;
+    font-size: 15px;
 }
 .login-form form {
     margin-bottom: 15px;
