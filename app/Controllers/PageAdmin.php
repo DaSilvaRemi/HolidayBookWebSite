@@ -11,12 +11,14 @@ use \App\Models\Session;
  * @author Martin
  */
 class PageAdmin extends Controller{
-    /* 
-    fonction : Vérifie l'utilisateur est connecté et qu'il a les permissions, puis on charge la vue
-    parametre : void
-    retour : Si une erreur est détecté on retourne sur la vue et on affiche l'erreur. 
-     * Sinon on retourne sur la page de connexion pour demander à l'utilisateur de se connecté
-    */
+    /**
+     * Page d'acceuil pour l'administration permet seulement de naviguer
+     *
+     * @param void
+     * @return string|object  
+     * - string retourne la vue
+     * - object redirige sur la Connexion et on demande à l'utilisateur de se connecter s'il ne l'est pas déja
+     */
     public function index() {
         helper('form');
         Session::startSession();
