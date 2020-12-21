@@ -8,8 +8,7 @@
         <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
         
   <nav class="navbar navbar-expand-sm navbar-dark bg-dark fixed-top">
-    <div class="container">
-        <?php echo anchor('Home', 'CVVEN','class="navbar-brand fa fa-home fa-lg"'); ?>
+        <?php echo anchor('Home', ' ','class="nav-link fa fa-home fa-2x text-success"'); ?>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
           <span class="navbar-toggler-icon"></span>
         </button>
@@ -20,30 +19,30 @@
              <!-- page search -->
            <li class="nav-item active">
                 <?php if(isset($iduser)){                               
-                    echo anchor('BookForm', ' ','class="nav-link fa fa-search fa-2x"'); 
+                    echo anchor('BookForm', ' ','class="nav-link fa fa-search fa-2x text-success"'); 
                 } 
                 ?>
                <span class="sr-only">(current)</span>
           </li>
           
           <li class="nav-item">
-                <?php if(isset($iduser)){                               
-                    echo anchor('GestionUser', ' ','class="nav-link fa fa-user fa-2x"');  
-                } 
-                ?>           
-          </li>
-          
-          <li class="nav-item">
             <?php if(isset($iduser)){                               
-                echo anchor('PageUser', ' ','class="nav-link fa fa-database fa-2x"'); 
+                echo anchor('PageUser', ' ','class="nav-link fa fa-database fa-2x text-success"'); 
             } 
             ?>
           </li>
-                   
+          
+          <li class="nav-item">
+                <?php if(isset($iduser)){                               
+                    echo anchor('GestionUser', ' ','class="nav-link fa fa-user fa-2x text-primary"');  
+                } 
+                ?>           
+          </li>
+        
           <!-- Creation utilisateur -->
           <li class="nav-item">
             <?php if(isset($iduser)){                
-                echo anchor('CreateUser', ' ','class="nav-link fa fa-user-plus fa-2x"'); 
+                echo anchor('CreateUser', ' ','class="nav-link fa fa-user-plus fa-2x text-primary"'); 
             } 
             ?>
           </li>
@@ -51,24 +50,23 @@
                     <li class="nav-item"> 
             <?php
             if(isset($iduser)){                        
-                echo anchor('ModifyPassword', '  ','class="nav-link fa fa-cog fa-2x"'); 
+                echo anchor('ModifyPassword', '  ','class="nav-link fa fa-cog fa-2x text-warning"'); 
             }?>
           </li>
           
           <li class="nav-item"> 
             <?php
             if(!isset($iduser)){ 
-                echo anchor('Connexion', ' ','class="nav-link fa fa-sign-in fa-2x"'); 
+                echo anchor('Connexion', ' ','class="nav-link fa fa-sign-in fa-2x text-success"'); 
             }?>
           </li>
 
           <li class="nav-item">
             <?php if(isset($iduser)){
-            echo anchor('Connexion/deconnexion', ' ','class="nav-link fa fa-sign-out fa-2x"'); 
+            echo anchor('Connexion/deconnexion', ' ','class="nav-link fa fa-sign-out fa-2x text-danger"'); 
             }
             ?>
           </li>
         </ul>
       </div>
-    </div>
   </nav>
