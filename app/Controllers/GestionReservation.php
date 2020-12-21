@@ -14,7 +14,9 @@ class GestionReservation extends Controller{
      * Vérifie si l'utilisateur est connecté et que les champs du formulaire sont bien rempli
      * 
      * @param void
-     * @return void Si une erreur est détecté on retourne sur la vue et on affiche l'erreur. Sinon on appelle control
+     * @return string|object  
+     * - string retourne la vue
+     * - object redirige sur la Connexion et on demande à l'utilisateur de se connecter s'il ne l'est pas déja
      */
     public function index() {
         helper('form');
