@@ -27,7 +27,7 @@ class GestionUser extends Controller{
         
         $SiteReservationModel = new \App\Models\SiteReservationModel;
         if(!empty($this->request->getPost('idUtilisateur'))){
-            $SiteReservationModel->deleteReservation($this->request->getPost('idUtilisateur'));
+            $SiteReservationModel->deleteAllReservationByUser($this->request->getPost('idUtilisateur'));
             $SiteReservationModel->deleteUser($this->request->getPost('idUtilisateur'));
         }
         

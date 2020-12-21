@@ -142,7 +142,8 @@ class SiteReservationModel extends Model{
      * @return array<int,array<string,string|int>> contient les résultat de la requête
      */
     public function getLesReservationsById($id_reservation){
-        return $this->db->query("SELECT id_reservation, datedebut, nbpersonne, (SELECT nom FROM user), pension, valide FROM public.reservation "
+        return $this->db->query("SELECT id_reservation, datedebut, datefin, nbpersonne, nbpersonne, pension, menage FROM public.reservation "
+                . "INNER JOIN public.user ON public.reservation.id_user = public.user.id_user"
                 . "WHERE public.reservation.id_reservation = :id_reservation: ORDER BY valide;",['id_reservation' => $id_reservation])->getResultArray();
     }
     
@@ -166,7 +167,7 @@ class SiteReservationModel extends Model{
      * @param String $mdp Mot de passe de l'utilisateur
      * @return void
      */
-    public function updateReservation($id_user,$nom,$prenom,$mdp){
+    public function updateReservation($id_reservation, $typelogement, $dateDebut, $dateFin, $nbPersonne, $pension, $menage){
         $this->db->query("UPDATE public.user SET nom=:nom:, prenom=:prenom:,"
                 . "mdp=:mdp:, WHERE id_user=:id_user:;",['id_user' => $id_user,'nom'=>$nom,'prenom'=>$prenom,'mdp'=>$mdp]);
     }

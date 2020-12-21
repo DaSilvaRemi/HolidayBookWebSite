@@ -71,7 +71,7 @@ class BookForm extends Controller {
             return false;
         } else {
             Session::startSession();
-            $leControlSiteReservation->insertData(Session::getSessionData('idUser'));
+            $leControlSiteReservation->insertUneReservation(Session::getSessionData('idUser'));
             return true;
         }
     }

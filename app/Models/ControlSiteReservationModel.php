@@ -198,12 +198,12 @@ class ControlSiteReservationModel{
     } 
 
     /**
-     * Créer une réservation et détruit le modè
+     * Créer une réservation et détruit le modèle
      * 
      * @param int $id_user id de l'utilisateur connecté
      * @return void
      */
-    public function insertData($id_user) : void{
+    public function insertUneReservation($id_user) : void{
         $siteReservationModel = new SiteReservationModel();
         $siteReservationModel->insertReservation($this->getTypeLogement(), $id_user, $this->getDateDebut()->getDate(), $this->getDateFin()->getDate(), $this->getNbPersonne(), $this->getPension(), $this->getOption());
         unset($siteReservationModel);
