@@ -27,7 +27,14 @@
           
           <li class="nav-item">
             <?php if(isset($iduser)){                               
-                echo anchor('PageUser', ' ','class="nav-link fa fa-database fa-2x text-success"'); 
+                echo anchor('PageUser', ' ','class="nav-link fa fa-bookmark fa-2x text-success"'); 
+            } 
+            ?>
+          </li>
+          
+          <li class="nav-item">
+            <?php if(isset($iduser) && $iduser == 1){                               
+                echo anchor('GestionReservation', ' ','class="nav-link fa fa-database fa-2x text-primary"'); 
             } 
             ?>
           </li>
@@ -67,6 +74,8 @@
             }
             ?>
           </li>
+          <i class="bi bi-bookmark-check"></i>
+
         </ul>
       </div>
   </nav>
