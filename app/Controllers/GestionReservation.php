@@ -38,9 +38,7 @@ class GestionReservation extends Controller{
         else if(!empty($this->request->getPost('idReservationSuppr'))){
             $SiteReservationModel->deleteReservation($this->request->getPost('idReservationSuppr'));
         }
-        else if(!empty($this->request->getPost('idReservationModif'))){
-            return redirect()->to(site_url('ModifyReservation')); 
-        }
+        
         echo view('template/header', ['iduser' => Session::getSessionData('idUser')]);
         echo view("form/gestionreservation",['tabReservation' => $SiteReservationModel->getLesReservations()]);
         echo view('template/footer');
