@@ -7,7 +7,7 @@
 <body>
 <div class="Sejour-form">
     <?= form_open('BookForm'); ?>
-        <h2 class="text-center">Effectuer réservation</h2>       
+        <h2 class="text-center">Effectuer une réservation</h2>       
         <div class="form-group">
             <select name="typelogement" class="form-control">
         <option value="">-----Veuillez sélectionnez une option------</option>
