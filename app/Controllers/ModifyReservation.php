@@ -12,12 +12,21 @@ use \App\Models\Session;
 class ModifyReservation extends Controller{
     
     /**
-     * Vérifie si l'utilisateur est connecté et que les champs du formulaire sont bien rempli
+     * Vérifie si l'utilisateur est connecté et qu'on a bien reçu un id
      * 
+     * Nous avons trois cas possibles :
+     * -Si l'utilisateur n'est pas connecté et qu'il n'est pas admin alors il est déconnecté et redirigé sur la vue Connexion
+     * -Si l'admin a sélectionné l'action modifiée alors on l'affiche la vue modifyreservation
+     * -Si l'admin a envoyé le formulaire et que tout est bon alors on le redirige sur GestionReservation sinon on lui affiche les erreurs sur la vue
+     * -Sinon cela veut dire qu'aucune action et formulaire à été reçu alors on redirige sur GestionReservation
+     * 
+     * @var idReservationModif correspond à l'id de la réservation envoyé lorsque l'admin selectionne l'action modifiée
+     * @var idUpdateReservation correspond à l'id de la réservation envoyé lorsque l'admin envoie le formulaire de modification
      * @param void
      * @return string|object  
-     * - string retourne la vue
+     * - string retourne la vue du formulaire de modification avec ou sans erreur
      * - object redirige sur la Connexion et on demande à l'utilisateur de se connecter s'il ne l'est pas déja
+     * - object redirige sur GestionReservation si aucun id de la réservation n'est reçu
      */
     public function index() {
         helper('form');
@@ -51,14 +60,16 @@ class ModifyReservation extends Controller{
     }
     
     /**
-     * Vérifie les éventuel erreurs lors de la création de l'objet(Durée de date incorrecte ou/et nombre de personne incorrecte)
+     * Vérifie les éventuels erreurs lors de la création de l'objet(Durée de date incorrecte ou/et nombre de personne incorrecte)
      * 
      * Dans tous les cas on met à jour la BDD que sa soit avec les ancienne ou les nouvelles données
      * 
      * @param void
-     * @return void
+     * @return bool
+     * -true si aucune erreur est rencontré
+     * -false si une données est incorrecte
      */
-    private function verifFieldModif(){
+    private function verifFieldModif() : bool{
         $InfoReservation = $this->verifFieldIsSame();
         $leControlSiteReservation = new \App\Models\ControlSiteReservationModel($InfoReservation['datedebut'], $InfoReservation['datefin'], $InfoReservation['nbpersonne'],
                 $InfoReservation['typelogement'],
@@ -79,7 +90,6 @@ class ModifyReservation extends Controller{
             unset($leControlSiteReservation);
             return false;
         } else {
-            echo('Je suis la 2');
             $SiteReservationModel->updateReservation($this->request->getPost('idUpdateReservation'), $InfoReservation['datedebut'], $InfoReservation['datefin'], 
                 $InfoReservation['nbpersonne'], $InfoReservation['pension'], $InfoReservation['menage'], $InfoReservation['typelogement']);
             unset($leControlSiteReservation);
