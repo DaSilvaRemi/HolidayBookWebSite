@@ -49,7 +49,7 @@
         </div>
         
         <div class="form-group">
-            <input type="hidden" name="idUpdateReservation" value="<?php $tabInfoReservation['id_reservation'];?>">
+            <input type="hidden" name="idUpdateReservation" value="<?php echo $tabInfoReservation['id_reservation'];?>">
             <input type="submit" id="Envoyer" class="btn btn-success btn-block" value="Modifier la réservation"/>
         </div>
     </form>
