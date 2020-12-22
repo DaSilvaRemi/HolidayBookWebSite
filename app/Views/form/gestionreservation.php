@@ -37,6 +37,8 @@ and open the template in the editor.
                             echo "<td>".$LesReservations['pension']."</td>";
                             echo "<td>".$LesReservations['valide']."</td>";
                             echo "<td>";
+                            
+                            /*---------------Validation----------*/
                             //Si la réservation est en attente ou modifiée on peut alors la validée
                             if($LesReservations['valide'] == "En attente de validation" || $LesReservations['valide'] == "Modifiée"){
                                 echo form_open('GestionReservation');
@@ -45,6 +47,7 @@ and open the template in the editor.
                                 echo '</form>';
                             }
                             
+                            /*---------------Refus----------*/
                             //Si la réservation est en attente ou modifiée on peut alors la validée
                             if($LesReservations['valide'] == "En attente de validation" || $LesReservations['valide'] == "Modifiée"){
                                 echo form_open('GestionReservation');
@@ -53,19 +56,21 @@ and open the template in the editor.
                                 echo '</form>';
                             }
                            
+                            /*---------------Modification----------*/
                             //Si la réservation est en attente ou modifiée on peut alors la modifiée
                             if($LesReservations['valide'] == "En attente de validation" || $LesReservations['valide'] == "Modifiée"){
-                                echo form_open('GestionReservation');
+                                echo form_open('ModifyReservation');
                                 echo '<input name="idReservationModif" type="hidden" value="'.$LesReservations['id_reservation'].'"/>';
                                 echo form_button(array('name'=>'modifier','type'=>'submit','class'=>'btn', 'content'=>'<i class="fa fa-pencil-square-o fa-lg text-warning"></i>'));
                                 echo '</form>';
                             }
                             
+                            /*---------------Supprimer----------*/
                             //Si la réservation n'est pas valide alors on peut la supprimée
                             if($LesReservations['valide'] != "Validée"){
                                 echo form_open('GestionReservation');
                                 echo '<input name="idReservationSuppr" type="hidden" value="'.$LesReservations['id_reservation'].'"/>';
-                                echo form_button(array('nom'=>'supprimer','type'=>'submit','class'=>'btn', 'content'=>'<i class="fa fa-trash fa-lg text-danger"></i>'));
+                                echo form_button(array('name'=>'supprimer','type'=>'submit','class'=>'btn', 'content'=>'<i class="fa fa-trash fa-lg text-danger"></i>'));
                                 echo '</form>';
                                 
                             }

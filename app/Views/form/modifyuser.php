@@ -29,7 +29,7 @@ and open the template in the editor.
             <input type="hidden" name="password2" value="<?php $infoUtilisateur['mdp']?>" />
         </div>
         <div class="form-group">
-            <button type="submit" class="btn btn-primary btn-block" id="Envoyer" >Modifier</button>
+            <input type="submit" id="Envoyer" class="btn btn-success btn-block" value="Modifier l'utilisateur"/>
             <br>
             <?php echo anchor('Connexion', '<input class="btn btn-danger btn-block" value="Annuler" />'); ?>
         </div>

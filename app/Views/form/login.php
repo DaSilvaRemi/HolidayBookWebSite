@@ -21,7 +21,7 @@ and open the template in the editor.
             <input type="password" class="form-control" placeholder="Mot de passe" id="password" name="password" required="required">
         </div>
         <div class="form-group">
-            <button type="submit" class="btn btn-primary btn-block" id="Envoyer" >Connexion</button>
+            <input type="submit" id="Envoyer" class="btn btn-primary btn-block" value="Connexion"/>
         </div>
         <div class="clearfix">
              <?php if(isset($validation)){

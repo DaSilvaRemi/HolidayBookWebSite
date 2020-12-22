@@ -30,7 +30,7 @@ and open the template in the editor.
         <div class="form-group">
             <button type="submit" class="btn btn-primary btn-block" id="Envoyer" >Inscription</button>
             <br>
-            <?php echo anchor('Connexion', '<input class="btn btn-danger btn-block" value="Annuler" />'); ?>
+            <?php echo anchor('Connexion', '<input type="button" class="btn btn-danger btn-block" value="Annuler" />'); ?>
         </div>
         <div class="clearfix">
              <?php if(isset($validation)){

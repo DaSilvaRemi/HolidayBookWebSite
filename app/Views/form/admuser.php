@@ -29,7 +29,7 @@ and open the template in the editor.
             <input type="password" class="form-control" placeholder="Mot de passe" id="password" name="password" required="required">
         </div>
         <div class="form-group">
-            <button type="submit" class="btn btn-primary btn-block" id="Envoyer" >Inscription</button>
+            <input type="submit" id="Envoyer" class="btn btn-primary btn-block" value="Ajouter un utilisateur"/>
             <br>
             <?php echo anchor('Connexion', '<input class="btn btn-danger btn-block" value="Annuler" />'); ?>
         </div>

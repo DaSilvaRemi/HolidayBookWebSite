@@ -37,7 +37,7 @@
         </div>
         <div class="form-check">
             <label for="menage" class="form-check-label">
-            <input type="checkbox" name="menage" value="menage" class="form-check-input">
+                <input type="checkbox" name="menage" value="TRUE" class="form-check-input">
             Ménage fin de séjour</label>
             </div>
 
@@ -47,7 +47,7 @@
             }?>
         </div>
         <div class="form-group">
-            <button type="submit" class="btn btn-success btn-block" id="Envoyer" >Je réserve !</button>
+            <input type="submit" id="Envoyer" class="btn btn-success btn-block" value="Je réserve !"/>
         </div>
     </form>
 </div>

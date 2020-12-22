@@ -40,7 +40,7 @@ and open the template in the editor.
                             if($LesReservations['valide'] == "En attente de validation" || $LesReservations['valide'] == "Modifiée"){
                                 echo form_open('PageUser');
                                 echo '<input name="idReservation" type="hidden" value="'.$LesReservations['id_reservation'].'"/>'; 
-                                echo form_button(array('nom'=>'supprimer','type'=>'submit','class'=>'btn', 'content'=>'<i class="fa fa-times-circle fa-lg text-danger"></i>')); 
+                                echo form_button(array('name'=>'supprimer','type'=>'submit','class'=>'btn', 'content'=>'<i class="fa fa-times-circle fa-lg text-danger"></i>')); 
                                 echo "</form>";
                             }
                             else{
