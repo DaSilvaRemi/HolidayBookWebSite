@@ -141,7 +141,7 @@ class SiteReservationModel extends Model{
      * @param int $id_reservation UNIQUE KEY; Correspond à l'id de l'utilisateur
      * @return array<int,array<string,string|int>> contient les résultat de la requête
      */
-    public function getLesReservationsById($id_reservation){
+    public function getUneReservationById($id_reservation){
         return $this->db->query("SELECT id_reservation, datedebut, datefin, nbpersonne, nbpersonne, pension, menage, typelogement FROM public.reservation "
                 . "INNER JOIN public.user ON public.reservation.id_user = public.user.id_user "
                 . "WHERE public.reservation.id_reservation = :id_reservation: ORDER BY valide;",['id_reservation' => $id_reservation])->getResultArray();
