@@ -3,7 +3,6 @@
 namespace App\Controllers;
 
 use CodeIgniter\Controller;
-use \App\Models\ControlSiteReservationModel;
 use \App\Models\Session;
 
 /**
@@ -52,7 +51,7 @@ class BookForm extends Controller {
      * - false en cas d'erreur.
      */
     private function control() {
-        $leControlSiteReservation = new ControlSiteReservationModel($this->request->getPost('datedebut'), $this->request->getPost('datefin'), $this->request->getPost('nbpersonne'),
+        $leControlSiteReservation = new \App\Models\ControlSiteReservationModel($this->request->getPost('datedebut'), $this->request->getPost('datefin'), $this->request->getPost('nbpersonne'),
                 $this->request->getPost('typelogement'),
                 $this->request->getPost('pension'),
                 $this->request->getPost('menage'));
