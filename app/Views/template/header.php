@@ -9,7 +9,12 @@
  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
         
   <nav class="navbar navbar-expand-sm navbar-dark bg-dark fixed-top">
-        <?php echo anchor('Home', ' ','class="nav-link fa fa-home fa-2x text-success"'); ?>
+        <?php if(isset($iduser) && $iduser == 1){
+            echo anchor('PageAdmin', ' ','class="nav-link fa fa-home fa-2x text-primary"');
+        }else{
+            echo anchor('Home', ' ','class="nav-link fa fa-home fa-2x text-success"');
+        }
+         ?>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
           <span class="navbar-toggler-icon"></span>
         </button>
@@ -71,7 +76,7 @@
 
           <li class="nav-item">
             <?php if(isset($iduser)){
-            echo anchor('Connexion/deconnexion', ' ','class="nav-link fa fa-sign-out fa-2x text-danger"'); 
+                echo anchor('Connexion/deconnexion', ' ','class="nav-link fa fa-sign-out fa-2x text-danger"'); 
             }
             ?>
           </li>

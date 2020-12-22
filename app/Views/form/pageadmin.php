@@ -7,6 +7,7 @@ and open the template in the editor.
 <html>
     <head>
         <title>Gestion de réservations</title>
+        <link rel="stylesheet" href="<?= base_url('css/form.css'); ?>"> 
     </head>
     <body>
         <?= form_open('PageAdmin'); ?>
@@ -15,39 +16,24 @@ and open the template in the editor.
                 
                 <H1>Gestion de réservations</H1>
             </div>
-            <div class="row">
-                  <?= form_open('PageAdmin'); ?>
-                <table class="table">
-                    <tr>
-                    <th scope="col">Nom</th>
-                    <th scope="col">Date début</th>
-                    <th scope="col">Nombre de personnes</th>
-                    <th scope="col">Pension</th>
-                    <th scope="col">Etat de la réservation</th>
-                    <th scope="col">Annuler</th>
-                    </tr>
-                    
-                    <?php
-                    if(isset($tabReservation)){
-                        foreach ($tabReservation as $LesReservations) {
-                            echo "<tr scope='row'>";
-                            echo "<td>".$LesReservations['nom']."</td>";
-                            echo "<td>".$LesReservations['datedebut']."</td>";                        
-                            echo "<td>".$LesReservations['nbpersonne']."</td>";
-                            echo "<td>".$LesReservations['pension']."</td>";
-                            echo "<td>".$LesReservations['valide']."</td>";
-                            echo "<td>";
-                            echo form_button(array('name'=>'modifier','type'=>'submit','class'=>'btn btn-warning', 'content'=>'<i class="fa fa-pencil-square-o"></i>'));
-                            echo form_button(array('nom'=>'refuser','type'=>'submit','class'=>'btn btn-danger', 'content'=>'<i class="fa fa-trash"></i>'));
-                            echo "</td>";
-                            echo "</tr>";
-                        }  
-                    }
-                    else {
-                        echo 'Erreur : Champs Vide !!!';
-                    }
-                ?>     
-                </table>
+            <div class="container-fluid grid-home text-right">
+                <h1 class="text-center">Page Admin</h1>
+                <div class="row">
+                    <div class="text-center col bg-light "><?php echo anchor('Home', ' ','class="fa fa-home fa-10x text-success"'); ?></div>
+                    <div class="text-center col bg-light"><?php echo anchor('GestionUser', ' ','class="fa fa-user fa-10x text-primary"'); ?></div>
+                    <div class="text-center col bg-light"><?php echo anchor('AddUserAdmin', ' ','class="fa fa-user-plus fa-10x text-primary"'); ?></div>
+                </div>
+                <div class="row">
+                    <div class="text-center col bg-light"><?php echo anchor('BookForm', ' ','class="fa fa-search fa-10x text-success"'); ?></div>
+                    <div class="text-center col bg-light"><?php echo anchor('GestionReservation', ' ','class="fa fa-database fa-10x text-primary"'); ?></div>
+                    <div class="text-center col bg-light"><?php echo anchor('ModifyPassword', '  ','class="fa fa-cog fa-10x text-warning"'); ?></div>
+                </div>
+                <div class="row">
+                    <div class="text-center col bg-light"></div>
+                    <div class="text-center col bg-light"><?php echo anchor('Connexion/deconnexion', ' ','class="nav-link fa fa-sign-out fa-10x text-danger"');  ?></div>
+                    <div class="text-center col bg-light"></div>
+                </div>
+            </div>
             </div>
     </body>
 </html>
