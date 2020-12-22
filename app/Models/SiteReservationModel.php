@@ -161,10 +161,13 @@ class SiteReservationModel extends Model{
     /**
      * Modifie les informations utilisateurs
      * 
-     * @param int $id_user UNIQUE KEY; Correspond à l'id de l'utilisateur
-     * @param String $nom Nom de l'utilisateur
-     * @param String $prenom Prénom de l'utilisateur
-     * @param String $mdp Mot de passe de l'utilisateur
+     * @param int $id_reservation UNIQUE KEY; Correspond à l'id de l'utilisateur
+     * @param string $typelogement Nom de l'utilisateur
+     * @param string $dateDebut Prénom de l'utilisateur
+     * @param string $dateFin Mot de passe de l'utilisateur
+     * @param int $nbpersonne Mot de passe de l'utilisateur
+     * @param string $pension Mot de passe de l'utilisateur
+     * @param bool $menage Mot de passe de l'utilisateur
      * @return void
      */
     public function updateReservation($id_reservation, $typelogement, $dateDebut, $dateFin, $nbpersonne, $pension, $menage){
@@ -242,8 +245,7 @@ class SiteReservationModel extends Model{
      *Recupere les infos utilisateurs par rapport a son id
      * 
      * @param int $id_user UNIQUE KEY; Correspond à l'id de l'utilisateur
-     * @return array<int,array<string,int>>|bool
-     * -array<int,array<string,int>> contient les résultat de la requête
+     * @return array<int,array<string,int>> contient les résultat de la requête
      */
     public function getInfoUser($id_user){
         return $this->db->query("SELECT nom,prenom,mdp FROM public.user WHERE id_user=:id_user:",["id_user"=> $id_user])->getResultArray();
@@ -275,7 +277,7 @@ class SiteReservationModel extends Model{
      /**
      * Retourne le nombre de mot de passe
      * 
-     * @param int $idUser UNIQUE KEY; Correspond à l'id de l'utilisateur
+     * @param int $id_user UNIQUE KEY; Correspond à l'id de l'utilisateur
      * @param string $mdp Correspond au mot de passe
      * @return array<int,array<string,string|int>> contient les résultat de la requête
      */
@@ -332,9 +334,9 @@ class SiteReservationModel extends Model{
      * Modifie les informations utilisateurs
      * 
      * @param int $id_user UNIQUE KEY; Correspond à l'id de l'utilisateur
-     * @param String $nom Nom de l'utilisateur
-     * @param String $prenom Prénom de l'utilisateur
-     * @param String $mdp Mot de passe de l'utilisateur
+     * @param string $nom Nom de l'utilisateur
+     * @param string $prenom Prénom de l'utilisateur
+     * @param string $mdp Mot de passe de l'utilisateur
      * @return void
      */
     public function updateInfoUser($id_user,$nom,$prenom,$mdp){
