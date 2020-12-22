@@ -138,11 +138,11 @@ class SiteReservationModel extends Model{
     /**
      * Retourne toutes les réservations d'un utilisateur
      * 
-     * @param int $id_user UNIQUE KEY; Correspond à l'id de l'utilisateur
+     * @param int $id_reservation UNIQUE KEY; Correspond à l'id de l'utilisateur
      * @return array<int,array<string,string|int>> contient les résultat de la requête
      */
     public function getLesReservationsById($id_reservation){
-        return $this->db->query("SELECT id_reservation, datedebut, datefin, nbpersonne, nbpersonne, pension, menage FROM public.reservation "
+        return $this->db->query("SELECT id_reservation, datedebut, datefin, nbpersonne, nbpersonne, pension, menage, typelogement FROM public.reservation "
                 . "INNER JOIN public.user ON public.reservation.id_user = public.user.id_user "
                 . "WHERE public.reservation.id_reservation = :id_reservation: ORDER BY valide;",['id_reservation' => $id_reservation])->getResultArray();
     }
@@ -161,19 +161,19 @@ class SiteReservationModel extends Model{
     /**
      * Modifie les informations utilisateurs
      * 
-     * @param int $id_reservation UNIQUE KEY; Correspond à l'id de l'utilisateur
-     * @param string $typelogement Nom de l'utilisateur
-     * @param string $dateDebut Prénom de l'utilisateur
-     * @param string $dateFin Mot de passe de l'utilisateur
-     * @param int $nbpersonne Mot de passe de l'utilisateur
-     * @param string $pension Mot de passe de l'utilisateur
-     * @param bool $menage Mot de passe de l'utilisateur
+     * @param int $id_reservation UNIQUE KEY; Correspond à l'id de la réservation
+     * @param string $dateDebut Date en format YYYY-MM-DD 
+     * @param string $dateFin Date en format YYYY-MM-DD 
+     * @param int $nbpersonne
+     * @param string $pension Correspond au type de pension
+     * @param bool $menage Correspond à option
+     * @param string $typelogement UNIQUE KEY; type du logement
      * @return void
      */
-    public function updateReservation($id_reservation, $typelogement, $dateDebut, $dateFin, $nbpersonne, $pension, $menage){
-        $this->db->query("UPDATE public.reservation SET typelogement = :typelogement:, datedebut = :datedebut:, dateFin = :datefin:, nbpersonne = :nbpersonne:,"
-                . "pension = :pension:, menage = :menage:, valide = :valide: WHERE id_reservation = :id_reservation:;",['id_reservation' => $id_reservation, 
-                    'typelogement'=>$typelogement, 'dateDebut'=>$dateDebut, 'dateFin'=>$dateFin, 'nbpersonne'=>$nbpersonne, 'pension'=>$pension, 'menage'=>$menage, 
+    public function updateReservation($id_reservation, $dateDebut, $dateFin, $nbpersonne, $pension, $menage, $typelogement){
+        $this->db->query("UPDATE public.reservation SET datedebut = :datedebut:, datefin = :datefin:, nbpersonne = :nbpersonne:, pension = :pension:, menage = :menage:, "
+                . "valide = :valide:, typelogement = :typelogement: WHERE id_reservation = :id_reservation:;",['id_reservation' => $id_reservation, 
+                    'datedebut'=>$dateDebut, 'datefin'=>$dateFin, 'nbpersonne'=>$nbpersonne, 'pension'=>$pension, 'menage'=>$menage, 'typelogement'=>$typelogement,
                     'valide' => 'Modifiée']);
     }
     
@@ -186,7 +186,7 @@ class SiteReservationModel extends Model{
      * @param string dateFin Date en format YYYY-MM-DD 
      * @param int nbPersonne
      * @param string $pension Correspond au type de pension
-     * @param string $menage Correspond à option n
+     * @param string $menage Correspond à option
      * @return void
      */
     public function insertReservation($typelogement, $id_user,$dateDebut, $dateFin, $nbPersonne, $pension, $menage) : void{
