@@ -248,7 +248,7 @@ class SiteReservationModel extends Model{
      * @return array<int,array<string,int>> contient les résultat de la requête
      */
     public function getInfoUser($id_user){
-        return $this->db->query("SELECT nom,prenom,mdp FROM public.user WHERE id_user=:id_user:",["id_user"=> $id_user])->getResultArray();
+        return $this->db->query("SELECT nom,prenom,mdp, id_user FROM public.user WHERE id_user=:id_user:",["id_user"=> $id_user])->getResultArray();
     }
     
     /**
@@ -340,8 +340,7 @@ class SiteReservationModel extends Model{
      * @return void
      */
     public function updateInfoUser($id_user,$nom,$prenom,$mdp){
-        $this->db->query("UPDATE public.user SET nom=:nom:, prenom=:prenom:,"
-                . "mdp=:mdp:, WHERE id_user=:id_user:;",['id_user' => $id_user,'nom'=>$nom,'prenom'=>$prenom,'mdp'=>$mdp]);
+        $this->db->query('UPDATE public.user SET nom=:nom:, prenom=:prenom:,  mdp=:mdp: WHERE id_user=:id_user:;',['id_user' => $id_user,'nom'=>$nom,'prenom'=>$prenom,'mdp'=>$mdp]);
     }
     
      /**
@@ -351,7 +350,7 @@ class SiteReservationModel extends Model{
      * @return void
      */
     public function deleteUser($id_user){
-        $this->db->query("DELETE FROM public.user WHERE id_user=:id_user:;",["id_user" => $id_user]);
+        $this->db->query('DELETE FROM public.user WHERE id_user=:id_user:;',['id_user' => $id_user]);
     } 
     
 }

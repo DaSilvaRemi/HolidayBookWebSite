@@ -31,16 +31,17 @@ and open the template in the editor.
                                 echo "<tr scope='row'>";
                                 echo "<td>" . $LesUtilisateurs['nom'] . " - " . $LesUtilisateurs['prenom'] . "</td>";
                                 echo "<td>" . $LesUtilisateurs['login'] . "</td>";
-                                echo "<td>";
-                                echo form_open('GestionUser');
-                                echo anchor('AddUserAdmin', '<button class="btn btn-warning fa fa-pencil-square-o"/>');
+                                echo '<td><div class="row">';
+                                echo form_open('ModifyUser');
+                                echo '<input name="idUtilisateur" type="hidden" value="' . $LesUtilisateurs['id_user'] . '"/>';
+                                echo anchor('AddUserAdmin', '<button class="btn fa fa-pencil-square-o fa-lg text-warning"/>');
                                 echo "</form>";
 
                                 echo form_open('GestionUser');
                                 echo '<input name="idUtilisateur" type="hidden" value="' . $LesUtilisateurs['id_user'] . '"/>';
-                                echo form_button(array('nom' => 'supprimerUser', 'type' => 'submit', 'class' => 'btn btn-danger', 'content' => '<i class="fa fa-trash"></i>'));
+                                echo form_button(array('nom' => 'supprimerUser', 'type' => 'submit', 'class' => 'btn', 'content' => '<i class="fa fa-trash fa-lg text-danger"></i>'));
                                 echo "</form>";
-                                echo "</td>";
+                                echo '</row></td>';
                                 echo "</tr>";
                             }
                         }

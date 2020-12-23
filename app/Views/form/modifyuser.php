@@ -5,37 +5,46 @@ and open the template in the editor.
 -->
 <!DOCTYPE html>
 <html lang="fr">
-<head>
-<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-<title>INSCRIPTION CVVEN</title>
-<link rel="stylesheet" href="<?= base_url('css/form.css'); ?>"> 
+    <head>
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+        <title>INSCRIPTION CVVEN</title>
+        <link rel="stylesheet" href="<?= base_url('css/form.css'); ?>"> 
 
-</head>
-<body>
-<div class="register-form">
-    <?= form_open('CreateUser'); ?>
-        <h2 class="text-center">Modification administrateur</h2>       
-        <div class="form-group">
-            <input type="text" class="form-control" placeholder="Nom" id="nom" name="nom" value="<?php $infoUtilisateur['nom']?>" required="required">
+    </head>
+    <body>
+        <div class="register-form">
+            <div class="row">
+                <h2 class="text-center">Modification administrateur</h2>       
+
+                <table class="table table-bordered table-hover">
+                    <tr class="thead-light" >
+                        <th scope="col">Nom</th>
+                        <th scope="col">Prenom</th>
+                        <th scope="col">Mot de passe</th>
+                        <th scope="col">Valider modifications</th>
+                        <?= form_open('ModifyUser'); ?>
+                        <?php
+                        if (isset($infoUser)) {
+                            foreach ($infoUser as $user) {
+                                if (isset($user['id_user'])) {
+                                    echo "<form><tr scope='row'>";
+                                    echo '<td><input type="text" class="form-control" placeholder="Nom" id="nom" name="nom" value="' . $user['nom'] . '" required="required"></td>';
+                                    echo '<td><input type="text" class="form-control" placeholder="Prenom" id="prenom" name="prenom" value="' . $user['prenom'] . '" required="required"></td>';
+                                    echo '<td><input type="password" class="form-control" placeholder="Mot de passe" id="password" name="password"></td>';
+
+                                    echo '<td><input type="hidden" name="idModifUser" value="' . $user['id_user'] . '" />'
+                                    . form_button(array('nom' => 'supprimerUser', 'type' => 'submit', 'class' => 'btn btn-success', 'content' => '<i class="fa fa-check"></i>'));
+                                    echo "</form>";
+                                    echo "</tr>";
+                                }
+                            }
+                        } else {
+                            echo 'Aucune information reçu !!!';
+                        }
+                        ?>
+                </table>
+            </div>
         </div>
-          <div class="form-group">
-            <input type="text" class="form-control" placeholder="Prenom" id="prenom" name="prenom" value="<?php $infoUtilisateur['prenom']?>" required="required">
-        </div>
-          <div class="form-group">
-            <input type="text" class="form-control" placeholder="Pseudo" id="user" name="user" value="<?php $infoUtilisateur['login']?>" required="required">
-        </div>
-        <div class="form-group">
-            <input type="password" class="form-control" placeholder="Mot de passe" id="password" name="password">
-            <input type="hidden" name="password2" value="<?php $infoUtilisateur['mdp']?>" />
-        </div>
-        <div class="form-group">
-            <input type="submit" id="Envoyer" class="btn btn-success btn-block" value="Modifier l'utilisateur"/>
-            <br>
-            <?php echo anchor('Connexion', '<input class="btn btn-danger btn-block" value="Annuler" />'); ?>
-        </div>
-        <div class="clearfix">
-        </div>
-    </form>
-</div>
-</body>
+    </body>
 </html>
+

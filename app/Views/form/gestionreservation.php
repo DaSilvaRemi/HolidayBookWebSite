@@ -36,7 +36,7 @@ and open the template in the editor.
                             echo "<td>".$LesReservations['nbpersonne']."</td>";
                             echo "<td>".$LesReservations['pension']."</td>";
                             echo "<td>".$LesReservations['valide']."</td>";
-                            echo "<td>";
+                            echo '<td><div class="row">';
                             
                             /*---------------Validation----------*/
                             //Si la réservation est en attente ou modifiée on peut alors la validée
@@ -74,7 +74,7 @@ and open the template in the editor.
                                 echo '</form>';
                                 
                             }
-                            echo "</td>";
+                            echo '</div></td>';
                             echo "</tr>";   
                         }  
                     }

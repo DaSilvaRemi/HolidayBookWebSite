@@ -30,12 +30,11 @@ class ModifyPassword extends Controller{
             return redirect()->to(site_url('Connexion/deconnexion')); 
         }
         
-        if (!$this->validate(['password' => 'required|min_length[4]|max_length[20]','confirmPassword' => 'required|min_length[4]|max_length[30]'],
-        ['password' => ['required' => 'Merci d\'indiquer votre mot de passe.', 'min_length' => 'Merci d\'indiquer un mot de passe d\'au moins 4 caractère', 
-            'max_length' => 'La longueur du mot de passe ne peut pas dépasser 20 caractère'],
-            'confirmPassword' => ['required' => 'Merci de confirmer votre mot de passe','min_length' => 'La confirmation du mot de passe doit avoir au moins 4 caractère', 
-            'max_length' => 'La longueur du mot de passe ne peut pas dépasser 30 caractère']]))
-        {
+        if (!$this->validate(['password' => 'required|min_length[4]|max_length[20]', 'confirmPassword' => 'required|min_length[4]|max_length[30]'],
+                        ['password' => ['required' => 'Merci d\'indiquer votre mot de passe.', 'min_length' => 'Merci d\'indiquer un mot de passe d\'au moins 4 caractère',
+                                'max_length' => 'La longueur du mot de passe ne peut pas dépasser 20 caractère'],
+                            'confirmPassword' => ['required' => 'Merci de confirmer votre mot de passe', 'min_length' => 'La confirmation du mot de passe doit avoir au moins 4 caractère',
+                                'max_length' => 'La longueur du mot de passe ne peut pas dépasser 30 caractère']])) {
             echo view('template/header',['iduser' => Session::getSessionData('idUser')]);
             echo view('form/modifypassword', ['validation' => $this->validator]);
             echo view('template/footer');
