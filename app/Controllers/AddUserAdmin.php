@@ -11,8 +11,17 @@ use \App\Models\Session;
  * and open the template in the editor.
  */
 
+/**
+ * Classe technique permettant l'ajout d'un utilisateur
+ */
 class AddUserAdmin extends Controller {
 
+    /**
+     * Vérifie si l'utilisateur est connecté et qu'il est admin, et que les champs du formulaire sont bien rempli
+     * 
+     * @param void
+     * @return string Si une erreur est détecté on retourne sur la vue et on affiche l'erreur. Sinon on appelle control
+     */
     public function index() {
         helper('form');
 
@@ -41,6 +50,12 @@ class AddUserAdmin extends Controller {
         }
     }
 
+    /**
+     * Vérifie si le compte existe ou pas sinon ont crée le compte
+     * 
+     * @param void
+     * @return string retourne la vue de connexion avec ou sans les erreur
+     */
     private function verifyLoginExistAdmin() {
         $SiteReservationModel = new \App\Models\SiteReservationModel();
         if (intval($SiteReservationModel->countUserLogin($this->request->getPost('user'))[0]['count']) != 0) {

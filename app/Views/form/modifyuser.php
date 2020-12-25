@@ -7,14 +7,14 @@ and open the template in the editor.
 <html lang="fr">
     <head>
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-        <title>INSCRIPTION CVVEN</title>
+        <title>Modifier l'utilisateur</title>
         <link rel="stylesheet" href="<?= base_url('css/form.css'); ?>"> 
 
     </head>
     <body>
         <div class="register-form">
             <div class="row">
-                <h2 class="text-center">Modification administrateur</h2>       
+                <h2 class="text-center">Modifier l'utilisateur</h2>       
 
                 <table class="table table-bordered table-hover">
                     <tr class="thead-light" >

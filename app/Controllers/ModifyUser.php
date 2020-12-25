@@ -10,14 +10,26 @@ use \App\Models\Session;
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
+/**
+ * Classe technique permettant de modifier un utilisateur
+ * 
+ * @author Mathieu
+ */
 class ModifyUser extends Controller {
 
+    /**
+     * Vérifie si l'utilisateur est connecté et qu'il a les permissions, et que les champs du formulaire sont bien rempli
+     * 
+     * @param void
+     * @return string|object
+     * -string retourne la vue avec ou sans les erreurs
+     * -object redirige sur la Connexion et on demande à l'utilisateur de se connecter s'il ne l'est pas déja
+     */
     public function index() {
         helper('form');
         Session::startSession();
         if (!Session::verifySession() || Session::getSessionData('idUser') != 1) {
-            return redirect()->to(site_url('Connexion'));
+            return redirect()->to(site_url('Connexion/deconnexion'));
         }
 
         $SiteReservationModel = new \App\Models\SiteReservationModel;
@@ -33,7 +45,12 @@ class ModifyUser extends Controller {
         }
     }
     
-    
+    /**
+     * Met à jour les données de l'utilisateur
+     *  
+     * @uses verifyFields Vérifie les champs
+     * @return bool
+     */
     private function updateUser(): bool {
         $SiteReservationModel = new \App\Models\SiteReservationModel;
         $NewInfoUser = $this->verifyFields();
@@ -41,8 +58,14 @@ class ModifyUser extends Controller {
         return true;
     }
     
-    
-
+    /**
+     * Vérifie si les champs sont remplis et si ils sont les mêmes
+     * 
+     * Lorsqu'un champs entré est différent de celui de la BDD il est remplacé.
+     * 
+     * @param void
+     * @return array<String,mixed>   
+     */
     private function verifyFields(): array {
         $SiteReservationModel = new \App\Models\SiteReservationModel;
         $InfoUser = $SiteReservationModel->getInfoUSer($this->request->getPost('idModifUser'))[0];

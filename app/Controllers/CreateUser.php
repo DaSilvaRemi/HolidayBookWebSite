@@ -15,9 +15,7 @@ class CreateUser extends Controller {
      * Vérifie si les champs manquant du formulaire sont bien rempli
      * 
      * @param void
-     * @return string|object  
-     * - string retourne la vue avec les erreurs
-     * - object redirige sur le controlleur verifyLoginExist.
+     * @return string Si une erreur est détecté on retourne sur la vue et on affiche l'erreur. Sinon on appelle control
      */
     public function index() {
         helper('form');
@@ -44,7 +42,7 @@ class CreateUser extends Controller {
     }
 
     /**
-     * Vérifie si le compte existe ou pas sinon onc crée le compte
+     * Vérifie si le compte existe ou pas sinon ont crée le compte
      * 
      * @param void
      * @return string retourne la vue de connexion avec ou sans les erreur

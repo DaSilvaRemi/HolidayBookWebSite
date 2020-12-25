@@ -8,14 +8,14 @@ and open the template in the editor.
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-<title>INSCRIPTION CVVEN</title>
+<title>Ajouter un utilisateur</title>
 <link rel="stylesheet" href="<?= base_url('css/form.css'); ?>"> 
 
 </head>
 <body>
 <div class="register-form">
     <?= form_open('AddUserAdmin'); ?>
-        <h2 class="text-center">Inscription CVVEN</h2>       
+        <h2 class="text-center">Ajouter un utilisateur</h2>       
         <div class="form-group">
             <input type="text" class="form-control" placeholder="Nom" id="nom" name="nom" required="required">
         </div>

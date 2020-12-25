@@ -10,7 +10,7 @@ use \App\Models\Session;
 class Home extends BaseController
 {
         /**
-        * Vérifie si le compte existe ou pas sinon onc crée le compte
+        * Affiche la page d'acceuil avec l'utilisateur connecté ou non
         * 
         * @param void
         * @return string retourne la page d'acceuil
