@@ -5,7 +5,7 @@ use \CodeIgniter\Controller;
 use \App\Models\Session;
 
 /**
- * Description of ModifyReservation
+ * Classe technique permettant de modifier une réservation
  *
  * @author remi
  */
