@@ -28,7 +28,6 @@ and open the template in the editor.
                     if(isset($tabReservation)){
                         foreach ($tabReservation as $LesReservations) {
                             echo "<tr scope='row'>";
-                            //echo "<td><input type='hidden' name='idReservation' value='".$LesReservations['id_reservation']."'/></td>";
                             echo "<td>".$LesReservations['nom']."</td>";
                             echo "<td>".$LesReservations['datedebut']."</td>";                        
                             echo "<td>".$LesReservations['nbpersonne']."</td>";
@@ -36,7 +35,6 @@ and open the template in the editor.
                             echo "<td>".$LesReservations['valide']."</td>";
                             echo "<td>";
                             echo "";
-                            //echo form_button(array('name'=>'modifier','type'=>'submit','class'=>'btn btn-warning', 'content'=>'<i class="fa fa-pencil-square-o"></i>'));
                             if($LesReservations['valide'] == "En attente de validation" || $LesReservations['valide'] == "Modifiée"){
                                 echo form_open('PageUser');
                                 echo '<input name="idReservation" type="hidden" value="'.$LesReservations['id_reservation'].'"/>'; 
