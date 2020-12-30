@@ -14,7 +14,7 @@
 
         <div class="col-lg-3 col-md-6 mb-4">
             <div class="card h-100">
-                <img class="card-img-top" src="../img/italie.jpg" alt="">
+                <img class="card-img-top" src="<?= base_url("img/italie.jpg") ?>" alt="">
                 <div class="card-body">
                     <h4 class="card-title">Appartement Italien</h4>                
                 </div>
@@ -23,10 +23,9 @@
                 </div>
             </div>
         </div>
-
         <div class="col-lg-3 col-md-6 mb-4">
             <div class="card h-100">
-                <img class="card-img-top" src="../img/hotel.jpg" alt="">
+                <img class="card-img-top" src="<?= base_url("img/hotel.jpg") ?>" alt="">
                 <div class="card-body">
                     <h4 class="card-title">Chambre Double</h4>
                 </div>
@@ -35,10 +34,9 @@
                 </div>
             </div>
         </div>
-
         <div class="col-lg-3 col-md-6 mb-4">
             <div class="card h-100">
-                <img class="card-img-top" src="../img/PIC10.jpg" alt="">
+                <img class="card-img-top" src="<?= base_url("img/PIC10.jpg") ?>" alt="">
                 <div class="card-body">
                     <h4 class="card-title">Hotel Arueco</h4>
                 </div>
@@ -47,10 +45,9 @@
                 </div>
             </div>
         </div>
-
         <div class="col-lg-3 col-md-6 mb-4">
             <div class="card h-100">
-                <img class="card-img-top" src="../img/mac3.jpg" alt="">
+                <img class="card-img-top" src="<?= base_url("img/mac3.jpg") ?>" alt="">
                 <div class="card-body">
                     <h4 class="card-title">Villa Corleane</h4>                
                 </div>
@@ -67,11 +64,11 @@
         <h2 class="h3 font-weight-bold">Réservation de séjours</h2>
         <div class="row">
             <div class="col-lg-10 mb-4">
-                <p class="font-italic text-muted">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor.</p>
-                <p class="font-italic text-muted">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor.</p>
+                <p class="font-italic text-muted">Vous revez d'évasions, vous souhaitez découvrir de nouveux paysage et de nouvelles cultures ou vivre un séjour innoubliable que ce soit seul, à deux ou en famille</p>
+                <p class="font-italic text-muted">Alors n'hésitez plus réservez chez CVVEN disposant d'une large gamme de prix adaptés à tous les budgets.</p>
             </div>
             <div class="col-lg-8">
-                <p class="font-italic text-muted">Lorem ipsum dolor sit amet, consectetur <strong class="font-weight-bold text-dark">adipisicing elit, sed </strong>do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in <strong class="font-weight-bold text-dark">reprehenderit in voluptate </strong>velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+                <p class="font-italic text-muted">Alors qu'attendez vous pour <strong class="font-weight-bold text-dark">réservez !</strong> On se dit à très vite chez les villages de CVVEN.</p>
             </div>
         </div>
     </div>
