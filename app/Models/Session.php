@@ -8,7 +8,12 @@ namespace App\Models;
  */
 abstract class Session {
     
+    /**
+     *
+     * @var \Config\Services::session() 
+     */
     private static $session;
+    
     /**
      * Démarre une session
      * 

@@ -28,14 +28,14 @@ class ModifyUser extends Controller {
     public function index() {
         helper('form');
         Session::startSession();
-        if (!Session::verifySession() || Session::getSessionData('idUser') != 1) {
+        if (!Session::verifySession() || Session::getSessionData('isAdmin') != 't') {
             return redirect()->to(site_url('Connexion/deconnexion'));
         }
 
         $SiteReservationModel = new \App\Models\SiteReservationModel;
         if (!empty($this->request->getPost('idUtilisateur'))) {
             $SiteReservationModel = new \App\Models\SiteReservationModel;
-            echo view('template/header', ['iduser' => Session::getSessionData('idUser')]);
+            echo view('template/header', ['iduser' => Session::getSessionData('idUser'), 'isAdmin' => Session::getSessionData('isAdmin')]);
             echo view("form/modifyuser", ['infoUser' => $SiteReservationModel->getInfoUser($this->request->getPost('idUtilisateur'))]);
             echo view('template/footer');
         } else if (!empty($this->request->getPost('idModifUser'))) {
@@ -68,7 +68,7 @@ class ModifyUser extends Controller {
      */
     private function verifyFields(): array {
         $SiteReservationModel = new \App\Models\SiteReservationModel;
-        $InfoUser = $SiteReservationModel->getInfoUSer($this->request->getPost('idModifUser'))[0];
+        $InfoUser = $SiteReservationModel->getInfoUser($this->request->getPost('idModifUser'))[0];
         $newInfoUser = [];
 
         //nom 
@@ -86,7 +86,7 @@ class ModifyUser extends Controller {
         }
 
         //motDePasse
-        if (!empty($this->request->getPost('password')) && $InfoUser['mdp'] != $this->request->getPost('password')) {
+        if (!empty($this->request->getPost('password')) && $InfoUser['mdp'] != md5($this->request->getPost('password'))) {
             $newInfoUser['password'] = $this->request->getPost('password');
         } else {
             $newInfoUser['password'] = $InfoUser['mdp'];

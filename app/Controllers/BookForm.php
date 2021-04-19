@@ -34,7 +34,7 @@ class BookForm extends Controller {
                             'typelogement' => ['required' => 'Veuillez selectionnez un type de séjour']])) {
             echo($this->request->getPost('pension'));
             $SiteReservationModel = new \App\Models\SiteReservationModel();
-            echo view('template/header', ['iduser' => Session::getSessionData('idUser')]);
+            echo view('template/header', ['iduser' => Session::getSessionData('idUser'), 'isAdmin' => Session::getSessionData('isAdmin')]);
             echo view('form/book', ['validation' => $this->validator, 'data' => $SiteReservationModel->getTypeLogement()]);
             echo view('template/footer');
         } else {
@@ -53,12 +53,17 @@ class BookForm extends Controller {
      * - false en cas d'erreur.
      */
     private function control() {
-        $leControlSiteReservation = new \App\Models\ControlSiteReservationModel($this->request->getPost('datedebut'), $this->request->getPost('datefin'), $this->request->getPost('nbpersonne'),
-                $this->request->getPost('typelogement'),
-                $this->request->getPost('pension'),
-                $this->request->getPost('menage'));
+        $leControlSiteReservation = new \App\Models\ControlSiteReservationModel
+                (
+                    $this->request->getPost('datedebut'), 
+                    $this->request->getPost('datefin'), 
+                    $this->request->getPost('nbpersonne'),
+                    $this->request->getPost('typelogement'),
+                    $this->request->getPost('pension'),
+                    $this->request->getPost('menage')
+                );
 
-        if ($leControlSiteReservation->Erreur()) {
+        if ($leControlSiteReservation->erreur()) {
             $tabException = $leControlSiteReservation->getException();
             foreach ($tabException as $Exception) {
                 foreach ($Exception as $errorField => $errorValue) {
@@ -66,7 +71,7 @@ class BookForm extends Controller {
                 }
             }
             $SiteReservationModel = new \App\Models\SiteReservationModel();
-            echo view('template/header', ['iduser' => Session::getSessionData('idUser')]);
+            echo view('template/header', ['iduser' => Session::getSessionData('idUser'), 'isAdmin' => Session::getSessionData('isAdmin')]);
             echo view('form/book', ['validation' => $this->validator, 'data' => $SiteReservationModel->getTypeLogement()]);
             echo view('template/footer');
             return false;

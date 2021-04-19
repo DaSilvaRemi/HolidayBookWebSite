@@ -9,7 +9,7 @@
  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
         
   <nav class="navbar navbar-expand-sm navbar-dark bg-dark fixed-top">
-        <?php if(isset($iduser) && $iduser == 1){
+        <?php if(isset($iduser) && isset($isAdmin) && $isAdmin == 't'){
             echo anchor('PageAdmin', ' ','class="nav-link fa fa-home fa-2x text-primary"');
         }else{
             echo anchor('Home', ' ','class="nav-link fa fa-home fa-2x text-success"');
@@ -39,14 +39,14 @@
           </li>
           
           <li class="nav-item">
-            <?php if(isset($iduser) && $iduser == 1){                               
+            <?php if(isset($iduser) && isset($isAdmin) && $isAdmin == 't'){                               
                 echo anchor('GestionReservation', ' ','class="nav-link fa fa-database fa-2x text-primary"'); 
             } 
             ?>
           </li>
           
           <li class="nav-item">
-                <?php if(isset($iduser) && $iduser == 1){                               
+                <?php if(isset($iduser) && isset($isAdmin) && $isAdmin == 't'){                               
                     echo anchor('GestionUser', ' ','class="nav-link fa fa-user fa-2x text-primary"');  
                 } 
                 ?>           
@@ -54,7 +54,7 @@
         
           <!-- Creation utilisateur -->
           <li class="nav-item">
-            <?php if(isset($iduser) && $iduser == 1){                
+            <?php if(isset($iduser) && isset($isAdmin) && $isAdmin == 't'){                
                 echo anchor('AddUserAdmin', ' ','class="nav-link fa fa-user-plus fa-2x text-primary"'); 
             } 
             ?>

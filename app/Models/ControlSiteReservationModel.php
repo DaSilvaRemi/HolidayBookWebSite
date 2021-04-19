@@ -130,7 +130,7 @@ class ControlSiteReservationModel{
      * @param void
      * @return bool $erreur
      */
-    public function Erreur() : bool{
+    public function erreur() : bool{
         $erreur = false;
         if(!$this->controlDuree($this->getDateDebut(), $this->getDateFin())){
             $this->addException(array("datedebut" => "La durée du séjour est incorrecte!")); 
@@ -180,7 +180,7 @@ class ControlSiteReservationModel{
                 unset($siteReservationModel);
                 return false;
         }
-        }
+    }
     
      /**
      * Controle la durée du séjour s'il est égale à 7 jours

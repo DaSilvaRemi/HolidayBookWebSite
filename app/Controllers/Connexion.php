@@ -59,6 +59,7 @@ class Connexion extends Controller{
         else{
             Session::initSession($SiteReservationModel->getIdUser($this->request->getPost('user'))[0]['id_user']);
             Session::setSessionData('nom', $SiteReservationModel->getNameUser($this->request->getPost('user'))[0]['nom']);
+            Session::setSessionData('isAdmin', $SiteReservationModel->getIsAdmin(Session::getSessionData('idUser'))[0]['is_admin']);
             return true; 
         }
     }
