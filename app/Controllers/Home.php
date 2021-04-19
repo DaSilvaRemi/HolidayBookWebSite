@@ -19,10 +19,14 @@ class Home extends BaseController
 	{    
             Session::startSession();
             $iduser = NULL;
+            $idAdmin = NULL;
             if(Session::verifySession()){
                 $iduser = Session::getSessionData('idUser');
+                $idAdmin = Session::getSessionData('isAdmin');
             }
-            echo view('template/header',['iduser' => $iduser]);
+            var_dump($iduser);
+            var_dump($idAdmin);
+            echo view('template/header',['iduser' => $iduser, 'isAdmin' => $idAdmin]);
             echo view('welcome_message');
             echo view('template/footer');
                 

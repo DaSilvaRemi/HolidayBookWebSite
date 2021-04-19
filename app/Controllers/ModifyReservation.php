@@ -31,14 +31,14 @@ class ModifyReservation extends Controller{
     public function index() {
         helper('form');
         Session::startSession();
-        if(!Session::verifySession() || Session::getSessionData('idUser') != 1){
+        if(!Session::verifySession() || Session::getSessionData('isAdmin') != 't'){
             return redirect()->to(site_url('Connexion/deconnexion')); 
         }
         
         $SiteReservationModel = new \App\Models\SiteReservationModel;
         //Modifie la réservation
         if(!empty($this->request->getPost('idReservationModif'))){
-            echo view('template/header', ['iduser' => Session::getSessionData('idUser')]);
+            echo view('template/header', ['iduser' => Session::getSessionData('idUser'), 'isAdmin' => Session::getSessionData('isAdmin')]);
             echo view("form/modifyreservation",['tabInfoReservation' => $SiteReservationModel->getUneReservationById($this->request->getPost('idReservationModif'))[0],
                 'tabQueryTypeLogement' => $SiteReservationModel->getTypeLogement()]);
             echo view('template/footer');
@@ -48,7 +48,7 @@ class ModifyReservation extends Controller{
                 return redirect()->to(site_url('GestionReservation'));
             }
             else{
-               echo view('template/header', ['iduser' => Session::getSessionData('idUser')]);
+               echo view('template/header', ['iduser' => Session::getSessionData('idUser'), 'isAdmin' => Session::getSessionData('isAdmin')]);
                echo view("form/modifyreservation",['tabInfoReservation' => $SiteReservationModel->getUneReservationById($this->request->getPost('idUpdateReservation'))[0],
                 'tabQueryTypeLogement' => $SiteReservationModel->getTypeLogement(), 'validation' => $this->validator]);
                echo view('template/footer'); 
@@ -71,13 +71,18 @@ class ModifyReservation extends Controller{
      */
     private function verifFieldModif() : bool{
         $InfoReservation = $this->verifFieldIsSame();
-        $leControlSiteReservation = new \App\Models\ControlSiteReservationModel($InfoReservation['datedebut'], $InfoReservation['datefin'], $InfoReservation['nbpersonne'],
-                $InfoReservation['typelogement'],
-                $InfoReservation['pension'],
-                $InfoReservation['menage']);
+        $leControlSiteReservation = new \App\Models\ControlSiteReservationModel
+                (
+                    $InfoReservation['datedebut'], 
+                    $InfoReservation['datefin'], 
+                    $InfoReservation['nbpersonne'],
+                    $InfoReservation['typelogement'],
+                    $InfoReservation['pension'],
+                    $InfoReservation['menage']
+                );
         $SiteReservationModel = new \App\Models\SiteReservationModel();
         
-        if ($leControlSiteReservation->Erreur()) {
+        if ($leControlSiteReservation->erreur()) {
             $this->validate([]);
             $tabException = $leControlSiteReservation->getException();
             foreach ($tabException as $Exception) {

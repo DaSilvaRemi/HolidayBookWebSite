@@ -31,7 +31,7 @@ class PageUser extends Controller{
         if(!empty($this->request->getPost('idReservation'))){
             $SiteReservationModel->updateisValide($this->request->getPost('idReservation'), "Annulée");
         }
-            echo view('template/header', ['iduser' => Session::getSessionData('idUser')]);
+            echo view('template/header', ['iduser' => Session::getSessionData('idUser'), 'isAdmin' => Session::getSessionData('isAdmin')]);
             echo view("form/pageuser",['tabReservation' => $SiteReservationModel->getLesReservationsByUser(Session::getSessionData('idUser'))]);
             echo view('template/footer');
     }

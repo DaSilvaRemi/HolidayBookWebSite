@@ -231,12 +231,22 @@ class SiteReservationModel extends Model{
     }
     
     /**
+     * Retourne si l'utilisateur est admin
+     * 
+     * @param int $id_user UNIQUE KEY; Correspond à l'id de l'utilisateur
+     * @return array<int,array<string,string|int>> contient les résultat de la requête
+     */
+    public function getIsAdmin($id_user) {
+        return $this->db->query("SELECT is_admin FROM public.user WHERE id_user = :id_user:;",["id_user" => $id_user])->getResultArray();
+    }
+    
+    /**
      * Retourne tous les utilisateurs sauf l'administrateur
      * 
      * @return array<int,array<string,string|int>> contient les résultat de la requête
      */
     public function getLesUtilisateurs(){
-        return $this->db->query("SELECT id_user, nom, prenom, login FROM public.user WHERE id_user != 1;")->getResultArray();
+        return $this->db->query("SELECT id_user, nom, prenom, login FROM public.user WHERE is_admin = 'FALSE'")->getResultArray();
     }
    
      /**
@@ -248,7 +258,7 @@ class SiteReservationModel extends Model{
      * @return array<int,array<string,int>> contient les résultat de la requête
      */
     public function getInfoUser($id_user){
-        return $this->db->query("SELECT nom,prenom,mdp, id_user FROM public.user WHERE id_user=:id_user:",["id_user"=> $id_user])->getResultArray();
+        return $this->db->query("SELECT nom, prenom, mdp, is_admin, id_user FROM public.user WHERE id_user=:id_user:",["id_user"=> $id_user])->getResultArray();
     }
     
     /**
@@ -282,7 +292,7 @@ class SiteReservationModel extends Model{
      * @return array<int,array<string,string|int>> contient les résultat de la requête
      */
     public function countUserMdp($id_user, $mdp){
-        return $this->db->query('SELECT COUNT(mdp) FROM public.user WHERE id_user = :id_user: AND mdp = :mdp:;',['id_user' => $id_user, 'mdp' => $mdp])->getResultArray();
+        return $this->db->query('SELECT COUNT(mdp) FROM public.user WHERE id_user = :id_user: AND mdp = MD5(:mdp:);',['id_user' => $id_user, 'mdp' => $mdp])->getResultArray();
     }
 
     /**
@@ -303,7 +313,7 @@ class SiteReservationModel extends Model{
      * @return array<int,array<string,string|int>> contient les résultat de la requête
      */
     public function countIdUserValide($login, $mdp){
-        return $this->db->query("SELECT COUNT(id_user) FROM public.user WHERE login = :login: AND mdp = :mdp:;",['login' => $login, 'mdp' => $mdp])->getResultArray();
+        return $this->db->query("SELECT COUNT(id_user) FROM public.user WHERE login = :login: AND mdp = MD5(:mdp:);",['login' => $login, 'mdp' => $mdp])->getResultArray();
     }
     
     /**
@@ -316,7 +326,10 @@ class SiteReservationModel extends Model{
      * @return void
      */
     public function insertUser($nom, $prenom, $login, $mdp) {
-        $this->db->query('INSERT INTO public.user(nom, prenom, login, mdp) VALUES(:nom:, :prenom:, :login:, :mdp:);',['nom' => $nom, 'prenom' => $prenom, 'login' => $login, 'mdp' => $mdp]);
+        $this->db->query(
+                    "INSERT INTO public.user(nom, prenom, login, mdp, is_admin) VALUES(:nom:, :prenom:, :login:, MD5(:mdp:), 'FALSE');",
+                    ['nom' => $nom, 'prenom' => $prenom, 'login' => $login, 'mdp' => $mdp]
+                );
     }
 
     /**
@@ -327,7 +340,7 @@ class SiteReservationModel extends Model{
      * @return void
      */
     public function updateUserMdp($id_user, $mdp){
-        $this->db->query('UPDATE public.user SET mdp = :mdp: WHERE id_user = :id_user:;',['mdp' => $mdp, 'id_user' => $id_user]);
+        $this->db->query('UPDATE public.user SET mdp = MD5(:mdp:) WHERE id_user = :id_user:;',['mdp' => $mdp, 'id_user' => $id_user]);
     }
     
     /**
@@ -340,7 +353,10 @@ class SiteReservationModel extends Model{
      * @return void
      */
     public function updateInfoUser($id_user,$nom,$prenom,$mdp){
-        $this->db->query('UPDATE public.user SET nom=:nom:, prenom=:prenom:,  mdp=:mdp: WHERE id_user=:id_user:;',['id_user' => $id_user,'nom'=>$nom,'prenom'=>$prenom,'mdp'=>$mdp]);
+        $this->db->query(
+                    'UPDATE public.user SET nom = :nom:, prenom = :prenom:, mdp = MD5(:mdp:) WHERE id_user= :id_user:;',
+                    ['id_user' => $id_user,'nom'=>$nom,'prenom'=>$prenom,'mdp'=>$mdp]
+                );
     }
     
      /**
@@ -350,7 +366,7 @@ class SiteReservationModel extends Model{
      * @return void
      */
     public function deleteUser($id_user){
-        $this->db->query('DELETE FROM public.user WHERE id_user=:id_user:;',['id_user' => $id_user]);
+        $this->db->query('DELETE FROM public.user WHERE id_user= :id_user:;',['id_user' => $id_user]);
     } 
     
 }
