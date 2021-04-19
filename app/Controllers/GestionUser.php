@@ -22,7 +22,7 @@ class GestionUser extends Controller{
     public function index() {
         helper('form');
         Session::startSession();
-        if(!Session::verifySession() || Session::getSessionData('idUser') != 1){
+        if(!Session::verifySession() || Session::getSessionData('isAdmin') != 't'){
             return redirect()->to(site_url('PageUser')); 
         }
         
@@ -33,7 +33,7 @@ class GestionUser extends Controller{
             $SiteReservationModel->deleteUser($this->request->getPost('idUtilisateur'));
         }
         
-        echo view('template/header', ['iduser' => Session::getSessionData('idUser')]);
+        echo view('template/header', ['iduser' => Session::getSessionData('idUser'), 'isAdmin' => Session::getSessionData('isAdmin')]);
         echo view("form/gestionuser",['tabUtilisateurs' => $SiteReservationModel->getLesUtilisateurs()]);
         echo view('template/footer');
     }

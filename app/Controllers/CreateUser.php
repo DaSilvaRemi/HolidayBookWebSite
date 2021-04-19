@@ -20,7 +20,6 @@ class CreateUser extends Controller {
     public function index() {
         helper('form');
 
-
         if (!$this->validate(['nom' => 'required|min_length[3]|max_length[60]',
                     'prenom' => 'required|min_length[3]|max_length[60]',
                     'user' => 'required|min_length[4]|max_length[20]',

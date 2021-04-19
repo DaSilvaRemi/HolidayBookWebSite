@@ -21,7 +21,7 @@ class GestionReservation extends Controller{
     public function index() {
         helper('form');
         Session::startSession();
-        if(!Session::verifySession() || Session::getSessionData('idUser') != 1){
+        if(!Session::verifySession() || Session::getSessionData('isAdmin') != 't'){
             return redirect()->to(site_url('Connexion/deconnexion')); 
         }
         
@@ -39,7 +39,7 @@ class GestionReservation extends Controller{
             $SiteReservationModel->deleteReservation($this->request->getPost('idReservationSuppr'));
         }
         
-        echo view('template/header', ['iduser' => Session::getSessionData('idUser')]);
+        echo view('template/header', ['iduser' => Session::getSessionData('idUser'), 'isAdmin' => Session::getSessionData('isAdmin')]);
         echo view("form/gestionreservation",['tabReservation' => $SiteReservationModel->getLesReservations()]);
         echo view('template/footer');
     }

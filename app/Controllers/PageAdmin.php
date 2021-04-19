@@ -22,11 +22,11 @@ class PageAdmin extends Controller{
     public function index() {
         helper('form');
         Session::startSession();
-        if(!Session::verifySession() || Session::getSessionData('idUser') != 1){
+        if(!Session::verifySession() || Session::getSessionData('isAdmin') != 't'){
             return redirect()->to(site_url('PageUser')); 
         }
         
-        echo view('template/header', ['iduser' => Session::getSessionData('idUser')]);
+        echo view('template/header', ['iduser' => Session::getSessionData('idUser'), 'isAdmin' => Session::getSessionData('isAdmin')]);
         echo view("form/pageadmin");
         echo view('template/footer');
     }

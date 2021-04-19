@@ -25,9 +25,9 @@ class AddUserAdmin extends Controller {
     public function index() {
         helper('form');
 
-
         Session::startSession();
-        if (!Session::verifySession() || Session::getSessionData('idUser') != 1) {
+        $SiteReservationModel = new \App\Models\SiteReservationModel();
+        if (!Session::verifySession() || Session::getSessionData("isAdmin") != 't') {
             return redirect()->to(site_url('PageUser'));
         }
         if (!$this->validate(['nom' => 'required|min_length[3]|max_length[60]',
@@ -42,7 +42,7 @@ class AddUserAdmin extends Controller {
                                 'max_length' => 'La longueur du login ne peut pas dépasser 20 caractère'],
                             'password' => ['required' => 'Merci d\'indiquer votre mot de passe', 'min_length' => 'Merci d\'indiquer un mot de passe d\'au moins 4 caractère',
                                 'max_length' => 'La longueur du mot de passe ne peut pas dépasser 30 caractère']])) {
-            echo view('template/header', ['iduser' => Session::getSessionData('idUser')]);
+            echo view('template/header', ['iduser' => Session::getSessionData('idUser'), 'isAdmin' => Session::getSessionData('isAdmin')]);
             echo view("form/admuser", ['validation' => $this->validator]);
             echo view('template/footer');
         } else {
@@ -60,12 +60,12 @@ class AddUserAdmin extends Controller {
         $SiteReservationModel = new \App\Models\SiteReservationModel();
         if (intval($SiteReservationModel->countUserLogin($this->request->getPost('user'))[0]['count']) != 0) {
             $this->validator->setError("user", "Ce nom d'utilisateur existe déja");
-            echo view('template/header',['iduser' => Session::getSessionData('idUser')]);
+            echo view('template/header',['iduser' => Session::getSessionData('idUser'), 'isAdmin' => Session::getSessionData('isAdmin')]);
             echo view('form/admuser', ['validation' => $this->validator, 'connexion' => 'votre compte existe déja']);
             echo view('template/footer');
         } else {
             $SiteReservationModel->insertUser($this->request->getPost('nom'), $this->request->getPost('prenom'), $this->request->getPost('user'), $this->request->getPost('password'));
-            echo view('template/header',['iduser' => Session::getSessionData('idUser')]);
+            echo view('template/header',['iduser' => Session::getSessionData('idUser'), 'isAdmin' => Session::getSessionData('isAdmin')]);
             echo view('form/admuser', ['validation' => $this->validator, 'connexion' => 'Vous avez créer un compter utilisateur']);
             echo view('template/footer');
         }
