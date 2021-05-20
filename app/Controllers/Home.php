@@ -24,8 +24,6 @@ class Home extends BaseController
                 $iduser = Session::getSessionData('idUser');
                 $idAdmin = Session::getSessionData('isAdmin');
             }
-            var_dump($iduser);
-            var_dump($idAdmin);
             echo view('template/header',['iduser' => $iduser, 'isAdmin' => $idAdmin]);
             echo view('welcome_message');
             echo view('template/footer');
