@@ -32,7 +32,6 @@ class BookForm extends Controller {
                             'datefin' => ['required' => 'Merci d\'indiquer une date de fin de séjour.'],
                             'pension' => ['required' => 'Merci d\'indiquer votre pension.'],
                             'typelogement' => ['required' => 'Veuillez selectionnez un type de séjour']])) {
-            echo($this->request->getPost('pension'));
             $SiteReservationModel = new \App\Models\SiteReservationModel();
             echo view('template/header', ['iduser' => Session::getSessionData('idUser'), 'isAdmin' => Session::getSessionData('isAdmin')]);
             echo view('form/book', ['validation' => $this->validator, 'data' => $SiteReservationModel->getTypeLogement()]);
