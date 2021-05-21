@@ -9,7 +9,7 @@ use \App\Models\Session;
  */
 class PageUser extends Controller{
     /**
-     * Récupère les informations de changement d'états de la réservation si l'utilisateur est bien sur connecté
+     * Récupère les informations de changement d'états de la réservation si l'utilisateur est bien connecté
      * 
      * Elle permet notamment d'annuler une réservation s'il n'est pas déja validé le controle de l'état se fait coté vue
      * 

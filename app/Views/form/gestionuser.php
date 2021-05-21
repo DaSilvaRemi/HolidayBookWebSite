@@ -6,14 +6,14 @@ and open the template in the editor.
 <!DOCTYPE html>
 <html lang="fr">
     <head>
-        <title>Gestion de réservations</title>
+        <title>Gestion des utilisateurs</title>
     </head>
     <body>
 
         <div class="container">
             <div class="row">
 
-                <H1>Gestion de réservations</H1>
+                <H1>Gestion des utilisateurs</H1>
             </div>
             <div class="row">
                 <table class="table table-bordered table-hover">

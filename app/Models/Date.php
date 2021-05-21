@@ -1,6 +1,6 @@
 <?php 
 /**
- * Class métier techniques gérant les dates
+ * Classe technique gérant les dates
  */
 class Date {
 

@@ -48,7 +48,7 @@ and open the template in the editor.
                             }
                             
                             /*---------------Refus----------*/
-                            //Si la réservation est en attente ou modifiée on peut alors la validée
+                            //Si la réservation est en attente ou modifiée on peut alors la refusée
                             if($LesReservations['valide'] == "En attente de validation" || $LesReservations['valide'] == "Modifiée"){
                                 echo form_open('GestionReservation');
                                 echo '<input name="idReservationRefus" type="hidden" value="'.$LesReservations['id_reservation'].'"/>'; 

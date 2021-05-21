@@ -42,6 +42,8 @@ class ModifyUser extends Controller {
             if ($this->updateUser()) {
                 return redirect()->to(site_url('GestionUser'));
             }
+        }else{
+            return redirect()->to(site_url('GestionUser'));
         }
     }
     
