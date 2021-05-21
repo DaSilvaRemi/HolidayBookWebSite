@@ -61,7 +61,7 @@ class AddUserAdmin extends Controller {
         if (intval($SiteReservationModel->countUserLogin($this->request->getPost('user'))[0]['count']) != 0) {
             $this->validator->setError("user", "Ce nom d'utilisateur existe déja");
             echo view('template/header',['iduser' => Session::getSessionData('idUser'), 'isAdmin' => Session::getSessionData('isAdmin')]);
-            echo view('form/admuser', ['validation' => $this->validator, 'connexion' => 'votre compte existe déja']);
+            echo view('form/admuser', ['validation' => $this->validator, 'connexion' => 'ce compte existe déja']);
             echo view('template/footer');
         } else {
             $SiteReservationModel->insertUser($this->request->getPost('nom'), $this->request->getPost('prenom'), $this->request->getPost('user'), $this->request->getPost('password'));
