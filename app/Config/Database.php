@@ -30,10 +30,10 @@ class Database extends \CodeIgniter\Database\Config
 	 * @var array
 	 */
 	public $default = [
-		'DSN'      => 'pgsql:host=localhost;port=5432;dbname=sitereservation;user=remi;password=test',
+		'DSN'      => 'pgsql:host=localhost;port=5432;dbname=sitereservation;user=user;password=password',
 		'hostname' => 'localhost',
-		'username' => 'remi',
-		'password' => 'test',
+		'username' => 'user',
+		'password' => 'password',
 		'database' => 'sitereservation',
 		'DBDriver' => 'Postgre',
 		'DBPrefix' => '',
